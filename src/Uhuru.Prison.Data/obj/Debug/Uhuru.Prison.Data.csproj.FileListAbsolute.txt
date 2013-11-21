@@ -1,0 +1,9 @@
+E:\Code\windows-prison\bin\x64\SQLite.Interop.dll
+E:\Code\windows-prison\bin\x86\SQLite.Interop.dll
+E:\Code\windows-prison\bin\Uhuru.Prison.Data.XML
+E:\Code\windows-prison\bin\Uhuru.Prison.Data.dll
+E:\Code\windows-prison\bin\Uhuru.Prison.Data.pdb
+E:\Code\windows-prison\src\Uhuru.Prison.Data\obj\Debug\Uhuru.Prison.Data.csprojResolveAssemblyReference.cache
+E:\Code\windows-prison\src\Uhuru.Prison.Data\obj\Debug\Uhuru.Prison.Data.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data\obj\Debug\Uhuru.Prison.Data.pdb
+E:\Code\windows-prison\bin\Uhuru.Prison.Data.dll.config

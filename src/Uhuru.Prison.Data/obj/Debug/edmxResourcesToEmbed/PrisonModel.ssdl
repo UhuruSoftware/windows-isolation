@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="prisonModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="prisonModelStoreContainer">
+    <EntitySet Name="Prisons" EntityType="prisonModel.Store.Prisons" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="prisonModel.Store.Users" store:Type="Tables" />
+    <AssociationSet Name="FK_Users_0_0" Association="prisonModel.Store.FK_Users_0_0">
+      <End Role="Prisons" EntitySet="Prisons" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Prisons">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Prison" Type="integer" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Users_0_0">
+    <End Role="Prisons" Type="prisonModel.Store.Prisons" Multiplicity="1" />
+    <End Role="Users" Type="prisonModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prisons">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Prison" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

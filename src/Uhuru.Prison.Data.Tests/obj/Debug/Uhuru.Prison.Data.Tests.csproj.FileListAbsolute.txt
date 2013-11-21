@@ -1,0 +1,15 @@
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\x64\SQLite.Interop.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\x86\SQLite.Interop.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\Uhuru.Prison.Data.Tests.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\Uhuru.Prison.Data.Tests.pdb
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\Uhuru.Prison.Data.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\EntityFramework.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\Uhuru.Prison.Data.pdb
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\Uhuru.Prison.Data.xml
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\EntityFramework.xml
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\obj\Debug\Uhuru.Prison.Data.Tests.csprojResolveAssemblyReference.cache
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\obj\Debug\Uhuru.Prison.Data.Tests.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\obj\Debug\Uhuru.Prison.Data.Tests.pdb
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\Uhuru.Prison.Data.Tests.dll.config
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\EntityFramework.SqlServer.dll
+E:\Code\windows-prison\src\Uhuru.Prison.Data.Tests\bin\Debug\EntityFramework.SqlServer.xml

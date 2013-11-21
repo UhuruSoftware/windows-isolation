@@ -1,0 +1,1 @@
+E:\Code\windows-prison\src\Uhuru.Prison.Tests\obj\Debug\Uhuru.Prison.Tests.csprojResolveAssemblyReference.cache
