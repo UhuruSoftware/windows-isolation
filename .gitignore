@@ -3,3 +3,4 @@
 *.opensdf
 obj/
 bin/
+testresults/
