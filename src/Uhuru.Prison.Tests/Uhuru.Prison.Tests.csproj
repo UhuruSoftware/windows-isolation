@@ -50,16 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TestWindowStationRule.cs" />
-    <Compile Include="TestFilesystemRule.cs" />
-    <Compile Include="TestNetworkAndFirewall.cs" />
-    <Compile Include="TestDiskRule.cs" />
-    <Compile Include="TestMemoryRule.cs" />
-    <Compile Include="TestJobObjects.cs" />
-    <Compile Include="TestPersistence.cs" />
-    <Compile Include="TestUsers.cs" />
+    <Compile Include="Rules\TestWindowStationRule.cs" />
+    <Compile Include="Rules\TestFilesystemRule.cs" />
+    <Compile Include="Rules\TestNetworkAndFirewall.cs" />
+    <Compile Include="Rules\TestDiskRule.cs" />
+    <Compile Include="Rules\TestMemoryRule.cs" />
+    <Compile Include="JobObjects\TestJobObjects.cs" />
+    <Compile Include="Rules\TestPersistence.cs" />
+    <Compile Include="Rules\TestUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
+    <Compile Include="Serialization\TestPrisonSerialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uhuru.Prison\Uhuru.Prison.csproj">
@@ -67,6 +68,7 @@
       <Name>Uhuru.Prison</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

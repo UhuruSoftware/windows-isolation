@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Uhuru.Prison.Utilities.WindowsJobObjects;
 
 namespace Uhuru.Prison
 {
+    [DataContract]
     public class Prison
     {
         static Type[] cellTypes = new Type[]{
@@ -22,10 +25,15 @@ namespace Uhuru.Prison
             typeof(Restrictions.WindowStation)};
 
         List<Rule> prisonCells = new List<Rule>();
+
         JobObject jobObject = null;
+
         PrisonUser user = null;
         private static volatile bool wasInitialized = false;
+
         internal Native.STARTUPINFO ProcessStartupInfo = new Native.STARTUPINFO();
+
+        private const string databaseLocation = @".\db";
 
         public JobObject JobObject
         {
@@ -36,6 +44,12 @@ namespace Uhuru.Prison
         private PrisonRules prisonRules;
         private volatile bool used = false;
 
+        [DataMember]
+        public Guid ID
+        {
+            get;
+            set;
+        }
 
         public string Tag
         {
@@ -61,6 +75,8 @@ namespace Uhuru.Prison
 
         public Prison()
         {
+            this.ID = Guid.NewGuid();
+            this.Save();
         }
 
         private bool CellEnabled(RuleType cellTypeQuery)
@@ -223,6 +239,54 @@ namespace Uhuru.Prison
             }
 
             return result;
+        }
+
+        private void Save()
+        {
+            string assemblyLocation = Path.GetDirectoryName(typeof(Prison).Assembly.Location);
+            string dbDirectory = Path.Combine(assemblyLocation, Prison.databaseLocation);
+
+            Directory.CreateDirectory(dbDirectory);
+
+            string prisonFile = Path.GetFullPath(Path.Combine(dbDirectory, string.Format("{0}.xml", this.ID.ToString("N"))));
+
+            DataContractSerializer serializer = new DataContractSerializer(typeof(Prison));
+
+            using (FileStream writeStream = File.Open(prisonFile, FileMode.Create, FileAccess.Write))
+            {
+                serializer.WriteObject(writeStream, this);
+            }
+        }
+
+        /// <summary>
+        /// Loads all persisted Prison instances.
+        /// <remarks>
+        /// This method assumes that serialized Prison objects are stored in a folder named 'db', next to the assembly.
+        /// </remarks>
+        /// </summary>
+        /// <returns>An array of Prison objects.</returns>
+        public static Prison[] Load()
+        {
+            List<Prison> result = new List<Prison>();
+
+            string assemblyLocation = Path.GetDirectoryName(typeof(Prison).Assembly.Location);
+            string loadLocation = Path.GetFullPath(Path.Combine(assemblyLocation, Prison.databaseLocation));
+
+            Directory.CreateDirectory(loadLocation);
+
+            string[] prisonFiles = Directory.GetFiles(loadLocation, "*.xml", SearchOption.TopDirectoryOnly);
+
+            DataContractSerializer serializer = new DataContractSerializer(typeof(Prison));
+
+            foreach (string prisonLocation in prisonFiles)
+            {
+                using (FileStream readStream = File.OpenRead(prisonLocation))
+                {
+                    result.Add((Prison)serializer.ReadObject(readStream));
+                }
+            }
+
+            return result.ToArray();
         }
     }
 }
