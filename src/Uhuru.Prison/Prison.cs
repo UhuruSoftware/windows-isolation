@@ -6,20 +6,20 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using Uhuru.Prison.Cells;
+using Uhuru.Prison.Utilities.WindowsJobObjects;
 
 namespace Uhuru.Prison
 {
     public class Prison
     {
         static Type[] cellTypes = new Type[]{
-            typeof(CPUCell),
-            typeof(DiskCell),
-            typeof(FilesystemCell),
-            typeof(FirewallCell),
-            typeof(MemoryCell),
-            typeof(NetworkCell),
-            typeof(WindowStationCell)};
+            typeof(Restrictions.CPU),
+            typeof(Restrictions.Disk),
+            typeof(Restrictions.Filesystem),
+            typeof(Restrictions.Firewall),
+            typeof(Restrictions.Memory),
+            typeof(Restrictions.Network),
+            typeof(Restrictions.WindowStation)};
 
         List<Rule> prisonCells = new List<Rule>();
         JobObject jobObject = null;
@@ -63,9 +63,9 @@ namespace Uhuru.Prison
         {
         }
 
-        private bool CellEnabled(CellType cellTypeQuery)
+        private bool CellEnabled(RuleType cellTypeQuery)
         {
-            return ((this.prisonRules.CellType & cellTypeQuery) == cellTypeQuery) || ((this.prisonRules.CellType & CellType.All) == CellType.All);
+            return ((this.prisonRules.CellType & cellTypeQuery) == cellTypeQuery) || ((this.prisonRules.CellType & RuleType.All) == RuleType.All);
         }
 
         public void Lockdown(PrisonRules prisonRules)
@@ -77,7 +77,7 @@ namespace Uhuru.Prison
 
             this.prisonRules = prisonRules;
 
-            if (prisonRules.CellType != CellType.None)
+            if (prisonRules.CellType != RuleType.None)
             {
                 foreach (Type cellType in cellTypes)
                 {
@@ -212,9 +212,9 @@ namespace Uhuru.Prison
             }
         }
 
-        public static Dictionary<CellType, CellInstanceInfo[]> ListCellInstances()
+        public static Dictionary<RuleType, RuleInstanceInfo[]> ListCellInstances()
         {
-            Dictionary<CellType, CellInstanceInfo[]> result = new Dictionary<CellType, CellInstanceInfo[]>();
+            Dictionary<RuleType, RuleInstanceInfo[]> result = new Dictionary<RuleType, RuleInstanceInfo[]>();
 
             foreach (Type cellType in cellTypes)
             {

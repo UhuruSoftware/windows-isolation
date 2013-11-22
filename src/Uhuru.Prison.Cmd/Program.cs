@@ -31,15 +31,15 @@ namespace Uhuru.Prison.Cmd
                 var listSubOptions = (ListSubOptions)invokedVerbInstance;
                 if (listSubOptions.Orphaned)
                 {
-                    Dictionary<CellType, CellInstanceInfo[]> instances = Prison.ListCellInstances();
+                    Dictionary<RuleType, RuleInstanceInfo[]> instances = Prison.ListCellInstances();
 
-                    foreach (CellType cellType in instances.Keys)
+                    foreach (RuleType cellType in instances.Keys)
                     {
                         TableBuilder tb = new TableBuilder();
                         tb.AddRow(cellType.ToString(), "Info");
                         tb.AddRow(new string('-', cellType.ToString().Length), "----");
 
-                        foreach (CellInstanceInfo cellInstance in instances[cellType])
+                        foreach (RuleInstanceInfo cellInstance in instances[cellType])
                         {
                             tb.AddRow(cellInstance.Name, cellInstance.Info);
                         }

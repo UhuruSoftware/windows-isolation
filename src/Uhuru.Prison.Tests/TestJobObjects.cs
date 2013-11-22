@@ -19,7 +19,7 @@ namespace Uhuru.Prison.Tests
             prison.Tag = "uhtst";
 
             PrisonRules prisonRules = new PrisonRules();
-            prisonRules.CellType = CellType.None;
+            prisonRules.CellType = RuleType.None;
 
             prison.Lockdown(prisonRules);
 
@@ -41,7 +41,7 @@ namespace Uhuru.Prison.Tests
             prison.Tag = "uhtst";
 
             PrisonRules prisonRules = new PrisonRules();
-            prisonRules.CellType = CellType.None;
+            prisonRules.CellType = RuleType.None;
 
             prison.Lockdown(prisonRules);
 

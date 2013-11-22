@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Uhuru.Prison.Cells;
 
 namespace Uhuru.Prison
 {
@@ -83,7 +82,7 @@ namespace Uhuru.Prison
         }
 
 
-        public CellType CellType
+        public RuleType CellType
         {
             get;
             set;

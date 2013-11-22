@@ -1,2 +1,5 @@
 *.suo
 *.csproj.user
+*.opensdf
+obj/
+bin/

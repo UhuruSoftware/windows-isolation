@@ -1,3 +1,0 @@
-E:\Code\windows-prison\src\Uhuru.Prison\obj\Debug\Uhuru.Prison.csprojResolveAssemblyReference.cache
-E:\Code\windows-prison\src\Uhuru.Prison\obj\Debug\Interop.DiskQuotaTypeLibrary.dll
-E:\Code\windows-prison\src\Uhuru.Prison\obj\Debug\Uhuru.Prison.csproj.ResolveComReference.cache
