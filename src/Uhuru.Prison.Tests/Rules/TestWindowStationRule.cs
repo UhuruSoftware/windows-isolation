@@ -66,7 +66,7 @@ private static int Dummy()
 {{
 ", prison.User.Username), prison);
 
-            Process process = prison.Execute(exe, "", true);
+            Process process = prison.Execute(exe, "", false);
 
             process.WaitForExit();
 

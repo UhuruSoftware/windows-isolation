@@ -59,7 +59,7 @@
     <Compile Include="Restrictions\CPU.cs" />
     <Compile Include="Restrictions\Disk.cs" />
     <Compile Include="Restrictions\Filesystem.cs" />
-    <Compile Include="Restrictions\Firewall.cs" />
+    <Compile Include="Allowances\Httpsys.cs" />
     <Compile Include="Restrictions\Memory.cs" />
     <Compile Include="Restrictions\Network.cs" />
     <Compile Include="Restrictions\WindowStation.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Utilities\Command.cs" />
     <Compile Include="Utilities\Credentials.cs" />
+    <Compile Include="Utilities\FirewallTools.cs" />
     <Compile Include="Utilities\UserImpersonator.cs" />
     <Compile Include="Utilities\WindowsJobObjects\JobObject.cs" />
     <Compile Include="Utilities\WindowsJobObjects\JobObjectHandle.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="Utilities\WindowsUsersAndGroups.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Allowances\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +91,15 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="NetFwTypeLib">
+      <Guid>{58FBCF7C-E7A9-467C-80B3-FC65E8FCCA08}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
   <ItemGroup>

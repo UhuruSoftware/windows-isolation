@@ -1,7 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uhuru.Prison", "Uhuru.Prison\Uhuru.Prison.csproj", "{B9C02CB5-33CE-479A-9A16-78F67A66BF80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E47D4563-1130-48AD-A91D-7F6DEA470905} = {E47D4563-1130-48AD-A91D-7F6DEA470905}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uhuru.Prison.Cmd", "Uhuru.Prison.Cmd\Uhuru.Prison.Cmd.csproj", "{04F1041A-D5D0-4AF8-A53B-301329ABB709}"
 EndProject

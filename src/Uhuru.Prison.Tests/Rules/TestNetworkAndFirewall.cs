@@ -159,7 +159,7 @@ if ((1024 / timer.Elapsed.TotalSeconds) > 110)
             prison.Tag = "uhtst";
 
             PrisonRules prisonRules = new PrisonRules();
-            prisonRules.CellType = RuleType.Firewall | RuleType.Network;
+            prisonRules.CellType = RuleType.Httpsys | RuleType.Network;
             prisonRules.NetworkOutboundRateLimitBitsPerSecond = 8 * 1024 * 100;
             prisonRules.AppPortOutboundRateLimitBitsPerSecond = 8 * 1024 * 200;
             prisonRules.UrlPortAccess = 56444;
@@ -253,7 +253,7 @@ if ((1024 / timer.Elapsed.TotalSeconds) > 110)
             WebClient client = new WebClient();
             client.Proxy = new WebProxy("http://192.168.1.119:8080");
 
-            byte[] data = client.DownloadData("http://10.0.0.4:56444/");
+            byte[] data = client.DownloadData("http://10.0.0.10:56444/");
             timer.Stop();
 
             Assert.IsTrue(

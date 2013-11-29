@@ -1,6 +1,8 @@
 #include <windows.h>
 #include <map>
 #include <string>
+#include <iostream>
+#include <cstdio>
 
 using namespace std;
 
@@ -52,8 +54,23 @@ map<wstring, wstring> * GetEnvs()
 	return envsMap;
 }
 
+// Input will be recied with by stdin plus environment variables and output will be provided by stdout.
+// If successfull the return code is 0. If there was an error the return code is the error message.
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
+	wstring inputCommand;
+
+	// This will block the current process and allow the Prison Manager to tag it with the Job Object.
+	getline(std::wcin, inputCommand);
+
+	// If the input command is not CreateProcess then return the error message 1.
+	if (inputCommand != L"CreateProcess")
+	{
+		return 1;
+	}
+
+	// Parse the environment variable.
+
 	map<wstring, wstring> *envs = GetEnvs();
 	wstring method = envs->at(L"Method");
 
@@ -84,7 +101,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	if (method == L"CreateProcessWithLogonW")
 	{
-		wstring username = envs->at(L"Username");
+		wstring username = envs->at(L"pUsername");
 		wstring domain = envs->at(L"Domain");
 		wstring password = envs->at(L"Password");
 
@@ -111,8 +128,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	{
 		int error = GetLastError();
 		return error;
-		// throw new runtime_error("Process did not start.");
 	}
+
+
+	// Return the woker prorcess PID to stdout
+	wstring workerPid = to_wstring(processInfo.dwProcessId);
+	wcout << workerPid << endl;
 
 	return 0;
 }

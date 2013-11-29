@@ -33,7 +33,6 @@ namespace Uhuru.Prison.Tests.JobObjects
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "This prison has already been used to execute something.")]
         public void TestMultipleEcho()
         {
             // Arrange
@@ -57,6 +56,29 @@ namespace Uhuru.Prison.Tests.JobObjects
             // Assert
             Assert.AreNotEqual(0, process1.Id);
             Assert.AreNotEqual(0, process2.Id);
+        }
+
+        [TestMethod]
+        public void TestExitCode()
+        {
+            // Arrange
+            Prison prison = new Prison();
+            prison.Tag = "uhtst";
+
+            PrisonRules prisonRules = new PrisonRules();
+            prisonRules.CellType = RuleType.None;
+
+            prison.Lockdown(prisonRules);
+
+            // Act
+            Process process = prison.Execute(
+                @"c:\windows\system32\cmd.exe",
+                @"/c exit 667");
+
+            process.WaitForExit();
+
+            // Assert
+            Assert.AreEqual(667, process.ExitCode);
         }
     }
 }

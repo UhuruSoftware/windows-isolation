@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Uhuru.Prison
             typeof(Restrictions.CPU),
             typeof(Restrictions.Disk),
             typeof(Restrictions.Filesystem),
-            typeof(Restrictions.Firewall),
+            typeof(Restrictions.Httpsys),
             typeof(Restrictions.Memory),
             typeof(Restrictions.Network),
             typeof(Restrictions.WindowStation)};
@@ -38,11 +39,10 @@ namespace Uhuru.Prison
         public JobObject JobObject
         {
             get { return jobObject; }
-        } 
+        }
 
         private bool isLocked = false;
         private PrisonRules prisonRules;
-        private volatile bool used = false;
 
         [DataMember]
         public Guid ID
@@ -154,14 +154,10 @@ namespace Uhuru.Prison
                 throw new InvalidOperationException("This prison has to be locked before you can use it.");
             }
 
-            if (this.used)
-            {
-                throw new InvalidOperationException("This prison has already been used to execute something.");
-            }
+            var startupInfo = new Native.STARTUPINFO();
+            var processInfo = new Native.PROCESS_INFORMATION();
 
-            this.used = true;
-
-            Native.PROCESS_INFORMATION processInfo = new Native.PROCESS_INFORMATION();
+            startupInfo = this.ProcessStartupInfo;
 
             Native.ProcessCreationFlags creationFlags = Native.ProcessCreationFlags.ZERO_FLAG;
 
@@ -176,38 +172,95 @@ namespace Uhuru.Prison
             if (interactive)
             {
                 creationFlags |= Native.ProcessCreationFlags.CREATE_NEW_CONSOLE;
+                startupInfo.lpDesktop = "";
             }
             else
             {
                 creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
             }
 
-            bool startedOk = Native.CreateProcessWithLogonW(
-                      this.user.Username, ".", this.user.Password,
-                      Native.LogonFlags.LOGON_WITH_PROFILE,
-                      null, string.Format("\"{0}\" {1}", filename, arguments), creationFlags, env,
-                      this.prisonRules.PrisonHomePath, ref this.ProcessStartupInfo, out processInfo);
+            string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string assemblyDirPath = Directory.GetParent(assemblyPath).FullName;
 
-            if (!startedOk)
+            var delegateStartInfo = new ProcessStartInfo();
+            delegateStartInfo.FileName = assemblyDirPath + @"\Uhuru.Prison.CreateProcessDelegate.exe";
+            delegateStartInfo.UseShellExecute = false;
+
+            if (interactive)
             {
-                throw new Win32Exception(Marshal.GetLastWin32Error());
+                delegateStartInfo.CreateNoWindow = false;
+                delegateStartInfo.ErrorDialog = true;
+            }
+            else
+            {
+                delegateStartInfo.CreateNoWindow = true;
+                delegateStartInfo.ErrorDialog = false;
             }
 
-            Process process = Process.GetProcessById(processInfo.dwProcessId);
+            delegateStartInfo.RedirectStandardInput = true;
+            delegateStartInfo.RedirectStandardOutput = true;
+            
+            delegateStartInfo.EnvironmentVariables["Method"] = "CreateProcessWithLogonW";
+            delegateStartInfo.EnvironmentVariables["pUsername"] = this.user.Username;
+            delegateStartInfo.EnvironmentVariables["Domain"] = ".";
+            delegateStartInfo.EnvironmentVariables["Password"] = this.user.Password;
+            delegateStartInfo.EnvironmentVariables["LogonFlags"] = ((int)Native.LogonFlags.LOGON_WITH_PROFILE).ToString();
+            delegateStartInfo.EnvironmentVariables["CommandLine"] = string.IsNullOrWhiteSpace(filename) ? arguments : '"' + filename + "\" " + arguments;
+            delegateStartInfo.EnvironmentVariables["CreationFlags"] = ((int)(creationFlags)).ToString();
+            delegateStartInfo.EnvironmentVariables["CurrentDirectory"] = this.prisonRules.PrisonHomePath;
+            delegateStartInfo.EnvironmentVariables["Desktop"] = startupInfo.lpDesktop;
 
-            this.jobObject.AddProcess(process);
-            
-            uint resumeResult = Native.ResumeThread(processInfo.hThread);
-            
+            var delegateProcess = Process.Start(delegateStartInfo);
+
+            // Delegate Process: started in suspended state
+            // Working  Process: not started
+
+            // Take the process with the Job Object before resuming the process.
+            this.jobObject.AddProcess(delegateProcess);
+
+            delegateProcess.StandardInput.WriteLine("CreateProcess");
+
+            // Wait for response
+            var workerProcessPid = int.Parse(delegateProcess.StandardOutput.ReadLine());
+            var workerProcess = Process.GetProcessById(workerProcessPid);
+
+            // This would allow the process to query the ExitCode. ref: http://msdn.microsoft.com/en-us/magazine/cc163900.aspx
+            workerProcess.EnableRaisingEvents = true;
+
+            // Delegate Process: ending
+            // Working  Process: started in suspended state
+
+            delegateProcess.WaitForExit();
+
+            if (delegateProcess.ExitCode != 0)
+            {
+                throw new Win32Exception(delegateProcess.ExitCode);
+            }
+
+            // Delegate Process: finished
+            // Working  Process: started in suspended state
+
+            // Now that the process is is gated with the Job Object so we can resume the thread.
+            IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, workerProcess.Threads[0].Id);
+
+            uint resumeResult = Native.ResumeThread(threadHandler);
+
+            Native.CloseHandle(threadHandler);
+
             if (resumeResult != 1)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
-            Native.CloseHandle(processInfo.hProcess);
-            Native.CloseHandle(processInfo.hThread);
+            // Delegate Process: finished
+            // Working  Process: running
 
-            return process;
+            return workerProcess;
+
+            // Other IPC methods with the delegate.
+            // http://stackoverflow.com/questions/16129113/passing-c-char-to-c-sharp-via-shared-memory
+            // or http://stackoverflow.com/questions/2640642/c-implementing-named-pipes-using-the-win32-api and
+            // http://msdn.microsoft.com/en-us/library/system.io.pipes.namedpipeserverstream(v=vs.110).aspx
         }
 
         public void Destroy()
@@ -283,6 +336,57 @@ namespace Uhuru.Prison
                 using (FileStream readStream = File.OpenRead(prisonLocation))
                 {
                     result.Add((Prison)serializer.ReadObject(readStream));
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Formats a string with the env variables for CreateProcess Win API function.
+        /// See env format here: http://msdn.microsoft.com/en-us/library/windows/desktop/ms682653(v=vs.85).aspx
+        /// </summary>
+        /// <param name="EvnironmantVariables"></param>
+        /// <returns></returns>
+        private static string BuildEnvironmentVariable(Dictionary<string, string> EvnironmantVariables)
+        {
+            string ret = null;
+            if (EvnironmantVariables.Count > 0)
+            {
+                foreach (var EnvironmentVariable in EvnironmantVariables)
+                {
+                    var value = EnvironmentVariable.Value;
+                    if (value == null) value = "";
+
+                    if (EnvironmentVariable.Key.Contains('=') || EnvironmentVariable.Key.Contains('\0') || value.Contains('\0'))
+                    {
+                        throw new ArgumentException("Invalid or restricted charachter", "EvnironmantVariables");
+                    }
+
+                    ret += EnvironmentVariable.Key + "=" + value + '\0';
+                }
+
+
+                ret += "\0";
+            }
+
+            return ret;
+        }
+
+        private static Process[] GetChildPrecesses(int parentId) {
+            var result = new List<Process>();
+
+            var query = "Select * From Win32_Process Where ParentProcessId = " + parentId;
+
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
+            {
+                using (ManagementObjectCollection processList = searcher.Get())
+                {
+                    foreach (var i in processList)
+                    {
+                        var pid = Convert.ToInt32(i.GetPropertyValue("ProcessId"));
+                        result.Add(Process.GetProcessById(pid));
+                    }
                 }
             }
 

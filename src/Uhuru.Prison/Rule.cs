@@ -49,7 +49,7 @@ namespace Uhuru.Prison
         CPU = 0x1,
         Disk = 0x2,
         Filesystem = 0x4,
-        Firewall = 0x8,
+        Httpsys = 0x8,
         Network = 0x10,
         WindowStation = 0x20,
         Memory = 0x40,

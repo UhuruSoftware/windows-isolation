@@ -11,33 +11,43 @@ namespace Uhuru.Prison.Restrictions
 {
     class WindowStation : Rule
     {
-        private static readonly object windowStationLock = new object();
+        private static readonly object windowStationContextLock = new object();
 
         public override void Apply(Prison prison)
         {
             Native.SECURITY_ATTRIBUTES secAttributes = new Native.SECURITY_ATTRIBUTES();
             secAttributes.nLength = Marshal.SizeOf(secAttributes);
 
+            // TODO SECURITY: change security attributes. the default will give everyone access to the object including other prisons
             IntPtr windowStation = Native.CreateWindowStation(prison.User.Username, 0, Native.WINDOWS_STATION_ACCESS_MASK.WINSTA_NONE, null);
 
-            IntPtr desktop = IntPtr.Zero;
-            
-
-            lock (windowStationLock)
+            lock (windowStationContextLock)
             {
                 IntPtr currentWindowStation = Native.GetProcessWindowStation();
-                bool setOk = Native.SetProcessWindowStation(windowStation);
 
-                if (!setOk)
+                try
                 {
-                    throw new Win32Exception(Marshal.GetLastWin32Error());
+                    bool setOk = Native.SetProcessWindowStation(windowStation);
+
+                    if (!setOk)
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+
+                    // TODO SECURITY: change security attributes. the default will give everyone access to the object including other prisons
+                    var desktop = Native.CreateDesktop("Default", null, null, 0, Native.ACCESS_MASK.DESKTOP_CREATEWINDOW, null);
+
+                    if (desktop == IntPtr.Zero)
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+
+                    prison.ProcessStartupInfo.lpDesktop = string.Format(@"{0}\Default", prison.User.Username);
                 }
-
-                Native.CreateDesktop(prison.User.Username, null, null, 0, Native.ACCESS_MASK.DESKTOP_CREATEWINDOW, null);
-                
-                prison.ProcessStartupInfo.lpDesktop = string.Format(@"{0}\{0}", prison.User.Username);
-
-                Native.SetProcessWindowStation(currentWindowStation);
+                finally
+                {
+                    Native.SetProcessWindowStation(currentWindowStation);
+                }
             }
         }
 
