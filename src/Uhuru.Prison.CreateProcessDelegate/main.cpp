@@ -131,7 +131,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	}
 
 
-	// Return the woker prorcess PID to stdout
+	// Return the worker process PID to stdout
 	wstring workerPid = to_wstring(processInfo.dwProcessId);
 	wcout << workerPid << endl;
 
