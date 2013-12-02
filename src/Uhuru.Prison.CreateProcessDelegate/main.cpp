@@ -54,8 +54,8 @@ map<wstring, wstring> * GetEnvs()
 	return envsMap;
 }
 
-// Input will be recied with by stdin plus environment variables and output will be provided by stdout.
-// If successfull the return code is 0. If there was an error the return code is the error message.
+// Input will be recited with by stdin plus environment variables and output will be provided to stdout.
+// If successful the return code is 0. If there was an error the return code is the error message.
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
 	wstring inputCommand;
@@ -69,7 +69,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		return 1;
 	}
 
-	// Parse the environment variable.
+	// Parse the environment variables.
 
 	map<wstring, wstring> *envs = GetEnvs();
 	wstring method = envs->at(L"Method");
@@ -97,19 +97,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	PROCESS_INFORMATION processInfo;
 	ZeroMemory(&processInfo, sizeof(PROCESS_INFORMATION));
 
-	BOOL suc = false;
-
 	if (method == L"CreateProcessWithLogonW")
 	{
 		wstring username = envs->at(L"pUsername");
 		wstring domain = envs->at(L"Domain");
 		wstring password = envs->at(L"Password");
 
-		suc = CreateProcessWithLogonW(
+		BOOL cresteProcessSuccess = CreateProcessWithLogonW(
 			username.c_str(), domain.c_str(), password.c_str(), logonFlags,
 			NULL, (wchar_t  *)commandLine.c_str(), creationFlags, NULL, currentDirectory, &suInfo, &processInfo
 			);
 
+		if (!cresteProcessSuccess)
+		{
+			int error = GetLastError();
+			return error;
+		}
 	}
 
 	if (method == L"CreateProcessWithTokenW")
@@ -117,19 +120,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		wstring tokenStr = envs->at(L"Token");
 		HANDLE token = (HANDLE)_wtoi(tokenStr.c_str());
 
-		suc = CreateProcessWithTokenW(
+		BOOL cresteProcessSuccess = CreateProcessWithTokenW(
 			token, logonFlags,
 			NULL, (wchar_t  *)commandLine.c_str(), creationFlags, NULL, currentDirectory, &suInfo, &processInfo
 			);
 
+		if (!cresteProcessSuccess)
+		{
+			int error = GetLastError();
+			return error;
+		}
 	}
 
-	if (!suc)
-	{
-		int error = GetLastError();
-		return error;
-	}
-
+	CloseHandle(processInfo.hProcess);
+	CloseHandle(processInfo.hThread);
 
 	// Return the worker process PID to stdout
 	wstring workerPid = to_wstring(processInfo.dwProcessId);

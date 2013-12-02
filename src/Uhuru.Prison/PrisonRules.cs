@@ -21,7 +21,11 @@ namespace Uhuru.Prison
             set;
         }
 
-        public int RunningProcessesLimit
+        /// <summary>
+        /// The total number of processes that can run at the same time 
+        /// in the Prison.
+        /// </summary>
+        public int ActiveProcessesLimit
         {
             get;
             set;

@@ -11,7 +11,7 @@ namespace Uhuru.Prison.Restrictions
         public override void Apply(Prison prison)
         {
             prison.JobObject.JobMemoryLimitBytes = prison.Rules.TotalPrivateMemoryLimitBytes;
-            prison.JobObject.ActiveProcessesLimit = prison.Rules.RunningProcessesLimit;
+            prison.JobObject.ActiveProcessesLimit = prison.Rules.ActiveProcessesLimit;
         }
 
         public override void Destroy()
