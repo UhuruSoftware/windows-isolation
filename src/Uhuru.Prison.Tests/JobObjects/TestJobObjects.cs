@@ -79,6 +79,8 @@ namespace Uhuru.Prison.Tests.JobObjects
 
             // Assert
             Assert.AreEqual(667, process.ExitCode);
+
+            prison.Destroy();
         }
     }
 }

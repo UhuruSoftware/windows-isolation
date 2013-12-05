@@ -204,6 +204,7 @@ private static int Dummy()
                 Thread.Sleep(300);
             }
 
+            prison.Destroy();
         }
     }
 }

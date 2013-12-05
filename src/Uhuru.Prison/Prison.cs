@@ -8,6 +8,7 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Uhuru.Prison.Utilities.WindowsJobObjects;
 
@@ -119,7 +120,37 @@ namespace Uhuru.Prison
                 cell.Apply(this);
             }
 
+            if (this.prisonRules.TotalPrivateMemoryLimitBytes > 0)
+            {
+                RunGuard();
+            }
+
             this.isLocked = true;
+        }
+
+        private Process RunGuard()
+        {
+            var psi = new ProcessStartInfo();
+            psi.UseShellExecute = false;
+            psi.ErrorDialog = false;
+            psi.CreateNoWindow = true;
+
+            // TODO: rename TotalPrivateMemoryLimitBytes to a more general term
+            psi.FileName = GetGuardPath();
+            psi.Arguments = this.user.Username + " " + this.prisonRules.TotalPrivateMemoryLimitBytes;
+
+            return Process.Start(psi);
+        }
+
+        private void TryStopGuard()
+        {
+            EventWaitHandle dischargeEvent = null;
+            EventWaitHandle.TryOpenExisting("discharge-" + this.user.Username, out dischargeEvent);
+
+            if (dischargeEvent != null)
+            {
+                dischargeEvent.Set();
+            }
         }
 
         public Process Execute(string filename)
@@ -178,12 +209,9 @@ namespace Uhuru.Prison
             {
                 creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
             }
-
-            string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string assemblyDirPath = Directory.GetParent(assemblyPath).FullName;
-
+            
             var delegateStartInfo = new ProcessStartInfo();
-            delegateStartInfo.FileName = assemblyDirPath + @"\Uhuru.Prison.CreateProcessDelegate.exe";
+            delegateStartInfo.FileName = GetCreateProcessDeletegatePath();
             delegateStartInfo.UseShellExecute = false;
 
             if (interactive)
@@ -265,6 +293,7 @@ namespace Uhuru.Prison
 
         public void Destroy()
         {
+            TryStopGuard();
         }
 
         public static void Init()
@@ -391,6 +420,22 @@ namespace Uhuru.Prison
             }
 
             return result.ToArray();
+        }
+
+        private static string GetCreateProcessDeletegatePath()
+        {
+            string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string assemblyDirPath = Directory.GetParent(assemblyPath).FullName;
+
+            return Path.Combine(assemblyDirPath, "Uhuru.Prison.CreateProcessDelegate.exe");
+        }
+
+        private static string GetGuardPath()
+        {
+            string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string assemblyDirPath = Directory.GetParent(assemblyPath).FullName;
+
+            return Path.Combine(assemblyDirPath, "Uhuru.Prison.Guard.exe");
         }
     }
 }
