@@ -1,0 +1,1542 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Uhuru.Prison</name>
+    </assembly>
+    <members>
+        <member name="F:Uhuru.Prison.Restrictions.Disk.DiskQuotaManager.quotaControls">
+            <summary>
+            DiskQuotaControlls mapped to the unique volume name.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Disk.DiskQuotaManager.StartQuotaInitialization">
+            <summary>
+            Initialize the quota for every volume on the system.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Disk.DiskQuotaManager.GetDiskQuotaUser(System.String,System.String)">
+            <summary>
+            Gets a object that manages the quota for a specific user on a specific volume.
+            </summary>
+            <param name="rootPath"></param>
+            <param name="WindowsUsername"></param>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Disk.DiskQuotaManager.GetDisksQuotaUser(System.String)">
+            <summary>
+            Gets a objects that manages the quota for a specific user on all the system's volumes.
+            </summary>
+            <param name="rootPath"></param>
+            <param name="WindowsUsername"></param>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Disk.DiskQuotaManager.GetVolumeRootFromPath(System.String)">
+            <summary>
+            Get the volume root mount of the path. 
+            </summary>
+            <param name="path">The path for which the volume should be returned.</param>
+            <returns>The root volume path.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Disk.DiskQuotaManager.GetUniqueVolumeNameFromPath(System.String)">
+            <summary>
+            Get the unique volume name for a path. 
+            </summary>
+            <param name="path">The path for which the volume should be returned.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Allowances.Httpsys.AddPortAccess(System.Int32,System.String)">
+            <summary>
+            Allow access to the URL with the specified port for the specified username.
+            This will allow IIS HWC and IIS Express to bind and listen to that port.
+            </summary>
+            <param name="port">Http port number.</param>
+            <param name="Username">Windows Local username.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Allowances.Httpsys.RemovePortAccess(System.Int32,System.Boolean)">
+            <summary>
+            Remove access for the specified port.
+            </summary>
+            <param name="port">Http port number.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Network.CreateOutboundThrottlePolicy(System.String,System.String,System.Int64)">
+            <summary>
+            Sets the limit for the upload network data rate. This limit is applied for the specified user.
+            This method is not reentrant. Remove the policy first after creating it again.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Network.CreateOutboundThrottlePolicy(System.String,System.Int32,System.Int64)">
+            <summary>
+            Sets the limit for the upload network data rate. This limit is applied for a specific server URL passing through HTTP.sys.
+            This rules are applicable to IIS, IIS WHC and IIS Express. This goes hand in hand with URL Acls.
+            This method is not reentrant. Remove the policy first after creating it again.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.TotalPrivateMemoryLimitBytes">
+            <summary>
+            The total amount of commit memory available to the processes in the Prison.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.CPUPercentageLimit">
+            <summary>
+            The total amount of CPU (as a percentage) available to the processes in the Prison.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.ActiveProcessesLimit">
+            <summary>
+            The total number of processes that can run at the same time 
+            in the Prison.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.PriorityClass">
+            <summary>
+            The priority class for the job object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.DiskQuotaBytes">
+            <summary>
+            The space usage quota for VolumeRootPath.
+            Use -1 to disable disk quota.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.PrisonHomePath">
+            <summary>
+            The path in the disk volume to apply quota on.
+            Ex. "C:\dir" for volume "C:\"
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.NetworkOutboundRateLimitBitsPerSecond">
+            <summary>
+            The limit for network data upload rate in bits per second.
+            Policy not enforced for local traffic.
+            Use -1 to disable network throttling. NetworkOutboundRateLimitBitsPerSecond
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.AppPortOutboundRateLimitBitsPerSecond">
+            <summary>
+            The limit for network data upload rate in bits per second.
+            Policy not enforced for local traffic.
+            Use -1 to disable network throttling. NetworkOutboundRateLimitBitsPerSecond
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.PrisonRules.UrlPortAccess">
+            <summary>
+            Allows the prisson's user to bind to URLs with the specified port.
+            URL bindings are needed for HTTP.sys access, e.g. IIS, IIS HWC, IIS Express.
+            Use 0 to disable HTTP.sys port access.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.dwSize">
+            
+            Specifies the size of the structure, in bytes.
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.dwFlags">
+            
+            This member can be one of the following flags: PI_NOUI or PI_APPLYPOLICY
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.lpUserName">
+            
+            Pointer to the name of the user. 
+            This member is used as the base name of the directory in which to store a new profile. 
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.lpProfilePath">
+            
+            Pointer to the roaming user profile path. 
+            If the user does not have a roaming profile, this member can be NULL.
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.lpDefaultPath">
+            
+            Pointer to the default user profile path. This member can be NULL. 
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.lpServerName">
+            
+            Pointer to the name of the validating domain controller, in NetBIOS format. 
+            If this member is NULL, the Windows NT 4.0-style policy will not be applied. 
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.lpPolicyPath">
+            
+            Pointer to the path of the Windows NT 4.0-style policy file. This member can be NULL. 
+            
+        </member>
+        <member name="F:Uhuru.Prison.ProfileInfo.hProfile">
+            
+            Handle to the HKEY_CURRENT_USER registry key. 
+            
+        </member>
+        <member name="M:Uhuru.Prison.Prison.UnloadUserProfile">
+            <summary>
+            This should be a replacement for UnloadUserProfile (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762282%28v=vs.85%29.aspx)
+            UnloadUserProfile cannot be invoked because the hProfile handle may not be available.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Prison.Load">
+            <summary>
+            Loads all persisted Prison instances.
+            <remarks>
+            This method assumes that serialized Prison objects are stored in a folder named 'db', next to the assembly.
+            </remarks>
+            </summary>
+            <returns>An array of Prison objects.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Prison.BuildEnvironmentVariable(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Formats a string with the env variables for CreateProcess Win API function.
+            See env format here: http://msdn.microsoft.com/en-us/library/windows/desktop/ms682653(v=vs.85).aspx
+            </summary>
+            <param name="environmentVariables"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Uhuru.Prison.Logger">
+            <summary>
+            This is a helper logger class that is used throughout the code.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Logger.log">
+            <summary>
+            The NLog.Logger object used for logging.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Fatal(System.String)">
+            <summary>
+            Logs a fatal message.
+            This indicates a really severe error, that will probably make the application crash.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Error(System.String)">
+            <summary>
+            Logs an error message.
+            This indicates an error, but the application may be able to continue.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Warning(System.String)">
+            <summary>
+            Logs a warning message.
+            This indicates a situation that could lead to some bad things.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Info(System.String)">
+            <summary>
+            Logs an information message.
+            The message is used to indicate some progress.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Debug(System.String)">
+            <summary>
+            Logs a debug message.
+            This is an informational message, that is useful when debugging.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Fatal(System.String,System.Object[])">
+            <summary>
+            Logs a fatal message and formats it.
+            This indicates a really severe error, that will probably make the application crash.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="args">The arguments used for formatting.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Error(System.String,System.Object[])">
+            <summary>
+            Logs an error message and formats it.
+            This indicates an error, but the application may be able to continue.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="args">The arguments used for formatting.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Warning(System.String,System.Object[])">
+            <summary>
+            Logs a warning message and formats it.
+            This indicates a situation that could lead to some bad things.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="args">The arguments used for formatting.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Info(System.String,System.Object[])">
+            <summary>
+            Logs an information message and formats it.
+            The message is used to indicate some progress.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="args">The arguments used for formatting.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Logger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message and formats it.
+            This is an informational message, that is useful when debugging.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="args">The arguments used for formatting.</param>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.StreamWriterCallback">
+            <summary>
+            Callback for the process stream.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.ProcessDoneCallback">
+            <summary>
+            The callback that is executed after a process stopped.
+            </summary>
+            <param name="output">The output stream.</param>
+            <param name="statusCode">The status code.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.RunCommandAndGetOutput(System.String,System.String)">
+            <summary>
+            Starts up a new process and executes a command.
+            </summary>
+            <param name="command"> The command to execute. </param>
+            <param name="arguments"> The arguments of the command. </param>
+            <returns>The output of the executed command.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.RunCommandAndGetOutputAndErrors(System.String,System.String)">
+            <summary>
+            Starts up a new process and executes a command.
+            </summary>
+            <param name="command"> The command to execute. </param>
+            <param name="arguments"> The arguments of the command. </param>
+            <returns>The output of the executed command, including errors.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.RunCommandAndGetOutput(System.String,System.String,System.Boolean)">
+            <summary>
+            Starts up a new process and executes a command.
+            </summary>
+            <param name="command"> The command to execute. </param>
+            <param name="arguments"> The arguments of the command. </param>
+            <param name="outputIncludesErrors"> A value indicated whether the errors are to be included in output or not. </param>
+            <returns>The output of the executed command.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.ExecuteCommands(System.String,System.String,Uhuru.Prison.Utilities.StreamWriterCallback,Uhuru.Prison.Utilities.ProcessDoneCallback)">
+            <summary>
+            starts a new process and executes a command
+            </summary>
+            <param name="shell">The command to be executed.</param>
+            <param name="arguments">The arguments of the command.</param>
+            <param name="writerCallback">The callback to process the input.</param>
+            <param name="doneCallback">The callback to process the output.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.ExecuteCommand(System.String)">
+            <summary>
+            Starts up a cmd shell and executes a command.
+            </summary>
+            <param name="command">The command to be executed.</param>
+            <returns>The process' exit code.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.ExecuteCommand(System.String,System.String)">
+            <summary>
+            Starts up a cmd shell and executes a command.
+            </summary>
+            <param name="command">The command to be executed.</param>
+            <param name="workingDirectory">The working directory.</param>
+            <returns>The process' exit code.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Command.ExecuteCommand(System.String,System.Int32)">
+            <summary>
+            Starts up a cmd shell and executes a command.
+            </summary>
+            <param name="command">The command to be executed.</param>
+            <param name="timeout">Seconds to wait before killing the process.</param>
+            <returns>The process' exit code.</returns>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.Credentials">
+            <summary>
+            This is a helper class that generates credential strings, such as usernames and passwords.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Credentials.GenerateCredential">
+            <summary>
+            Generates a credential string with a default length of 12 characters.
+            </summary>
+            <returns>A string containing a randomly generated string with length 12.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Credentials.GenerateCredential(System.Int32)">
+            <summary>
+            Generates a credential string using the specified length.
+            </summary>
+            <param name="length">An int specifying the length of the generated string.</param>
+            <returns>A string containing a randomly generated string.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.Credentials.GenerateSecureGuid">
+            <summary>
+            Generated a GUID with a cryptographically secure random number generator.
+            </summary>
+            <returns>Secure GUID.</returns>
+        </member>
+        <member name="T:Uhuru.Prison.FirewallTools">
+            <summary>
+            A set of Windows Firewall tool. 
+            
+            NB: BLOCK rules have percedence/priority over ALLOW rules.
+            
+            Note from http://technet.microsoft.com/en-us/library/cc755191(v=ws.10).aspx :
+            This type of rule explicitly blocks a particular type of incoming or outgoing traffic. Because 
+            these rules are evaluated before allow rules, they take precedence. Network traffic that matches 
+            both an active block and an active allow rule is blocked.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.FirewallTools.OpenPort(System.Int32,System.String)">
+            <summary>
+            Opens a firewall port.
+            </summary>
+            <param name="port">the port to open</param>
+            <param name="rulName">the application to open the port to</param>
+        </member>
+        <member name="M:Uhuru.Prison.FirewallTools.ClosePort(System.Int32)">
+            <summary>
+            Closes a port
+            </summary>
+            <param name="port">the port to be closed</param>
+        </member>
+        <member name="M:Uhuru.Prison.FirewallTools.OpenPortRange(System.Int32,System.Int32,System.String)">
+            <summary>
+            Opens a range of firewall ports
+            </summary>
+            <param name="lowPort">the start port to open</param>
+            <param name="highPort">the end port to open</param>
+            <param name="ruleName">Firewall rule name</param>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.UserImpersonator">
+            <summary>
+            Impersonation of a user. Allows to execute code under another
+            user context.
+            Please note that the account that instantiates the Impersonator class
+            needs to have the 'Act as part of operating system' privilege set.
+            </summary>
+            <remarks>
+            This class is based on the information in the Microsoft knowledge base
+            article http://support.microsoft.com/default.aspx?scid=kb;en-us;Q306158
+            Encapsulate an instance into a using-directive like e.g.:
+            </remarks>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.Logon32LogonInteractive">
+            <summary>
+            Interactive logon.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.Logon32ProviderDefault">
+            <summary>
+            Default logon provider.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.disposed">
+            <summary>
+            Disposed flag.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.impersonationContext">
+            <summary>
+            Impersonation context.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.profileHandle">
+            <summary>
+            User profile handle.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.userToken">
+            <summary>
+            User Duplicate Token handle.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the UserImpersonator class.
+            Starts the impersonation with the given credentials.
+            Please note that the account that instantiates the Impersonator class
+            needs to have the 'Act as part of operating system' privilege set.
+            </summary>
+            <param name="userName">The name of the user to act as.</param>
+            <param name="domainName">The domain name of the user to act as.</param>
+            <param name="password">The password of the user to act as.</param>
+            <param name="loadUserProfile">if set to <c>true</c> [load user profile].</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.Finalize">
+            <summary>
+            Finalizes an instance of the UserImpersonator class.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.DeleteUserProfile(System.String,System.String)">
+            <summary>
+            Deletes the user profile.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="domainName">The domain name of the user to act as.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.Dispose">
+            <summary>
+            Disposes the current object.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.GetRegistryHandle">
+            <summary>
+            Gets the registry handle.
+            </summary>
+            <returns>The impersonated registry handle.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.Dispose(System.Boolean)">
+            <summary>
+            Disposes the current object.
+            </summary>
+            <param name="disposing">True if disposing from user code.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.UserImpersonator.ImpersonateValidUser(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Does the actual impersonation.
+            </summary>
+            <param name="userName">The name of the user to act as.</param>
+            <param name="domain">The domain name of the user to act as.</param>
+            <param name="password">The password of the user to act as.</param>
+            <param name="loadUserProfile">if set to <c>true</c> [load user profile].</param>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo">
+            <summary>
+            Profile Info structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.Size">
+            <summary>
+            Structure filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.Flags">
+            <summary>
+            Structure filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.UserName">
+            <summary>
+            Structure filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.ProfilePath">
+            <summary>
+            Structure filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.DefaultPath">
+            <summary>
+            Structure filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.ServerName">
+            <summary>
+            Structure filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.PolicyPath">
+            <summary>
+            Policy path filed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.UserImpersonator.ProfileInfo.Profile">
+            <summary>
+            Profile field.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject">
+            <summary>
+            Is a class that manages a Windows Job Object. Job Objects allows to group a number of processes and
+            perform some aggregate operations. It is a good tool for enforcing resource sandboxing for processes.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.name">
+            <summary>
+            Name of the Job Object
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.jobHandle">
+            <summary>
+            The Windows Handle
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.killProcessesOnJobClose">
+            <summary>
+            Flag to kill processes on job close.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.dieOnUnhandledException">
+            <summary>
+            Die on unhandled exception.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.allowChildProcessesBreakaway">
+            <summary>
+            Allow child process breakaway.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.alwaysBreakawayChildProcesses">
+            <summary>
+            Breakaway child processes by default.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.activeProcessesLimit">
+            <summary>
+            Maximum number of active processes.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.jobMemoryLimit">
+            <summary>
+            The memory limit of the Job Object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.processMemoryLimit">
+            <summary>
+            The memory limit of each process in the Job Object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.cpuPercentageLimit">
+            <summary>
+            The CPU percentage limit for the entire Job Object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.jobUserTimeLimitChanged">
+            <summary>
+            Flag if the job processor user time limit has changed.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.jobUserTimeLimit">
+            <summary>
+            The processor user time limit for the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.processUserTimeLimit">
+            <summary>
+            The user time limit per each process in the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.priorityClass">
+            <summary>
+            The priority class of the Job Object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.schedulingClass">
+            <summary>
+            The scheduling class.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.affinity">
+            <summary>
+            The processor affinity.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ioReadOperationsCount">
+            <summary>
+            The read IO operations count for the whole job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ioWriteOperationsCount">
+            <summary>
+            The write IO operations count for the whole job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ioOtherOperationsCount">
+            <summary>
+            Other IO operations count for the while job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ioReadBytes">
+            <summary>
+            Total IO bytes read by the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ioWriteBytes">
+            <summary>
+            Total IO bytes written by the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ioOtherBytes">
+            <summary>
+            Total IO bytes used in other operations.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.peakJobMemory">
+            <summary>
+            Peak memory usage by the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.peakProcessMemory">
+            <summary>
+            Peak memory usage by a process.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.userProcessorTime">
+            <summary>
+            Total user processor time used by the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.kernelProcessorTime">
+            <summary>
+            Total kernel processor time used by the job.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.totalProcesses">
+            <summary>
+            Total processes that was in the job object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.activeProcesses">
+            <summary>
+            Active processes in the job object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.totalTerminatedProcesses">
+            <summary>
+            Processes killed due to job object restrictions.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.jobProcesses">
+            <summary>
+            The processes in the job.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.Attach(System.String)">
+            <summary>
+            Attach to a named Job Object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.#ctor(Uhuru.Prison.Utilities.WindowsJobObjects.JobObjectHandle,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject"/> class. No Windows Job Object is created.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject"/> class. The Windows Job Object is unnamed.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject"/> class. If a Job Object with the specified name exists,
+            then the Job Object is opened; if not, the Job Object with the specified named is opened.
+            </summary>
+            <param name="jobObjectName">Name of the job object.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.Finalize">
+            <summary>
+            Finalizes an instance of the JobObject class. Releases unmanaged resources and performs other cleanup operations before the
+            <see cref="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.AddProcess(System.Diagnostics.Process)">
+            <summary>
+            Adds a process to the current Job Object, for which the Job Object limits apply.
+            </summary>
+            <param name="process">The process to be added.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.HasProcess(System.Diagnostics.Process)">
+            <summary>
+            Determines whether the specified process is in the Job Object
+            </summary>
+            <param name="process">The process to be checked for.</param>
+            <returns>
+              <c>true</c> if the specified process has the process; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.TerminateProcesses(System.Int32)">
+            <summary>
+            Terminates all the processes in the Job Object.
+            </summary>
+            <param name="exitCode">The exit code.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.GetJobProcesses">
+            <summary>
+            Gets all the processes included in the Job Object.
+            </summary>
+            <returns>The list of processes.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.HasProcess(System.IntPtr)">
+            <summary>
+            Determines whether the specified process handle is included in the Job Object.
+            </summary>
+            <param name="processHandle">The process handle.</param>
+            <returns>
+              <c>true</c> if the specified process handle has process; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.AddProcess(System.IntPtr)">
+            <summary>
+            Adds the process handle to the Job object.
+            </summary>
+            <param name="processHandle">The process handle.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.QueryProcessIds">
+            <summary>
+            Queries the process ids.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.UpdateCPULimits">
+            <summary>
+            Updates CPU Limit restrictions.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.UpdateExtendedLimit">
+            <summary>
+            Updates the extended limit.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.QueryBasicAndIoAccounting">
+            <summary>
+            Queries the basic and IO accounting.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.QueryExtendedLimitInformation">
+            <summary>
+            Queries the extended limit information.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.KillProcessesOnJobClose">
+            <summary>
+            Gets or sets a value indicating whether to kill the processes when the Job Object is closed.
+            </summary>
+            <value>
+             <c>true</c> if [kill processes on job close]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.DieOnUnhandledException">
+            <summary>
+            Gets or sets a value indicating whether a process to die on an unhandled exception.
+            </summary>
+            <value>
+             <c>true</c> if [die on unhandled exception]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.AllowChildProcessesBreakaway">
+            <summary>
+            Gets or sets a value indicating whether processes are allowed to create processes outside the Job Object.
+            </summary>
+            <value>
+             <c>true</c> if [allow child processes breakaway]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.AlwaysBreakawayChildProcesses">
+            <summary>
+            Gets or sets a value indicating whether child processes are not added to the Job Object.
+            </summary>
+            <value>
+             <c>true</c> if [always breakaway child processes]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ActiveProcessesLimit">
+            <summary>
+            Gets or sets the active processes in the Job Object. Set to 0 (zero) to disable the limit.
+            </summary>
+            <value>
+            The active processes.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ProcessMemoryLimit">
+            <summary>
+            Gets or sets the memory in bytes limit enforced per process. Set to 0 (zero) to disable the limit.
+            </summary>
+            <value>
+            The process memory limit.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.CPUPercentageLimit">
+            <summary>
+            Gets or sets the percentage of CPU cycles allowed to be used by all processes in the JobObject. 
+            Should be a value between 0 and 100.
+            Set to 0 (zero) to disable the limit.
+            </summary>
+            <value>
+            The process memory limit.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.JobMemoryLimitBytes">
+            <summary>
+            Gets or sets the memory limit in bytes of the entire Job Object. Set to 0 (zero) to disable the limit.
+            </summary>
+            <value>
+            The job memory limit.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ProcessUserTimeLimit">
+            <summary>
+            Gets or sets the process user time limit. It is enforced per process. Set to 0 (zero) to disable the limit.
+            </summary>
+            <value>
+            The process user time limit.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.JobUserTimeLimit">
+            <summary>
+            Gets or sets the Job Object user time limit. Every process user time is accounted. Set to 0 (zero) to disable the limit.
+            </summary>
+            <value>
+            The job user time limit.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.PriorityClass">
+            <summary>
+            Gets or sets the priority class of the Job Object.
+            </summary>
+            <value>
+            The priority class.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.SchedulingClass">
+            <summary>
+            Gets or sets the scheduling class of the JobObject.
+            </summary>
+            <value>
+            The scheduling class.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.Affinity">
+            <summary>
+            Gets or sets the processor affinity, enforced for every process.
+            </summary>
+            <value>
+            The affinity.
+            </value>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.IOReadBytes">
+            <summary>
+            Gets the total IO bytes read by every process in the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.IOWriteBytes">
+            <summary>
+            Gets the total IO bytes written by every process in the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.IOOtherBytes">
+            <summary>
+            Gets the total IO bytes used in other operations by every process in the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.IOReadOperationsCount">
+            <summary>
+            Gets the IO read operations count preformed by every process in the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.IOWriteOperationsCount">
+            <summary>
+            Gets the IO write operations count preformed by every process in the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.IOOtherOperationsCount">
+            <summary>
+            Gets the other IO operations count preformed by every process in the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.PeakJobMemory">
+            <summary>
+            Gets the peak memory in bytes used by the Job Object at any given time.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.PeakProcessMemory">
+            <summary>
+            Gets the peak memory in bytes used by a process.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.TotalProcessorTime">
+            <summary>
+            Gets the total processor time used by each process.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.UserProcessorTime">
+            <summary>
+            Gets the user processor time used by each process.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.KernelProcessorTime">
+            <summary>
+            Gets the kernel processor time used by each process.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.TotalProcesses">
+            <summary>
+            Gets the total processes that was in the job object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.ActiveProcesses">
+            <summary>
+            Gets active processes in the job object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.TotalTerminatedProcesses">
+            <summary>
+            Gets processes killed due to job object restrictions.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.WorkingSetMemory">
+            <summary>
+            Gets the working set memory in bytes of the Job Object.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.VirtualMemory">
+            <summary>
+            Gets the virtual memory in bytes.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.PrivateMemory">
+            <summary>
+            Gets the private memory in bytes.
+            Coresponds to Private Bytes in Process Hacker, Commit Size in Task Manager.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.PagedMemory">
+            <summary>
+            Gets the paged memory in bytes.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.PagedSystemMemory">
+            <summary>
+            Gets the paged system memory in bytes.
+            </summary>
+        </member>
+        <member name="P:Uhuru.Prison.Utilities.WindowsJobObjects.JobObject.NonPagedSystemMemory">
+            <summary>
+            Gets the non paged system memory in bytes.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObjectHandle">
+            <summary>
+            A safe handle for Job Object.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObjectHandle.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:Uhuru.Prison.Utilities.WindowsJobObjects.JobObjectHandle"/> class from being created.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsJobObjects.JobObjectHandle.ReleaseHandle">
+            <summary>
+            When overridden in a derived class, executes the code required to free the handle.
+            </summary>
+            <returns>
+            true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a releaseHandleFailed MDA Managed Debugging Assistant.
+            </returns>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods">
+            <summary>
+            Job Objects Windows API native methods.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass">
+            <summary>
+            Used for calling the Win API
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectBasicAccountingInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_BASIC_ACCOUNTING_INFORMATION structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectBasicAndIoAccountingInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectBasicLimitInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_BASIC_LIMIT_INFORMATION structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectBasicProcessIdList">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_BASIC_PROCESS_ID_LIST structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectBasicUIRestrictions">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_BASIC_UI_RESTRICTIONS structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectEndOfJobTimeInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_END_OF_JOB_TIME_INFORMATION structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectExtendedLimitInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_EXTENDED_LIMIT_INFORMATION structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectAssociateCompletionPortInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_ASSOCIATE_COMPLETION_PORT structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JobObjectInfoClass.JobObjectCpuRateControlInformation">
+            <summary>
+            The lpJobObjectInfo parameter is a pointer to a JOBOBJECT_CPU_RATE_CONTROL_INFORMATION structure.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.SECURITY_ATTRIBUTES">
+            <summary>
+            The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.SECURITY_ATTRIBUTES.Length">
+            <summary>
+            Length of the structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.SECURITY_ATTRIBUTES.SecurityDescriptor">
+            <summary>
+            Security Descriptor
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.SECURITY_ATTRIBUTES.InheritHandle">
+            <summary>
+            Child process inheritance.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION">
+            <summary>
+            Contains basic and extended limit information for a job object.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_ACTIVE_PROCESS">
+            <summary>
+            JOB_OBJECT_LIMIT_ACTIVE_PROCESS Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_AFFINITY">
+            <summary>
+            JOB_OBJECT_LIMIT_AFFINITY Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_BREAKAWAY_OK">
+            <summary>
+            JOB_OBJECT_LIMIT_BREAKAWAY_OK Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION">
+            <summary>
+            JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_JOB_MEMORY">
+            <summary>
+            JOB_OBJECT_LIMIT_JOB_MEMORY Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_JOB_TIME">
+            <summary>
+            JOB_OBJECT_LIMIT_JOB_TIME Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE">
+            <summary>
+            JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME">
+            <summary>
+            JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_PRIORITY_CLASS">
+            <summary>
+            JOB_OBJECT_LIMIT_PRIORITY_CLASS Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_PROCESS_MEMORY">
+            <summary>
+            JOB_OBJECT_LIMIT_PROCESS_MEMORY Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_PROCESS_TIME">
+            <summary>
+            JOB_OBJECT_LIMIT_PROCESS_TIME Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_SCHEDULING_CLASS">
+            <summary>
+            JOB_OBJECT_LIMIT_SCHEDULING_CLASS Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK">
+            <summary>
+            JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_SUBSET_AFFINITY">
+            <summary>
+            JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.JOB_OBJECT_LIMIT_WORKINGSET">
+            <summary>
+            JOB_OBJECT_LIMIT_WORKINGSET Windows API constant.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.PerProcessUserTimeLimit">
+            <summary>
+            Per process user time limit.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.PerJobUserTimeLimit">
+            <summary>
+            Per job user time limit.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.LimitFlags">
+            <summary>
+            Limit flags.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.MinimumWorkingSetSize">
+            <summary>
+            Minimum working set size.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.MaximumWorkingSetSize">
+            <summary>
+            Maximum working set size.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.ActiveProcessLimit">
+            <summary>
+            Active process limit.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.Affinity">
+            <summary>
+            Processor affinity.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.PriorityClass">
+            <summary>
+            Priority class.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_LIMIT_INFORMATION.SchedulingClass">
+            <summary>
+            Scheduling class.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_UI_RESTRICTIONS">
+            <summary>
+            JOBOBJECT_BASIC_UI_RESTRICTIONS Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_UI_RESTRICTIONS.UIRestrictionsClass">
+            <summary>
+            UI Restrictions class.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION">
+            <summary>
+            JOBOBJECT_CPU_RATE_CONTROL_INFORMATION Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.ControlFlags">
+            <summary>
+            Control Flags.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.CpuRate">
+            <summary>
+            CPU rate.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.Weight">
+            <summary>
+            CPU rate weight.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.CpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_ENABLE">
+            <summary>
+            This flag enables the job's CPU rate to be controlled based on weight or hard cap. 
+            It must be set if JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED or JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP is set.
+            <remarks>Source: http://msdn.microsoft.com/en-us/library/windows/desktop/hh448384(v=vs.85).aspx </remarks>
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.CpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED">
+            <summary>
+            The job's CPU rate is calculated based on its relative weight to the weight of other jobs.
+            If this flag is set, the Weight member contains more information. If this flag is clear, the CpuRate member contains more information.
+            <remarks>Source: http://msdn.microsoft.com/en-us/library/windows/desktop/hh448384(v=vs.85).aspx </remarks>
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.CpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP">
+            <summary>
+            The job's CPU rate is a hard limit. After the job reaches its CPU cycle limit for the current scheduling interval, no threads associated with the job will run until the next interval.
+            <remarks>Source: http://msdn.microsoft.com/en-us/library/windows/desktop/hh448384(v=vs.85).aspx </remarks>
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_CPU_RATE_CONTROL_INFORMATION.CpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY">
+            <summary>
+            The system will send a JOB_OBJECT_MSG_NOTIFICATION_LIMIT message to the job's I/O completion port if the job exceeds the CPU rate control limits specified in this structure within the tolerance specified in the JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION structure.
+            <remarks>Source: http://msdn.microsoft.com/en-us/library/windows/desktop/hh448384(v=vs.85).aspx </remarks>
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION">
+            <summary>
+            JOBOBJECT_EXTENDED_LIMIT_INFORMATION Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.BasicLimitInformation">
+            <summary>
+            BasicLimitInformation Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.IoInfo">
+            <summary>
+            IoInfo Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.ProcessMemoryLimit">
+            <summary>
+            ProcessMemoryLimit Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.JobMemoryLimit">
+            <summary>
+            JobMemoryLimit Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakProcessMemoryUsed">
+            <summary>
+            PeakProcessMemoryUsed Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakJobMemoryUsed">
+            <summary>
+            PeakJobMemoryUsed Windows API structure member.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS">
+            <summary>
+            IO_COUNTERS Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS.ReadOperationCount">
+            <summary>
+            ReadOperationCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS.WriteOperationCount">
+            <summary>
+            WriteOperationCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS.OtherOperationCount">
+            <summary>
+            OtherOperationCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS.ReadTransferCount">
+            <summary>
+            ReadTransferCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS.WriteTransferCount">
+            <summary>
+            WriteTransferCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.IO_COUNTERS.OtherTransferCount">
+            <summary>
+            OtherTransferCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION">
+            <summary>
+            JOBOBJECT_BASIC_ACCOUNTING_INFORMATION Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.TotalUserTime">
+            <summary>
+            TotalUserTime Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.TotalKernelTime">
+            <summary>
+            TotalKernelTime Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.ThisPeriodTotalUserTime">
+            <summary>
+            ThisPeriodTotalUserTime Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.ThisPeriodTotalKernelTime">
+            <summary>
+            ThisPeriodTotalKernelTime Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.TotalPageFaultCount">
+            <summary>
+            TotalPageFaultCount Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.TotalProcesses">
+            <summary>
+            TotalProcesses Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.ActiveProcesses">
+            <summary>
+            ActiveProcesses Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.TotalTerminatedProcesses">
+            <summary>
+            TotalTerminatedProcesses Windows API structure member.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION">
+            <summary>
+            JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION.BasicInfo">
+            <summary>
+            BasicInfo Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION.IoInfo">
+            <summary>
+            IoInfo Windows API structure member.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_PROCESS_ID_LIST">
+            <summary>
+            JOBOBJECT_BASIC_PROCESS_ID_LIST Windows API structure.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_PROCESS_ID_LIST.MaxProcessListLength">
+            <summary>
+            The maximum number of processes that are allocated when querying Windows API. 
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_PROCESS_ID_LIST.NumberOfAssignedProcesses">
+            <summary>
+            NumberOfAssignedProcesses Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_PROCESS_ID_LIST.NumberOfProcessIdsInList">
+            <summary>
+            NumberOfProcessIdsInList Windows API structure member.
+            </summary>
+        </member>
+        <member name="F:Uhuru.Prison.Utilities.WindowsJobObjects.NativeMethods.JOBOBJECT_BASIC_PROCESS_ID_LIST.ProcessIdList">
+            <summary>
+            ProcessIdList Windows API structure member.
+            </summary>
+        </member>
+        <member name="T:Uhuru.Prison.Utilities.WindowsUsersAndGroups">
+            <summary>
+            This is a helper class for managing Windows Users and Groups.
+            </summary>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.GetUsers">
+            <summary>
+            Gets all the existing windows users.
+            </summary>
+            <returns>Local users account names.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.GetUsersDescription">
+            <summary>
+            Gets all the existing windows users with descriptions.
+            </summary>
+            <returns>Local users account names with descriptions.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.CreateUser(System.String,System.String)">
+            <summary>
+            Creates a Windows user.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.CreateUser(System.String,System.String,System.String)">
+            <summary>
+            Creates a Windows user.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="description">The description for the user.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.DeleteUser(System.String)">
+            <summary>
+            Deletes the user.
+            </summary>
+            <param name="userName">Name of the user.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.ExistsUser(System.String)">
+            <summary>
+            Verify if the user exists.
+            </summary>
+            <param name="userName">The user name.</param>
+            <returns>True if the user exists.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.GetGroups">
+            <summary>
+            Gets all the existing windows groups.
+            </summary>
+            <returns>Local group names.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.CreateGroup(System.String)">
+            <summary>
+            Creates a Windows group.
+            </summary>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.CreateGroup(System.String,System.String)">
+            <summary>
+            Creates a Windows group.
+            </summary>
+            <param name="groupName">Name of the group.</param>
+            <param name="description">The description for the group.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.DeleteGroup(System.String)">
+            <summary>
+            Deletes the group.
+            </summary>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.ExistsGroup(System.String)">
+            <summary>
+            Verify if the group exists.
+            </summary>
+            <param name="groupName">The group name.</param>
+            <returns>True if group exists.</returns>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.AddUserToGroup(System.String,System.String)">
+            <summary>
+            Adds a user to a group.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.RemoveUserFromGroup(System.String,System.String)">
+            <summary>
+            Removes a user from a group.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="groupName">Name of the group.</param>
+        </member>
+        <member name="M:Uhuru.Prison.Utilities.WindowsUsersAndGroups.IsUserMemberOfGroup(System.String,System.String)">
+            <summary>
+            Determines whether [is user member of group] [the specified user name].
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="groupName">Name of the group.</param>
+            <returns>
+              <c>true</c> if [is user member of group] [the specified user name]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+    </members>
+</doc>
