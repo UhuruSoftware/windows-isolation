@@ -175,7 +175,7 @@ namespace Uhuru.Prison
             this.user = new PrisonUser(this.Tag);
             this.user.Create();
 
-            InitializeSystemVirtualAddressSpaceQuotas();
+            // InitializeSystemVirtualAddressSpaceQuotas();
 
             this.InitializeJobObject();
 
