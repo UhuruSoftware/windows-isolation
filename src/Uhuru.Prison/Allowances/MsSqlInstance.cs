@@ -49,7 +49,9 @@ namespace Uhuru.Prison.Allowances
                     this.GrantRegistryAccess(instanceRegistryKey2, prison);
                     this.GrantRegistryAccess(instanceRegistryKey3, prison);
                     this.GrantRegistryAccess(@"SYSTEM\CurrentControlSet\Services\WinSock2\Parameters", prison);
-                    this.GrantRegistryAccess(@"Software", prison);
+                    
+                    // TODO: verify if this is needed (it is very expensive)
+                    //this.GrantRegistryAccess(@"Software", prison);
                 }
                 //HKU\.DEFAULT\Software\Microsoft\SystemCertificates\MY
 
