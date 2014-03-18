@@ -42,22 +42,12 @@ namespace Uhuru.Prison.Allowances
                     string instanceRegistryKey3 = string.Format(@"SOFTWARE\Wow6432Node\Microsoft\Microsoft SQL Server\{0}", instanceName);
                     hklm.CreateSubKey(instanceRegistryKey3);
 
-                    //HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinSock2\Parameters
-
                     // Give registry access
                     this.GrantRegistryAccess(instanceRegistryKey1, prison);
                     this.GrantRegistryAccess(instanceRegistryKey2, prison);
                     this.GrantRegistryAccess(instanceRegistryKey3, prison);
                     this.GrantRegistryAccess(@"SYSTEM\CurrentControlSet\Services\WinSock2\Parameters", prison);
-                    
-                    // TODO: verify if this is needed (it is very expensive)
-                    //this.GrantRegistryAccess(@"Software", prison);
                 }
-                //HKU\.DEFAULT\Software\Microsoft\SystemCertificates\MY
-
-                // TODO: assign each privilege manually instead
-
-                WindowsUsersAndGroups.AddUserToGroup(prison.User.Username, string.Format(MSSQLGroupName, System.Environment.MachineName));
             }
             catch (Exception ex)
             {
