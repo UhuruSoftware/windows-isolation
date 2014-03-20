@@ -15,7 +15,11 @@ namespace Uhuru.Prison.Allowances
     // Give access to read the default SQL Server instance files and write to the registry at HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\
     class MsSqlInstance : Rule
     {
-        const string MSSQLGroupName = "SQLServerMSSQLUser${0}$MSSQLSERVER";
+        const string MSSQL2008 = "MSSQL10_50";
+        const string MSSQL2012 = "MSSQL11";
+        const string Default2008Instance = "MSSQLSERVER";
+        const string Default2012Instance = "MSSQLSERVER2012";
+        const string MSSQLGroupName = "SQLServerMSSQLUser${0}${1}";
 
         public override void Apply(Prison prison)
         {
@@ -23,36 +27,55 @@ namespace Uhuru.Prison.Allowances
             {
                 var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
 
-                string sqlPath = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\Setup", true).GetValue("SQLPath", string.Empty).ToString();
-
-                if (!string.IsNullOrWhiteSpace(sqlPath) && Directory.Exists(sqlPath))
+                if (hklm.OpenSubKey(string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}.{1}\Setup", MSSQL2008, Default2008Instance), true) != null)
                 {
-                    AllowReadOfBaseMSSQLInstance(sqlPath, prison);
 
-                    string instanceName = string.Format("Instance{0}", prison.Rules.UrlPortAccess);
-
-                    hklm.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL", true).SetValue(instanceName, string.Format("MSSQL10_50.{0}", instanceName), RegistryValueKind.String);
-
-                    string instanceRegistryKey1 = string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}", instanceName);
-                    hklm.CreateSubKey(instanceRegistryKey1);
-
-                    string instanceRegistryKey2 = string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL10_50.{0}", instanceName);
-                    hklm.CreateSubKey(instanceRegistryKey2);
-
-                    string instanceRegistryKey3 = string.Format(@"SOFTWARE\Wow6432Node\Microsoft\Microsoft SQL Server\{0}", instanceName);
-                    hklm.CreateSubKey(instanceRegistryKey3);
-
-                    // Give registry access
-                    this.GrantRegistryAccess(instanceRegistryKey1, prison);
-                    this.GrantRegistryAccess(instanceRegistryKey2, prison);
-                    this.GrantRegistryAccess(instanceRegistryKey3, prison);
-                    this.GrantRegistryAccess(@"SYSTEM\CurrentControlSet\Services\WinSock2\Parameters", prison);
+                    ConfigureMSSQLRegistry(prison, hklm, MSSQL2008, Default2008Instance);
+                    
                 }
+
+                if (hklm.OpenSubKey(string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}.{1}\Setup", MSSQL2012, Default2012Instance), true) != null)
+                {
+
+                    ConfigureMSSQLRegistry(prison, hklm, MSSQL2012, Default2012Instance);
+
+                }
+                               
             }
             catch (Exception ex)
             {
                 Logger.Error("There was an error while applying MsSqlInstance Prison Rule: {0} - {1}", ex.Message, ex.StackTrace);
                 throw;
+            }
+        }
+
+        private void ConfigureMSSQLRegistry(Prison prison, RegistryKey hklm, string instanceType, string defaultInstance)
+        {
+            string sqlPath = hklm.OpenSubKey(string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}.{1}\Setup", instanceType, defaultInstance), true).GetValue("SQLPath", string.Empty).ToString();
+
+            if (!string.IsNullOrWhiteSpace(sqlPath) && Directory.Exists(sqlPath))
+            {
+                AllowReadOfBaseMSSQLInstance(sqlPath, prison);
+
+                string instanceName = string.Format("Instance{0}", prison.Rules.UrlPortAccess);
+
+                hklm.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL", true).SetValue(instanceName, string.Format("{0}.{1}", instanceType, instanceName), RegistryValueKind.String);
+
+                string instanceRegistryKey1 = string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}", instanceName);
+                hklm.CreateSubKey(instanceRegistryKey1);
+
+                string instanceRegistryKey2 = string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}.{1}", instanceType, instanceName);
+                hklm.CreateSubKey(instanceRegistryKey2);
+
+                string instanceRegistryKey3 = string.Format(@"SOFTWARE\Wow6432Node\Microsoft\Microsoft SQL Server\{0}", instanceName);
+                hklm.CreateSubKey(instanceRegistryKey3);
+
+
+                // Give registry access
+                this.GrantRegistryAccess(instanceRegistryKey1, prison);
+                this.GrantRegistryAccess(instanceRegistryKey2, prison);
+                this.GrantRegistryAccess(instanceRegistryKey3, prison);
+                this.GrantRegistryAccess(@"SYSTEM\CurrentControlSet\Services\WinSock2\Parameters", prison);
             }
         }
 
