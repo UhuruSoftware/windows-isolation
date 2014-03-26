@@ -43,6 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningsAsErrors>612,618</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\..\..\..\..\output\</OutputPath>
@@ -54,6 +55,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningsAsErrors>612,618</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AlphaFS">
@@ -79,7 +81,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Allowances\MsSqlInstance.cs" />
     <Compile Include="Allowances\IISGroup.cs" />
     <Compile Include="Rule.cs" />
     <Compile Include="Restrictions\CPU.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Utilities\Credentials.cs" />
     <Compile Include="Utilities\DirectoryTools.cs" />
     <Compile Include="Utilities\FirewallTools.cs" />
+    <Compile Include="Utilities\MsSqlInstanceTool.cs" />
     <Compile Include="Utilities\PrivilegeAdjust.cs" />
     <Compile Include="Utilities\SystemVirtualAddressSpaceQuotas.cs" />
     <Compile Include="Utilities\UserImpersonator.cs" />
