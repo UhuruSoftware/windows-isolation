@@ -400,6 +400,14 @@
             <param name="highPort">the end port to open</param>
             <param name="ruleName">Firewall rule name</param>
         </member>
+        <member name="M:Uhuru.Prison.MsSqlInstanceTool.ConfigureMsSqlInstanceRegistry(Uhuru.Prison.Prison,System.String,System.String)">
+            <summary>
+            Give access to read the default SQL Server instance files and write to the registry at HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\
+            </summary>
+            <param name="prison">prison object associated to the gear</param>
+            <param name="instanceType">MsSql server instance type MSSQL10_50/MSSQL11</param>
+            <param name="defaultInstanceName">MsSql default instance MSSQLSERVER/MSSQLSERVER2012</param>
+        </member>
         <member name="T:Uhuru.Prison.Utilities.UserImpersonator">
             <summary>
             Impersonation of a user. Allows to execute code under another

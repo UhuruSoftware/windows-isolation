@@ -66,8 +66,9 @@ namespace Uhuru.Prison
         [EnumMember]
         IISGroup = 1 << 8,
         [EnumMember]
+        [Obsolete]
         MsSqlInstance = 1 << 9,
         [EnumMember]
-        All = None | CPU | Disk | Filesystem | Httpsys | Network | WindowStation | Memory | IISGroup | MsSqlInstance
+        All = None | CPU | Disk | Filesystem | Httpsys | Network | WindowStation | Memory | IISGroup
     }
 }

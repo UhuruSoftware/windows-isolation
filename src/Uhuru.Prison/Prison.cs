@@ -33,7 +33,6 @@ namespace Uhuru.Prison
             typeof(Restrictions.Network),
             typeof(Restrictions.WindowStation),
             typeof(Allowances.IISGroup),
-            typeof(Allowances.MsSqlInstance),
         };
 
         static private string guardSuffix = "-guard";
