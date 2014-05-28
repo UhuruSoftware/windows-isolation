@@ -41,7 +41,7 @@ namespace Uhuru.Prison.Tests.JobObjects
 
             PrisonRules prisonRules = new PrisonRules();
             prisonRules.CellType = RuleType.None;
-            prisonRules.PrisonHomePath = @"c:\prison_tests\p4";
+            prisonRules.PrisonHomePath = String.Format(@"c:\prison_tests\{0}", prison.ID);
 
             prison.Lockdown(prisonRules);
 

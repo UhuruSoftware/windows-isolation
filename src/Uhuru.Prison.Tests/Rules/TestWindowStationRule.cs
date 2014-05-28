@@ -22,7 +22,7 @@ namespace Uhuru.Prison.Tests.Rules
 
             PrisonRules prisonRules = new PrisonRules();
             prisonRules.CellType = RuleType.WindowStation;
-            prisonRules.PrisonHomePath = @"C:\Workspace\dea_security\PrisonHome";
+            prisonRules.PrisonHomePath = String.Format(@"c:\prison_tests\{0}", prison.ID);
 
             prison.Lockdown(prisonRules);
 

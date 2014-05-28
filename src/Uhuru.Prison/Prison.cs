@@ -56,7 +56,7 @@ namespace Uhuru.Prison
         public const string changeSessionBaseEndpointAddress = @"net.pipe://localhost/Uhuru.Prison.ExecutorService/Executor";
 
         private const string databaseLocation = @".\uhuru-prison-db";
-        private const string installUtilPath = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe";
+        private static string installUtilPath = Path.Combine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(),  "InstallUtil.exe");
 
         public JobObject JobObject
         {
