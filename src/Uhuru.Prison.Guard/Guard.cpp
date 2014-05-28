@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <Psapi.h>
+#include <Aclapi.h>
 
 #include <iostream>
 #include <string>
@@ -19,7 +20,7 @@ long checkRateMs = 100;
 
 HANDLE GetPrisonJobObjectHandle(wstring name)
 {
-	HANDLE hJob = CreateJobObject(NULL, name.c_str());
+	HANDLE hJob = CreateJobObject(NULL, (wstring(L"Global\\") + name).c_str());
 
 	if (hJob == NULL)
 	{
@@ -45,7 +46,7 @@ HANDLE GetPrisonJobObjectHandle(wstring name)
 
 HANDLE CreateGuardJobObject(wstring name)
 {
-	HANDLE hJob = CreateJobObject(NULL, name.c_str());
+	HANDLE hJob = CreateJobObject(NULL, (wstring(L"Global\\") + name).c_str());
 
 	if (hJob == NULL)
 	{
@@ -221,6 +222,57 @@ bool Discharged()
 	
 }
 
+// Similar code here: https://chromium.googlesource.com/chromium/chromium/+/master/sandbox/src/acl.cc
+void SetDefaultDacl()
+{
+	HANDLE curProc = GetCurrentProcess();
+	HANDLE curToken;
+	BOOL res = OpenProcessToken(curProc, TOKEN_ADJUST_DEFAULT | TOKEN_READ, &curToken);
+
+	if (res == false)
+	{
+		wclog << L"Error on OpenProcessToken." << endl;
+		exit(GetLastError());
+	}
+
+	DWORD defDaclLen;
+	GetTokenInformation(curToken, TokenDefaultDacl, NULL, 0, &defDaclLen);
+
+
+	TOKEN_DEFAULT_DACL *defaultDacl = (TOKEN_DEFAULT_DACL *)malloc(defDaclLen);
+	
+	res = GetTokenInformation(curToken, TokenDefaultDacl, defaultDacl, defDaclLen, &defDaclLen);
+	if (res == false)
+	{
+		wclog << L"Error on GetTokenInformation." << endl;
+		exit(GetLastError());
+	}
+	
+
+	EXPLICIT_ACCESS eaccess;
+	BuildExplicitAccessWithName(&eaccess, L"BUILTIN\\Administrators", GENERIC_ALL, GRANT_ACCESS, 0);
+	
+	PACL newDacl = NULL;
+	DWORD dres = SetEntriesInAcl(1, &eaccess, defaultDacl->DefaultDacl, &newDacl);
+	if (dres != ERROR_SUCCESS)
+	{
+		wclog << L"Error on SetEntriesInAcl." << endl;
+		exit(dres);
+	}
+
+	TOKEN_DEFAULT_DACL newDefaultDacl = { 0 };
+	newDefaultDacl.DefaultDacl = newDacl;
+	res = SetTokenInformation(curToken, TokenDefaultDacl, &newDefaultDacl, sizeof(newDefaultDacl));
+	if (res == false)
+	{
+		wclog << L"Error on SetTokenInformation." << endl;
+		exit(GetLastError());
+	}
+
+	LocalFree(newDacl);
+	free(defaultDacl);
+}
+
 int wmain(int argc, wchar_t **argv)
 {
 	if (argc != 3)
@@ -233,6 +285,8 @@ int wmain(int argc, wchar_t **argv)
 	wstring jobName(argv[1]);
 	wstring memoryQuotaString(argv[2]);
 	long memoryQuota = _wtol(memoryQuotaString.c_str());
+
+	SetDefaultDacl();
 
 	wstring dischargeEventName = wstring(L"discharge-") + jobName;
 
