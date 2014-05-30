@@ -71,6 +71,7 @@ namespace Uhuru.Prison.Tests.JobObjects
             PrisonRules prisonRules = new PrisonRules();
             prisonRules.CellType = RuleType.None;
             prisonRules.CellType |= RuleType.Filesystem;
+
             prisonRules.PrisonHomePath = String.Format(@"c:\prison_tests\{0}", prison.ID);
 
             prison.Lockdown(prisonRules);
@@ -82,10 +83,10 @@ namespace Uhuru.Prison.Tests.JobObjects
 
             process.WaitForExit();
 
+            prison.Destroy();
+
             // Assert
             Assert.AreEqual(667, process.ExitCode);
-
-            prison.Destroy();
         }
     }
 }

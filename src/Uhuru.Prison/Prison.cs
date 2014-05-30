@@ -186,7 +186,10 @@ namespace Uhuru.Prison
             // Lock all cells
             foreach (Rule cell in this.prisonCells)
             {
-                cell.Apply(this);
+                if (cell.GetFlag() != RuleType.WindowStation)
+                {
+                    cell.Apply(this);
+                }
             }
 
             this.CreateUserProfile();
@@ -356,7 +359,6 @@ namespace Uhuru.Prison
             else
             {
                 var workerProcess = InitializeProcessWithChagedSession(filename, arguments, interactive, extraEnvironmentVariables);
-                ResumeProcess(workerProcess);
                 return workerProcess;
             }
         }
@@ -381,6 +383,8 @@ namespace Uhuru.Prison
             workingProcess.EnableRaisingEvents = true;
 
             ((ICommunicationObject)remoteSessionExec).Close();
+
+            ResumeProcess(workingProcess);
 
             RemoveChangeSessionService(tempSeriviceId);
 

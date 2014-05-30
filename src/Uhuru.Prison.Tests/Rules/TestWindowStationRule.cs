@@ -70,6 +70,7 @@ private static int Dummy()
 
             process.WaitForExit();
 
+            prison.Destroy();
             // Assert
             Assert.AreEqual(0, process.ExitCode);
         }
