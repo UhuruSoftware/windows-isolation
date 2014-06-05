@@ -12,9 +12,11 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Uhuru.Prison.ExecutorService;
 using Uhuru.Prison.Restrictions;
 using Uhuru.Prison.Utilities;
 using Uhuru.Prison.Utilities.WindowsJobObjects;
@@ -51,7 +53,10 @@ namespace Uhuru.Prison
         [DataMember]
         internal string desktopName = null;
 
+        public const string changeSessionBaseEndpointAddress = @"net.pipe://localhost/Uhuru.Prison.ExecutorService/Executor";
+
         private const string databaseLocation = @".\uhuru-prison-db";
+        private static string installUtilPath = Path.Combine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(),  "InstallUtil.exe");
 
         public JobObject JobObject
         {
@@ -181,7 +186,10 @@ namespace Uhuru.Prison
             // Lock all cells
             foreach (Rule cell in this.prisonCells)
             {
-                cell.Apply(this);
+                if (cell.GetFlag() != RuleType.WindowStation)
+                {
+                    cell.Apply(this);
+                }
             }
 
             this.CreateUserProfile();
@@ -189,7 +197,7 @@ namespace Uhuru.Prison
             // Directory.CreateDirectory(prisonRules.PrisonHomePath);
             this.ChangeProfilePath(Path.Combine(prisonRules.PrisonHomePath, "profile"));
 
-            RunGuard();
+            // RunGuard();
 
             this.isLocked = true;
 
@@ -198,7 +206,7 @@ namespace Uhuru.Prison
 
         private void CheckGuard()
         {
-            using (var guardJob = JobObject.Attach(this.user.Username + Prison.guardSuffix))
+            using (var guardJob = JobObject.Attach("Global\\" + this.user.Username + Prison.guardSuffix))
             {
             }
         }
@@ -254,7 +262,7 @@ namespace Uhuru.Prison
             // Careful to close the Guard Job Object, 
             // else it is not guaranteed that the Job Object will not terminate if the Guard exists
 
-            using (var guardJob = JobObject.Attach(this.user.Username + Prison.guardSuffix))
+            using (var guardJob = JobObject.Attach("Global\\" + this.user.Username + Prison.guardSuffix))
             {
                 guardJob.AddProcess(p);
             }
@@ -265,12 +273,64 @@ namespace Uhuru.Prison
         private void TryStopGuard()
         {
             EventWaitHandle dischargeEvent = null;
-            EventWaitHandle.TryOpenExisting("discharge-" + this.user.Username, out dischargeEvent);
+            EventWaitHandle.TryOpenExisting("Global\\" + "discharge-" + this.user.Username, out dischargeEvent);
 
             if (dischargeEvent != null)
             {
                 dischargeEvent.Set();
             }
+        }
+
+
+        
+        private static void InstallService(string servicePath, Dictionary<string, string> parameters)
+        {
+            string installCmd = installUtilPath;
+
+            foreach(var p in parameters)
+            {
+                installCmd += " /" + p.Key + "=" + p.Value;
+            }
+
+            installCmd += " " + '"' + servicePath + '"';
+
+            var res = Utilities.Command.ExecuteCommand(installCmd);
+            
+            if (res != 0)
+            {
+                throw new Exception(String.Format("Error installing service {0}, exit code: {1}", installCmd, res));
+            }
+        }
+
+        private static void UninstallService(string servicePath, Dictionary<string, string> parameters)
+        {
+            string installCmd = installUtilPath;
+            installCmd += " /u ";
+            foreach (var p in parameters)
+            {
+                installCmd += " /" + p.Key + "=" + p.Value;
+            }
+
+            installCmd += " " + '"' + servicePath + '"';
+
+            var res = Utilities.Command.ExecuteCommand(installCmd);
+
+            if (res != 0)
+            {
+                throw new Exception(String.Format("Error installing service {0}, exit code: {1}", installCmd, res));
+            }
+        }
+
+        private static void InitChangeSessionService(string id)
+        {
+            InstallService(GetChangeSessionServicePath(), new Dictionary<string, string>() { {"service-id", id} });
+            Utilities.Command.ExecuteCommand("net start ChangeSession-" + id);
+        }
+
+        private static void RemoveChangeSessionService(string id)
+        {
+            Utilities.Command.ExecuteCommand("net stop ChangeSession-" + id);
+            UninstallService(GetChangeSessionServicePath(), new Dictionary<string, string>() { { "service-id", id } });
         }
 
         public Process Execute(string filename)
@@ -289,6 +349,49 @@ namespace Uhuru.Prison
         }
 
         public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
+        {
+            if (Process.GetCurrentProcess().SessionId == 0)
+            {
+                var workerProcess = InitializeProcess(filename, arguments, interactive, extraEnvironmentVariables);
+                ResumeProcess(workerProcess);
+                return workerProcess;
+            }
+            else
+            {
+                var workerProcess = InitializeProcessWithChagedSession(filename, arguments, interactive, extraEnvironmentVariables);
+                return workerProcess;
+            }
+        }
+
+        public Process InitializeProcessWithChagedSession(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
+        {
+            string tempSeriviceId = Guid.NewGuid().ToString();
+            InitChangeSessionService(tempSeriviceId);
+
+            var bind = new NetNamedPipeBinding();
+            bind.Security.Mode = NetNamedPipeSecurityMode.Transport;
+            bind.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
+
+            var endpoint = new EndpointAddress(changeSessionBaseEndpointAddress + "/" + tempSeriviceId);
+            
+            var channelFactory = new ChannelFactory<IExecutor>(bind, endpoint);
+
+            IExecutor remoteSessionExec = channelFactory.CreateChannel();
+
+            var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, extraEnvironmentVariables);
+            var workingProcess = Process.GetProcessById(workingProcessId);
+            workingProcess.EnableRaisingEvents = true;
+
+            ((ICommunicationObject)remoteSessionExec).Close();
+
+            ResumeProcess(workingProcess);
+
+            RemoveChangeSessionService(tempSeriviceId);
+
+            return workingProcess;
+        }
+
+        public Process InitializeProcess(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
         {
             // C with Win32 API example to start a process under a different user: http://msdn.microsoft.com/en-us/library/aa379608%28VS.85%29.aspx
 
@@ -387,7 +490,6 @@ namespace Uhuru.Prison
             var workerProcessPid = processInfo.dwProcessId;
             var workerProcess = Process.GetProcessById(workerProcessPid);
 
-
             // AccessTokenHandle
             // workerProcess.RemovePrivilege(ProcessPrivileges.Privilege.ChangeNotify);
             // ProcessExtensions.RemovePrivilege(new AccessTokenHandle() , Privilege.ChangeNotify);
@@ -401,19 +503,20 @@ namespace Uhuru.Prison
             // This would allow the process to query the ExitCode. ref: http://msdn.microsoft.com/en-us/magazine/cc163900.aspx
             workerProcess.EnableRaisingEvents = true;
 
+            return workerProcess;
+        }
+
+        private void ResumeProcess(Process workerProcess)
+        {
             // Now that the process is tagged with the Job Object so we can resume the thread.
-            IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, processInfo.dwThreadId);
-
+            IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, workerProcess.Threads[0].Id);
             uint resumeResult = Native.ResumeThread(threadHandler);
-
             Native.CloseHandle(threadHandler);
 
             if (resumeResult != 1)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
-
-            return workerProcess;
         }
 
         public void Destroy()
@@ -561,7 +664,7 @@ namespace Uhuru.Prison
             if (this.jobObject != null) return;
 
             // Create the JobObject
-            this.jobObject = new JobObject(this.user.Username);
+            this.jobObject = new JobObject("Global\\" + this.user.Username);
 
             if (this.Rules.CPUPercentageLimit > 0)
             {
@@ -801,6 +904,14 @@ namespace Uhuru.Prison
             return Path.Combine(assemblyDirPath, "Uhuru.Prison.Guard.exe");
         }
 
+        private static string GetChangeSessionServicePath()
+        {
+            string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string assemblyDirPath = Directory.GetParent(assemblyPath).FullName;
+
+            return Path.Combine(assemblyDirPath, "Uhuru.Prison.ChangeSession.exe");
+        }
+
         public Dictionary<string, string> GetDefaultEnvironmentVarialbes()
         {
             Dictionary<string, string> res = new Dictionary<string, string>();
@@ -897,7 +1008,7 @@ namespace Uhuru.Prison
             string currentProfileDir = pathBuf.ToString();
 
 
-            var userProfKey = 
+            var userProfKey =
                 RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).
                 OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\" + user.UserSID, true);
 
