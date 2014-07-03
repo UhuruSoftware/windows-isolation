@@ -17,6 +17,10 @@ using System.Security.AccessControl;
 using Uhuru.Prison.Restrictions.Fakes;
 using DiskQuotaTypeLibrary;
 using System.Management.Fakes;
+using Uhuru.Prison.ExecutorService.Fakes;
+using System.ServiceModel.Fakes;
+using Uhuru.Prison.ExecutorService;
+using System.ServiceModel;
 
 namespace Uhuru.Prison.FakesUnitTest.JobObjects
 {
@@ -60,7 +64,7 @@ namespace Uhuru.Prison.FakesUnitTest.JobObjects
                 var shimedProcess = new ShimProcess();
                 shimedProcess.IdGet = () => { return processInfo.dwProcessId; };
                 var raisingEventsChangedTo = false;
-                shimedProcess.EnableRaisingEventsSetBoolean = (x) => { raisingEventsChangedTo = x; };
+                shimedProcess.EnableRaisingEventsSetBoolean = (value) => { raisingEventsChangedTo = value; };
                 ShimProcess.GetProcessByIdInt32 = (id) => { return (Process)shimedProcess; };
 
                 Process procAddedToJob = null;
@@ -82,5 +86,69 @@ namespace Uhuru.Prison.FakesUnitTest.JobObjects
             }
         }
 
+        [TestMethod]
+        public void TestSimpleEchoChangedSession()
+        {
+            using (ShimsContext.Create())
+            {
+                // shim Prison.Lockdown
+                PrisonTestsHelper.PrisonLockdownFakes();
+
+                Prison prison = new Prison();
+                prison.Tag = "uhtst";
+
+                PrisonRules prisonRules = new PrisonRules();
+                prisonRules.CellType = RuleType.None;
+                prisonRules.PrisonHomePath = @"c:\prison_tests\p3";
+
+                prison.Lockdown(prisonRules);
+
+
+                // shim Prison.Execute
+                Native.PROCESS_INFORMATION processInfo = new Native.PROCESS_INFORMATION
+                {
+                    hProcess = new IntPtr(2400),
+                    hThread = new IntPtr(2416),
+                    dwProcessId = 5400,
+                    dwThreadId = 4544
+                };
+
+                PrisonTestsHelper.PrisonCreateProcessAsUserFakes(processInfo);
+
+                ShimPrison.GetCurrentSessionId = () => { return 12; };
+
+                ShimPrison.InitChangeSessionServiceString = (tempSeriviceId) => { return; };
+
+                StubIExecutor exec = new StubIExecutor();
+                ShimChannelFactory<IExecutor>.AllInstances.CreateChannel = (executor) => { return exec; };
+                exec.ExecuteProcessPrisonStringStringDictionaryOfStringString =
+                    (fakePrison, filename, arguments, extraEnvironmentVariables) =>
+                    {
+                        return processInfo.dwProcessId;
+                    };
+
+                var shimedProcess = new ShimProcess();
+                shimedProcess.IdGet = () => { return processInfo.dwProcessId; };
+                var raisingEventsChangedTo = false;
+                shimedProcess.EnableRaisingEventsSetBoolean = (value) => { raisingEventsChangedTo = value; };
+                ShimProcess.GetProcessByIdInt32 = (id) => { return (Process)shimedProcess; };
+
+                ShimPrison.AllInstances.CloseRemoteSessionIExecutor = (fakePrison, executor) => { return; };
+               
+                var processIdResumed = 0;
+                ShimPrison.AllInstances.ResumeProcessProcess = (fakePrison, pProcess) => { processIdResumed = pProcess.Id; };
+
+                ShimPrison.RemoveChangeSessionServiceString = (sessionId) => { return; };
+                // Act
+                Process process = prison.Execute(
+                    @"c:\windows\system32\cmd.exe",
+                    @"/c echo test");
+
+                // Assert
+                Assert.AreEqual(processInfo.dwProcessId, process.Id);
+                Assert.AreEqual(processInfo.dwProcessId, processIdResumed);
+                Assert.AreEqual(true, raisingEventsChangedTo);
+            }
+        }
     }
 }

@@ -60,6 +60,10 @@
     <Reference Include="System.Runtime.Serialization.4.0.0.0.Fakes">
       <HintPath>FakesAssemblies\System.Runtime.Serialization.4.0.0.0.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.4.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\System.ServiceModel.4.0.0.0.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="System.XML" />
     <Reference Include="Uhuru.Prison.Fakes">
       <HintPath>FakesAssemblies\Uhuru.Prison.Fakes.dll</HintPath>
@@ -139,7 +143,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Fakes Include="Fakes\System.ServiceModel.fakes" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

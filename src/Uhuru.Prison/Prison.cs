@@ -375,14 +375,14 @@ namespace Uhuru.Prison
             var endpoint = new EndpointAddress(changeSessionBaseEndpointAddress + "/" + tempSeriviceId);
             
             var channelFactory = new ChannelFactory<IExecutor>(bind, endpoint);
-
+            
             IExecutor remoteSessionExec = channelFactory.CreateChannel();
 
             var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, extraEnvironmentVariables);
             var workingProcess = Process.GetProcessById(workingProcessId);
             workingProcess.EnableRaisingEvents = true;
 
-            ((ICommunicationObject)remoteSessionExec).Close();
+            CloseRemoteSession(remoteSessionExec);
 
             ResumeProcess(workingProcess);
 
@@ -1072,6 +1072,11 @@ namespace Uhuru.Prison
         private void SystemRemoveQuota()
         {
             SystemVirtualAddressSpaceQuotas.RemoveQuotas(new SecurityIdentifier(this.user.UserSID));
+        }
+
+        private void CloseRemoteSession(IExecutor remoteSessionExec)
+        {
+            ((ICommunicationObject)remoteSessionExec).Close();
         }
     }
 }

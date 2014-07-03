@@ -197,10 +197,6 @@ namespace Uhuru.Prison.FakesUnitTest
         {
             ShimPrison.AllInstances.InitializeLogonToken = (pris) => { return; };
             ShimPrison.AllInstances.LoadUserProfile = (pris) => { return; };
-
-
-
-
             ShimPrison.AllInstances.UnloadUserProfile = (pris) => { return; };
         }
 

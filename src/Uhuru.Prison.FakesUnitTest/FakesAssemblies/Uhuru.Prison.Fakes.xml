@@ -625,6 +625,9 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.CheckGuard">
             <summary>Sets the shim of Prison.CheckGuard()</summary>
         </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.CloseRemoteSessionIExecutor">
+            <summary>Sets the shim of Prison.CloseRemoteSession(IExecutor remoteSessionExec)</summary>
+        </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.Constructor">
             <summary>Sets the shim of Prison.Prison()</summary>
         </member>
@@ -801,6 +804,9 @@
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.CheckGuard">
             <summary>Sets the shim of Prison.CheckGuard()</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.CloseRemoteSessionIExecutor">
+            <summary>Sets the shim of Prison.CloseRemoteSession(IExecutor remoteSessionExec)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.CreateUserProfile">
             <summary>Sets the shim of Prison.CreateUserProfile()</summary>
