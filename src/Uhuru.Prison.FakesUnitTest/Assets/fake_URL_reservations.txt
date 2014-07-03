@@ -1,0 +1,9 @@
+
+URL Reservations: 
+----------------- 
+
+    Reserved URL            : http://*:56444/ 
+        User: ComputerName\prison_uhtst_nObcxRo
+            Listen: Yes
+            Delegate: No
+            SDDL: D:(A;;GX;;;S-1-5-21-1012319625-3991820258-509952402-5169) 

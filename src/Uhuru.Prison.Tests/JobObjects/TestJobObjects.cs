@@ -20,6 +20,7 @@ namespace Uhuru.Prison.Tests.JobObjects
 
             PrisonRules prisonRules = new PrisonRules();
             prisonRules.CellType = RuleType.None;
+            prisonRules.PrisonHomePath = @"c:\prison_tests\p9";
 
             prison.Lockdown(prisonRules);
 

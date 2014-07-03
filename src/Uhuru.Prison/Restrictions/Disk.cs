@@ -12,6 +12,7 @@ namespace Uhuru.Prison.Restrictions
     class Disk : Rule
     {
         private DIDiskQuotaUser userQuota;
+
         private class DiskQuotaManager
         {
             /// <summary>
@@ -179,15 +180,14 @@ namespace Uhuru.Prison.Restrictions
         public override void Apply(Prison prison)
         {
             // Set the disk quota to 0 for all disks, except disk quota path
-            var volumesQuotas = DiskQuotaManager.GetDisksQuotaUser(prison.User.Username);
+            var volumesQuotas = GetUserQoutaDiskQuotaManager(prison);
 
             foreach (var volumeQuota in volumesQuotas)
             {
                 volumeQuota.QuotaLimit = 0;
             }
 
-            userQuota = DiskQuotaManager.GetDiskQuotaUser(DiskQuotaManager.GetVolumeRootFromPath(prison.Rules.PrisonHomePath), prison.User.Username);
-            userQuota.QuotaLimit = prison.Rules.DiskQuotaBytes;
+            SetUserQoutaDiskQuotaManager(prison);
         }
 
         public override void Destroy(Prison prison)
@@ -216,6 +216,17 @@ namespace Uhuru.Prison.Restrictions
 
         public override void Recover(Prison prison)
         {
+        }
+
+        private void SetUserQoutaDiskQuotaManager(Prison prison)
+        {
+            userQuota = DiskQuotaManager.GetDiskQuotaUser(DiskQuotaManager.GetVolumeRootFromPath(prison.Rules.PrisonHomePath), prison.User.Username);
+            userQuota.QuotaLimit = prison.Rules.DiskQuotaBytes; 
+        }
+
+        private DIDiskQuotaUser[] GetUserQoutaDiskQuotaManager(Prison prison)
+        {
+            return DiskQuotaManager.GetDisksQuotaUser(prison.User.Username);
         }
     }
 }

@@ -94,13 +94,27 @@ namespace Uhuru.Prison.Restrictions
             }
         }
 
-        private static ManagementObjectCollection GetThrottlePolicies()
+        private static List<Dictionary<string, string>> GetThrottlePolicies()
         {
             var wql = "SELECT * FROM MSFT_NetQosPolicySettingData";
 
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\StandardCimv2", wql))
             {
-                return searcher.Get();
+                var policies = searcher.Get();
+
+                var ret = new List<Dictionary<string, string>>();
+
+                foreach (ManagementObject policy in policies)
+                {
+                    var item = new Dictionary<string, string>();
+                    item["Name"] = policy["Name"].ToString();
+                    item["ThrottleRateAction"] = policy["ThrottleRateAction"].ToString();
+                    item["URIMatchCondition"] = policy["URIMatchCondition"] != null ? policy["URIMatchCondition"].ToString() : String.Empty;
+                    item["UserMatchCondition"] = policy["UserMatchCondition"] != null ? policy["UserMatchCondition"].ToString() : String.Empty;
+                    ret.Add(item);
+                }
+
+                return ret;
             }
         }
 
@@ -108,7 +122,7 @@ namespace Uhuru.Prison.Restrictions
         {
             List<RuleInstanceInfo> result = new List<RuleInstanceInfo>();
 
-            foreach (ManagementObject policy in GetThrottlePolicies())
+            foreach (Dictionary<string, string> policy in GetThrottlePolicies())
             {
                 if (!string.IsNullOrWhiteSpace(policy["Name"] as string) && policy["Name"].ToString().StartsWith(PrisonUser.GlobalPrefix + PrisonUser.Separator))
                 {

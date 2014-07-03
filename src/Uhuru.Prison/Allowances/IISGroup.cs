@@ -24,7 +24,8 @@ namespace Uhuru.Prison.Allowances
 
         public override RuleInstanceInfo[] List()
         {
-            throw new NotImplementedException();           
+            //throw new NotImplementedException();   
+            return new RuleInstanceInfo[0];
         }
 
         public override void Init()

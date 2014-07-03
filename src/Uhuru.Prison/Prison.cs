@@ -400,49 +400,6 @@ namespace Uhuru.Prison
                 throw new InvalidOperationException("This prison has to be locked before you can use it.");
             }
 
-            var startupInfo = new Native.STARTUPINFO();
-            var processInfo = new Native.PROCESS_INFORMATION();
-
-            startupInfo = new Native.STARTUPINFO();
-
-            if (CellEnabled(RuleType.WindowStation))
-            {
-                new WindowStation().Apply(this);
-                startupInfo.lpDesktop = this.desktopName;
-            }
-
-
-            Native.ProcessCreationFlags creationFlags = Native.ProcessCreationFlags.ZERO_FLAG;
-
-            // Exclude flags
-            creationFlags &=
-                ~Native.ProcessCreationFlags.CREATE_PRESERVE_CODE_AUTHZ_LEVEL &
-                ~Native.ProcessCreationFlags.CREATE_BREAKAWAY_FROM_JOB;
-
-            // Include flags
-            creationFlags |=
-                Native.ProcessCreationFlags.CREATE_DEFAULT_ERROR_MODE |
-                Native.ProcessCreationFlags.CREATE_NEW_PROCESS_GROUP |
-                Native.ProcessCreationFlags.CREATE_SUSPENDED |
-                Native.ProcessCreationFlags.CREATE_UNICODE_ENVIRONMENT;
-
-            // TODO: extra steps for interactive to work:
-            // http://blogs.msdn.com/b/winsdk/archive/2013/05/01/how-to-launch-a-process-interactively-from-a-windows-service.aspx
-            if (interactive)
-            {
-                creationFlags |= Native.ProcessCreationFlags.CREATE_NEW_CONSOLE;
-                startupInfo.lpDesktop = "";
-            }
-            else
-            {
-                //     creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
-
-                // startupInfo.dwFlags |= 0x00000100; // STARTF_USESTDHANDLES
-                startupInfo.hStdInput = Native.GetStdHandle(Native.STD_INPUT_HANDLE);
-                startupInfo.hStdOutput = Native.GetStdHandle(Native.STD_OUTPUT_HANDLE);
-                startupInfo.hStdError = Native.GetStdHandle(Native.STD_ERROR_HANDLE);
-            }
-
 
             this.InitializeLogonToken();
             this.LoadUserProfileIfNotLoaded();
@@ -460,32 +417,11 @@ namespace Uhuru.Prison
 
             string envBlock = extraEnvironmentVariables == null ? null : Prison.BuildEnvironmentVariable(envs);
 
-            Native.SECURITY_ATTRIBUTES processAttributes = new Native.SECURITY_ATTRIBUTES();
-            Native.SECURITY_ATTRIBUTES threadAttributes = new Native.SECURITY_ATTRIBUTES();
-            processAttributes.nLength = Marshal.SizeOf(processAttributes);
-            threadAttributes.nLength = Marshal.SizeOf(threadAttributes);
-
             Logger.Debug("Starting process '{0}' with arguments '{1}' as user '{2}' in working dir '{3}'", filename, arguments, this.user.Username, this.prisonRules.PrisonHomePath);
 
             if (filename == string.Empty) filename = null;
 
-            var createProcessSuc = Native.CreateProcessAsUser(
-                hToken: logonToken.DangerousGetHandle(),
-                lpApplicationName: filename,
-                lpCommandLine: arguments,
-                lpProcessAttributes: ref processAttributes,
-                lpThreadAttributes: ref threadAttributes,
-                bInheritHandles: false,
-                dwCreationFlags: creationFlags,
-                lpEnvironment: envBlock,
-                lpCurrentDirectory: this.prisonRules.PrisonHomePath,
-                lpStartupInfo: ref startupInfo,
-                lpProcessInformation: out processInfo);
-
-            if (createProcessSuc == false)
-            {
-                throw new Win32Exception(Marshal.GetLastWin32Error());
-            }
+            Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, envBlock);
 
             var workerProcessPid = processInfo.dwProcessId;
             var workerProcess = Process.GetProcessById(workerProcessPid);
@@ -510,7 +446,7 @@ namespace Uhuru.Prison
         {
             // Now that the process is tagged with the Job Object so we can resume the thread.
             IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, workerProcess.Threads[0].Id);
-            uint resumeResult = Native.ResumeThread(threadHandler);
+            uint resumeResult = NativeResumeThread(processInfo.dwThreadId);
             Native.CloseHandle(threadHandler);
 
             if (resumeResult != 1)
@@ -546,7 +482,7 @@ namespace Uhuru.Prison
             this.DeleteUserProfile();
             this.user.Delete();
 
-            SystemVirtualAddressSpaceQuotas.RemoveQuotas(new SecurityIdentifier(this.user.UserSID));
+            SystemRemoveQuota();
 
             this.DeletePersistedPrirson();
         }
@@ -618,10 +554,9 @@ namespace Uhuru.Prison
         {
             InitializeLogonToken();
 
+            var userSid = WindowsUsersAndGroups.GetLocalUserSid(this.User.Username);
+
             var usersHive = Registry.Users.Handle.DangerousGetHandle();
-
-            var userSid = GetLocalUserSid(this.User.Username);
-
             var userHive = Registry.Users.OpenSubKey(userSid);
             userHive.Handle.SetHandleAsInvalid();
 
@@ -757,18 +692,12 @@ namespace Uhuru.Prison
         // This is useful to load the profile only once.
         private bool IsProfileLoaded()
         {
-            var userSid = GetLocalUserSid(this.User.Username);
+            var userSid = WindowsUsersAndGroups.GetLocalUserSid(this.User.Username);
 
             // If a profile is loaded the Registry hive will be loaded in HKEY_USERS\{User-SID}
             var res = Registry.Users.GetSubKeyNames().Contains(userSid);
 
             return res;
-        }
-
-        private static string GetLocalUserSid(string windowsUsername)
-        {
-            NTAccount ntaccount = new NTAccount(null, windowsUsername);
-            return ntaccount.Translate(typeof(SecurityIdentifier)).Value;
         }
 
         /// <summary>
@@ -1002,18 +931,12 @@ namespace Uhuru.Prison
             this.UnloadUserProfileUntilReleased();
 
             StringBuilder pathBuf = new StringBuilder(1024);
-            uint pathLen = (uint)pathBuf.Capacity;
-            Native.GetUserProfileDirectory(this.logonToken.DangerousGetHandle(), pathBuf, ref pathLen);
+            GetNativeUserProfileDirectory(pathBuf);
 
             string currentProfileDir = pathBuf.ToString();
 
-
-            var userProfKey =
-                RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).
-                OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\" + user.UserSID, true);
-
-            userProfKey.SetValue("ProfileImagePath", destination, RegistryValueKind.ExpandString);
-
+            ChangeRegistryUserProfile(destination);
+            
             Directory.Move(currentProfileDir, destination);
         }
 
@@ -1051,6 +974,106 @@ namespace Uhuru.Prison
             }
         }
 
+        private void GetNativeUserProfileDirectory(StringBuilder pathBuf)
+        {
+            uint pathLen = (uint)pathBuf.Capacity;
+            Native.GetUserProfileDirectory(this.logonToken.DangerousGetHandle(), pathBuf, ref pathLen);
+        }
 
+        private void ChangeRegistryUserProfile(string destination)
+        {
+            var userProfKey =
+                RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).
+                OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\" + user.UserSID, true);
+
+            userProfKey.SetValue("ProfileImagePath", destination, RegistryValueKind.ExpandString);
+
+        }
+
+        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string envBlock)
+        {
+            var startupInfo = new Native.STARTUPINFO();
+            var processInfo = new Native.PROCESS_INFORMATION();
+
+            startupInfo = new Native.STARTUPINFO();
+
+            if (CellEnabled(RuleType.WindowStation))
+            {
+                new WindowStation().Apply(this);
+                startupInfo.lpDesktop = this.desktopName;
+            }
+
+            Native.ProcessCreationFlags creationFlags = Native.ProcessCreationFlags.ZERO_FLAG;
+
+            // Exclude flags
+            creationFlags &=
+                ~Native.ProcessCreationFlags.CREATE_PRESERVE_CODE_AUTHZ_LEVEL &
+                ~Native.ProcessCreationFlags.CREATE_BREAKAWAY_FROM_JOB;
+
+            // Include flags
+            creationFlags |=
+                Native.ProcessCreationFlags.CREATE_DEFAULT_ERROR_MODE |
+                Native.ProcessCreationFlags.CREATE_NEW_PROCESS_GROUP |
+                Native.ProcessCreationFlags.CREATE_SUSPENDED |
+                Native.ProcessCreationFlags.CREATE_UNICODE_ENVIRONMENT;
+
+            // TODO: extra steps for interactive to work:
+            // http://blogs.msdn.com/b/winsdk/archive/2013/05/01/how-to-launch-a-process-interactively-from-a-windows-service.aspx
+            if (interactive)
+            {
+                creationFlags |= Native.ProcessCreationFlags.CREATE_NEW_CONSOLE;
+                startupInfo.lpDesktop = "";
+            }
+            else
+            {
+                //     creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
+
+                // startupInfo.dwFlags |= 0x00000100; // STARTF_USESTDHANDLES
+                startupInfo.hStdInput = Native.GetStdHandle(Native.STD_INPUT_HANDLE);
+                startupInfo.hStdOutput = Native.GetStdHandle(Native.STD_OUTPUT_HANDLE);
+                startupInfo.hStdError = Native.GetStdHandle(Native.STD_ERROR_HANDLE);
+            }
+
+            Native.SECURITY_ATTRIBUTES processAttributes = new Native.SECURITY_ATTRIBUTES();
+            Native.SECURITY_ATTRIBUTES threadAttributes = new Native.SECURITY_ATTRIBUTES();
+            processAttributes.nLength = Marshal.SizeOf(processAttributes);
+            threadAttributes.nLength = Marshal.SizeOf(threadAttributes);
+
+            var createProcessSuc = Native.CreateProcessAsUser(
+                hToken: logonToken.DangerousGetHandle(),
+                lpApplicationName: filename,
+                lpCommandLine: arguments,
+                lpProcessAttributes: ref processAttributes,
+                lpThreadAttributes: ref threadAttributes,
+                bInheritHandles: false,
+                dwCreationFlags: creationFlags,
+                lpEnvironment: envBlock,
+                lpCurrentDirectory: this.prisonRules.PrisonHomePath,
+                lpStartupInfo: ref startupInfo,
+                lpProcessInformation: out processInfo);
+
+            if (createProcessSuc == false)
+            {
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+            }
+
+            return processInfo;
+        }
+
+        private uint NativeResumeThread(int dwThreadId)
+        {
+            IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, dwThreadId);
+
+            uint resumeResult = Native.ResumeThread(threadHandler);
+
+            Native.CloseHandle(threadHandler);
+
+            return resumeResult;
+        }
+
+        private void SystemRemoveQuota()
+        {
+            SystemVirtualAddressSpaceQuotas.RemoveQuotas(new SecurityIdentifier(this.user.UserSID));
+        }
     }
 }
