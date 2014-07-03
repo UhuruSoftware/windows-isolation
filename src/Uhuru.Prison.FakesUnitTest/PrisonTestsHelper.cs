@@ -40,7 +40,7 @@ namespace Uhuru.Prison.FakesUnitTest
         public static void ApplyDiskRuleFakes()
         {
             ShimDisk.AllInstances.GetUserQoutaDiskQuotaManagerPrison = (disk, prison) => { return new DIDiskQuotaUser[0]; };
-            ShimDisk.AllInstances.SetUserQoutaDiskQuotaManagerPrison = (restriction, prison) => { return; };
+            ShimDisk.ShimDiskQuotaManager.SetDiskQuotaLimitStringStringInt64 = (WindowsUsername, Path, DiskQuotaBytes) => { return; };
         }
 
         public static void ApplyNetworkRuleFakes()

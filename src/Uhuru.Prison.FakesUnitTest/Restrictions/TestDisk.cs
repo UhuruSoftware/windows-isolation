@@ -18,11 +18,9 @@ namespace Uhuru.Prison.FakesUnitTest
             {
                 PrisonTestsHelper.PrisonLockdownFakes();
                 PrisonTestsHelper.ApplyDiskRuleFakes();
-
-                Disk disk = new Disk();
-                ShimDisk.AllInstances.SetUserQoutaDiskQuotaManagerPrison = (fakeDisk, fakePrison) => { disk = fakeDisk; return; };
-                //ShimDisk.AllInstances.QuotaLimitSetDouble = (fakeDisk, fakeUser) => { disk.QuotaLimit = 500; return; };
-
+                
+                long quotaSetTo = 0;
+                ShimDisk.ShimDiskQuotaManager.SetDiskQuotaLimitStringStringInt64 = (WindowsUsername, Path, DiskQuotaBytes) => { quotaSetTo = DiskQuotaBytes; return; };
                 Prison prison = new Prison();
                 prison.Tag = "uhtst";
                 PrisonRules prisonRules = new PrisonRules();
@@ -33,7 +31,7 @@ namespace Uhuru.Prison.FakesUnitTest
 
                 prison.Lockdown(prisonRules);
 
-                //Assert.AreEqual(disk.QuotaLimit.ToString(), 500.ToString());
+                Assert.AreEqual(quotaSetTo, 500);
             }
         }
 

@@ -1483,9 +1483,6 @@
         <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.RecoverPrison">
             <summary>Sets the shim of Disk.Recover(Prison prison)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.SetUserQoutaDiskQuotaManagerPrison">
-            <summary>Sets the shim of Disk.SetUserQoutaDiskQuotaManager(Prison prison)</summary>
-        </member>
         <member name="T:Uhuru.Prison.Restrictions.Fakes.ShimDisk.AllInstances">
             <summary>Define shims for all instances members</summary>
         </member>
@@ -1510,8 +1507,59 @@
         <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.AllInstances.RecoverPrison">
             <summary>Sets the shim of Disk.Recover(Prison prison)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.AllInstances.SetUserQoutaDiskQuotaManagerPrison">
-            <summary>Sets the shim of Disk.SetUserQoutaDiskQuotaManager(Prison prison)</summary>
+        <member name="T:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager">
+            <summary>Shim type of Uhuru.Prison.Restrictions.Disk+DiskQuotaManager</summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.#ctor(Uhuru.Prison.Restrictions.Disk.DiskQuotaManager)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.Constructor">
+            <summary>Sets the shim of DiskQuotaManager.DiskQuotaManager()</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.GetDiskQuotaUserStringString">
+            <summary>Sets the shim of DiskQuotaManager.GetDiskQuotaUser(String rootPath, String WindowsUsername)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.GetDisksQuotaUserString">
+            <summary>Sets the shim of DiskQuotaManager.GetDisksQuotaUser(String WindowsUsername)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.GetUniqueVolumeNameFromPathString">
+            <summary>Sets the shim of DiskQuotaManager.GetUniqueVolumeNameFromPath(String path)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.GetVolumeRootFromPathString">
+            <summary>Sets the shim of DiskQuotaManager.GetVolumeRootFromPath(String path)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.IsQuotaInitialized">
+            <summary>Sets the shim of DiskQuotaManager.IsQuotaInitialized()</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.IsQuotaInitializedString">
+            <summary>Sets the shim of DiskQuotaManager.IsQuotaInitialized(String rootPath)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.SetDiskQuotaLimitStringStringInt64">
+            <summary>Sets the shim of DiskQuotaManager.SetDiskQuotaLimit(String WindowsUsername, String Path, Int64 DiskQuotaBytes)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.StartQuotaInitialization">
+            <summary>Sets the shim of DiskQuotaManager.StartQuotaInitialization()</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.StartQuotaInitializationString">
+            <summary>Sets the shim of DiskQuotaManager.StartQuotaInitialization(String rootPath)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.StaticConstructor">
+            <summary>Sets the shim of DiskQuotaManager.DiskQuotaManager()</summary>
+        </member>
+        <member name="T:Uhuru.Prison.Restrictions.Fakes.ShimDisk.ShimDiskQuotaManager.AllInstances">
+            <summary>Define shims for all instances members</summary>
         </member>
         <member name="T:Uhuru.Prison.Restrictions.Fakes.ShimFilesystem">
             <summary>Shim type of Uhuru.Prison.Restrictions.Filesystem</summary>

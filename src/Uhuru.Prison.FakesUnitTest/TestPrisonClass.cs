@@ -22,7 +22,11 @@ namespace Uhuru.Prison.FakesUnitTest
                 bool saveWasInvoked = false;
                 ShimWindowsUsersAndGroups.CreateUserStringString = (username, password) => { createdUser = username;  return; };
                 ShimPrison.AllInstances.ChangeRegistryUserProfileString = (pris, destination) => { userProfileDestination = destination; return; };
-                ShimDataContractSerializer.AllInstances.WriteObjectContentXmlWriterObject = (data, writeStream, fakePrison) => { saveWasInvoked = true; return; };
+                ShimXmlObjectSerializer.AllInstances.WriteObjectStreamObject = (data, writeStream, fakePrison) =>
+                {
+                    saveWasInvoked = true;
+                    return;
+                };
 
                 Prison prison = new Prison();
                 prison.Tag = "uhtst";
