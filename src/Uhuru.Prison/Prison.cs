@@ -350,7 +350,7 @@ namespace Uhuru.Prison
 
         public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
         {
-            if (Process.GetCurrentProcess().SessionId == 0)
+            if (GetCurrentSessionId() == 0)
             {
                 var workerProcess = InitializeProcess(filename, arguments, interactive, extraEnvironmentVariables);
                 ResumeProcess(workerProcess);
@@ -421,6 +421,11 @@ namespace Uhuru.Prison
 
             if (filename == string.Empty) filename = null;
 
+            if (CellEnabled(RuleType.WindowStation))
+            {
+                new WindowStation().Apply(this);
+            }
+
             Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, envBlock);
 
             var workerProcessPid = processInfo.dwProcessId;
@@ -446,7 +451,7 @@ namespace Uhuru.Prison
         {
             // Now that the process is tagged with the Job Object so we can resume the thread.
             IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, workerProcess.Threads[0].Id);
-            uint resumeResult = NativeResumeThread(processInfo.dwThreadId);
+            uint resumeResult = Native.ResumeThread(threadHandler);
             Native.CloseHandle(threadHandler);
 
             if (resumeResult != 1)
@@ -686,6 +691,11 @@ namespace Uhuru.Prison
             {
                 LoadUserProfile();
             }
+        }
+
+        private static int GetCurrentSessionId()
+        {
+            return Process.GetCurrentProcess().SessionId;
         }
 
         // Check if the profile is loaded.
@@ -999,7 +1009,6 @@ namespace Uhuru.Prison
 
             if (CellEnabled(RuleType.WindowStation))
             {
-                new WindowStation().Apply(this);
                 startupInfo.lpDesktop = this.desktopName;
             }
 
@@ -1058,17 +1067,6 @@ namespace Uhuru.Prison
             }
 
             return processInfo;
-        }
-
-        private uint NativeResumeThread(int dwThreadId)
-        {
-            IntPtr threadHandler = Native.OpenThread(Native.ThreadAccess.SUSPEND_RESUME, false, dwThreadId);
-
-            uint resumeResult = Native.ResumeThread(threadHandler);
-
-            Native.CloseHandle(threadHandler);
-
-            return resumeResult;
         }
 
         private void SystemRemoveQuota()

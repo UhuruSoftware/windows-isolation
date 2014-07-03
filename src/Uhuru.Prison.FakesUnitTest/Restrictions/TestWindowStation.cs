@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.QualityTools.Testing.Fakes;
 using System.Collections.Generic;
 using Uhuru.Prison.Restrictions.Fakes;
+using System.Diagnostics;
+using Uhuru.Prison.Fakes;
+using System.Diagnostics.Fakes;
+using Uhuru.Prison.Utilities.WindowsJobObjects.Fakes;
 
 namespace Uhuru.Prison.FakesUnitTest
 {
@@ -31,6 +35,28 @@ namespace Uhuru.Prison.FakesUnitTest
                 prisonRules.PrisonHomePath = @"c:\prison_tests\p3";
 
                 prison.Lockdown(prisonRules);
+
+                Native.PROCESS_INFORMATION processInfo = new Native.PROCESS_INFORMATION
+                {
+                    hProcess = new IntPtr(2400),
+                    hThread = new IntPtr(2416),
+                    dwProcessId = 5400,
+                    dwThreadId = 4544
+                };
+
+                PrisonTestsHelper.PrisonCreateProcessAsUserFakes(processInfo);
+                ShimPrison.GetCurrentSessionId = () => { return 0; };
+
+                ShimProcess.GetProcessByIdInt32 = (id) => { return new Process(); };
+                ShimJobObject.AllInstances.AddProcessProcess = (jobObject, proc) => { return; };
+                ShimPrison.AllInstances.AddProcessToGuardJobObjectProcess = (fakePrison, proc) => { return; };
+                ShimPrison.AllInstances.ResumeProcessProcess = (fakePrison, pProcess) => { };
+
+
+                Process process = prison.Execute(
+                    @"c:\windows\system32\cmd.exe",
+                    @"/c echo test");
+
 
                 Assert.AreEqual(prison.desktopName, string.Format(@"{0}\Default", username));
             }
@@ -108,7 +134,7 @@ namespace Uhuru.Prison.FakesUnitTest
 
                 Assert.AreEqual(fakedStations.Count, rules[RuleType.WindowStation].Length);
 
-                foreach(var wstation in rules[RuleType.WindowStation])
+                foreach (var wstation in rules[RuleType.WindowStation])
                 {
                     Assert.IsTrue(fakedStations.Contains(wstation.Name));
                 }

@@ -54,6 +54,9 @@ namespace Uhuru.Prison.FakesUnitTest.JobObjects
                 };
 
                 PrisonTestsHelper.PrisonCreateProcessAsUserFakes(processInfo);
+
+                ShimPrison.GetCurrentSessionId = () => { return 0; };
+
                 var shimedProcess = new ShimProcess();
                 shimedProcess.IdGet = () => { return processInfo.dwProcessId; };
                 var raisingEventsChangedTo = false;
@@ -63,8 +66,8 @@ namespace Uhuru.Prison.FakesUnitTest.JobObjects
                 Process procAddedToJob = null;
                 ShimJobObject.AllInstances.AddProcessProcess = (jobObject, proc) => { procAddedToJob = proc; return; };
                 ShimPrison.AllInstances.AddProcessToGuardJobObjectProcess = (fakePrison, proc) => { return; };
-                var threadIdResumed = 0;
-                ShimPrison.AllInstances.NativeResumeThreadInt32 = (fakePrison, threadId) => { threadIdResumed = threadId; return 1; };
+                var processIdResumed = 0;
+                ShimPrison.AllInstances.ResumeProcessProcess = (fakePrison, pProcess) => { processIdResumed = pProcess.Id; };
 
                 // Act
                 Process process = prison.Execute(
@@ -73,7 +76,7 @@ namespace Uhuru.Prison.FakesUnitTest.JobObjects
 
                 // Assert
                 Assert.AreEqual(processInfo.dwProcessId, process.Id);
-                Assert.AreEqual(processInfo.dwThreadId, threadIdResumed);
+                Assert.AreEqual(processInfo.dwProcessId, processIdResumed);
                 Assert.AreEqual(procAddedToJob.Id, process.Id);
                 Assert.AreEqual(true, raisingEventsChangedTo);
             }
