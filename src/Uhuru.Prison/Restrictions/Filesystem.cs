@@ -241,33 +241,8 @@ namespace Uhuru.Prison.Restrictions
             deploymentDirSecurity.SetOwner(new NTAccount(prison.User.Username));
             deploymentDirSecurity.SetAccessRule(
                 new FileSystemAccessRule(
-                    prison.User.Username,
-                    FileSystemRights.AppendData |
-                    FileSystemRights.ChangePermissions |
-                    FileSystemRights.CreateDirectories |
-                    FileSystemRights.CreateFiles |
-                    FileSystemRights.Delete |
-                    FileSystemRights.DeleteSubdirectoriesAndFiles |
-                    FileSystemRights.ExecuteFile |
-                    FileSystemRights.FullControl |
-                    FileSystemRights.ListDirectory |
-                    FileSystemRights.Modify |
-                    FileSystemRights.Read |
-                    FileSystemRights.ReadAndExecute |
-                    FileSystemRights.ReadAttributes |
-                    FileSystemRights.ReadData |
-                    FileSystemRights.ReadExtendedAttributes |
-                    FileSystemRights.ReadPermissions |
-                    FileSystemRights.Synchronize |
-                    FileSystemRights.TakeOwnership |
-                    FileSystemRights.Traverse |
-                    FileSystemRights.Write |
-                    FileSystemRights.WriteAttributes |
-                    FileSystemRights.WriteData |
-                    FileSystemRights.WriteExtendedAttributes,
-                    InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-                    PropagationFlags.None,
-                    AccessControlType.Allow));
+                    prison.User.Username, FileSystemRights.FullControl, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+                    PropagationFlags.None, AccessControlType.Allow));
         }
     }
 }

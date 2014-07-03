@@ -75,6 +75,8 @@ namespace Uhuru.Prison.FakesUnitTest
 
         public static void InitFilesystemRuleFakes()
         {
+            ShimFilesystem.InitOpenDirectoriesList = () => { return; };
+
             ShimWindowsUsersAndGroups.ExistsGroupString = (group) => { return false; };
             ShimWindowsUsersAndGroups.CreateGroupString = (group) => { return; };
 
