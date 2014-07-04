@@ -20,7 +20,7 @@ namespace Uhuru.Prison.Restrictions
 
             IntPtr windowStation = IntPtr.Zero;
 
-            windowStation = Native.OpenWindowStation(prison.User.Username, false, Native.WINDOWS_STATION_ACCESS_MASK.WINSTA_CREATEDESKTOP);
+            windowStation = NativeOpenWindowStation(prison.User.Username);
 
             int openWinStaStatus = Marshal.GetLastWin32Error();
 
@@ -34,7 +34,7 @@ namespace Uhuru.Prison.Restrictions
             if (windowStation == IntPtr.Zero &&  openWinStaStatus == 0x2)
             {
                 // TODO SECURITY: change security attributes. the default will give everyone access to the object including other prisons
-                windowStation = Native.CreateWindowStation(prison.User.Username, 0, Native.WINDOWS_STATION_ACCESS_MASK.WINSTA_CREATEDESKTOP, null);
+                windowStation = NativeCreateWindowStation(prison.User.Username);
 
                 if (windowStation == IntPtr.Zero)
                 {
@@ -44,11 +44,11 @@ namespace Uhuru.Prison.Restrictions
 
             lock (windowStationContextLock)
             {
-                IntPtr currentWindowStation = Native.GetProcessWindowStation();
+                IntPtr currentWindowStation = NativeGetProcessWindowStation();
 
                 try
                 {
-                    bool setOk = Native.SetProcessWindowStation(windowStation);
+                    bool setOk = NativeSetProcessWindowStation(windowStation);
 
                     if (!setOk)
                     {
@@ -56,7 +56,7 @@ namespace Uhuru.Prison.Restrictions
                     }
 
                     // TODO SECURITY: change security attributes. the default will give everyone access to the object including other prisons
-                    var desktop = Native.CreateDesktop("Default", null, null, 0, Native.ACCESS_MASK.DESKTOP_CREATEWINDOW, null);
+                    var desktop = NativeCreateDesktop();
 
                     if (desktop == IntPtr.Zero)
                     {
@@ -67,7 +67,7 @@ namespace Uhuru.Prison.Restrictions
                 }
                 finally
                 {
-                    Native.SetProcessWindowStation(currentWindowStation);
+                    NativeSetProcessWindowStation(currentWindowStation);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Uhuru.Prison.Restrictions
             IList<string> workstationList = new List<string>();
 
             GCHandle gcHandle = GCHandle.Alloc(workstationList);
-            Native.EnumWindowStations(childProc, GCHandle.ToIntPtr(gcHandle));
+            NativeEnumWindowsStations(childProc, gcHandle);
 
             foreach (string workstation in workstationList)
             {
@@ -121,5 +121,36 @@ namespace Uhuru.Prison.Restrictions
         public override void Recover(Prison prison)
         {
         }
+
+        private static bool NativeEnumWindowsStations(Native.EnumWindowStationsDelegate childProc, GCHandle gcHandle)
+        {
+            return Native.EnumWindowStations(childProc, GCHandle.ToIntPtr(gcHandle));
+        }
+
+        private static IntPtr NativeOpenWindowStation(string username)
+        {
+            return Native.OpenWindowStation(username, false, Native.WINDOWS_STATION_ACCESS_MASK.WINSTA_CREATEDESKTOP);
+        }
+
+        private static IntPtr NativeCreateWindowStation(string username)
+        {
+            return Native.CreateWindowStation(username, 0, Native.WINDOWS_STATION_ACCESS_MASK.WINSTA_CREATEDESKTOP, null);
+        }
+
+        private static bool NativeSetProcessWindowStation(IntPtr windowStation)
+        {
+            return Native.SetProcessWindowStation(windowStation);
+        }
+
+        private static IntPtr NativeGetProcessWindowStation()
+        {
+            return NativeGetProcessWindowStation();
+        }
+
+        private static IntPtr NativeCreateDesktop()
+        {
+            return Native.CreateDesktop("Default", null, null, 0, Native.ACCESS_MASK.DESKTOP_CREATEWINDOW, null);
+        }
+
     }
 }

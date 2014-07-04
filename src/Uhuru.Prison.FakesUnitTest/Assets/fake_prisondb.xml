@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ArrayOfPersistenceRow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PersistenceRow>
+    <GroupKey>prison_users</GroupKey>
+    <ValueKey>prison_user_name</ValueKey>
+    <Value xsi:type="xsd:string">a password</Value>
+  </PersistenceRow>
+</ArrayOfPersistenceRow>

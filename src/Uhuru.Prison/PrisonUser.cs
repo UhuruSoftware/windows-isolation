@@ -131,7 +131,7 @@ namespace Uhuru.Prison
 
             WindowsUsersAndGroups.CreateUser(this.username, this.password);
 
-            this.userSID = new NTAccount(null, this.username).Translate(typeof(SecurityIdentifier)).Value;
+            this.userSID = WindowsUsersAndGroups.GetLocalUserSid(this.username);
 
             Persistence.SaveValue("prison_users", this.username, this.password);
             this.created = true;

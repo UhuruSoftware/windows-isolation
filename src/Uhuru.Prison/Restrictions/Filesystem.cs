@@ -30,36 +30,7 @@ namespace Uhuru.Prison.Restrictions
             DirectorySecurity deploymentDirSecurity = deploymentDirInfo.GetAccessControl();
 
             // Owner is important to account for disk quota 		
-            deploymentDirSecurity.SetOwner(new NTAccount(prison.User.Username));
-            deploymentDirSecurity.SetAccessRule(
-                new FileSystemAccessRule(
-                    prison.User.Username,
-                    FileSystemRights.AppendData |
-                    FileSystemRights.ChangePermissions |
-                    FileSystemRights.CreateDirectories |
-                    FileSystemRights.CreateFiles |
-                    FileSystemRights.Delete |
-                    FileSystemRights.DeleteSubdirectoriesAndFiles |
-                    FileSystemRights.ExecuteFile |
-                    FileSystemRights.FullControl |
-                    FileSystemRights.ListDirectory |
-                    FileSystemRights.Modify |
-                    FileSystemRights.Read |
-                    FileSystemRights.ReadAndExecute |
-                    FileSystemRights.ReadAttributes |
-                    FileSystemRights.ReadData |
-                    FileSystemRights.ReadExtendedAttributes |
-                    FileSystemRights.ReadPermissions |
-                    FileSystemRights.Synchronize |
-                    FileSystemRights.TakeOwnership |
-                    FileSystemRights.Traverse |
-                    FileSystemRights.Write |
-                    FileSystemRights.WriteAttributes |
-                    FileSystemRights.WriteData |
-                    FileSystemRights.WriteExtendedAttributes,
-                    InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-                    PropagationFlags.None,
-                    AccessControlType.Allow));
+            SetDirectoryOwner(deploymentDirSecurity, prison);
 
             // Taking ownership of a file has to be executed with0-031233332xpw0odooeoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo restore privilege elevated privilages		
             using (new ProcessPrivileges.PrivilegeEnabler(Process.GetCurrentProcess(), ProcessPrivileges.Privilege.Restore))
@@ -263,6 +234,15 @@ namespace Uhuru.Prison.Restrictions
 
         public override void Recover(Prison prison)
         {
+        }
+
+        private static void SetDirectoryOwner(DirectorySecurity deploymentDirSecurity, Prison prison)
+        {
+            deploymentDirSecurity.SetOwner(new NTAccount(prison.User.Username));
+            deploymentDirSecurity.SetAccessRule(
+                new FileSystemAccessRule(
+                    prison.User.Username, FileSystemRights.FullControl, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+                    PropagationFlags.None, AccessControlType.Allow));
         }
     }
 }

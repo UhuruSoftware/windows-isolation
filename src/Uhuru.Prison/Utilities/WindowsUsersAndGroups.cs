@@ -97,7 +97,7 @@ namespace Uhuru.Prison.Utilities
                 DirectoryEntry de = newUser.GetUnderlyingObject() as DirectoryEntry;
 
                 if (!string.IsNullOrEmpty(description))
-                {
+                {                   
                     de.Properties["Description"].Add(description);
                 }
 
@@ -282,10 +282,10 @@ namespace Uhuru.Prison.Utilities
             }
         }
 
-        public static string GetLocalUserSid(string userName)
+        public static string GetLocalUserSid(string username)
         {
-            NTAccount ntaccount = new NTAccount(null, userName);
-            return ntaccount.Translate(typeof(SecurityIdentifier)).Value;
+            return new NTAccount(null, username).Translate(typeof(SecurityIdentifier)).Value;
         }
+
     }
 }

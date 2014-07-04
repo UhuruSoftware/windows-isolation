@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uhuru.Prison", "Uhuru.Prison\Uhuru.Prison.csproj", "{B9C02CB5-33CE-479A-9A16-78F67A66BF80}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,6 +20,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uhuru.Prison.Guard", "Uhuru.Prison.Guard\Uhuru.Prison.Guard.vcxproj", "{9B3D3029-488D-49F1-A4C1-FFF256196455}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uhuru.Prison.ChangeSession", "Uhuru.Prison.ChangeSession\Uhuru.Prison.ChangeSession.csproj", "{55E28C63-13A1-49FE-933E-F71A8C1F9E47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uhuru.Prison.FakesUnitTest", "Uhuru.Prison.FakesUnitTest\Uhuru.Prison.FakesUnitTest.csproj", "{025D5019-6966-4E00-97C8-9B844527A6C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,11 +111,24 @@ Global
 		{55E28C63-13A1-49FE-933E-F71A8C1F9E47}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{55E28C63-13A1-49FE-933E-F71A8C1F9E47}.Release|Win32.ActiveCfg = Release|Any CPU
 		{55E28C63-13A1-49FE-933E-F71A8C1F9E47}.Release|x64.ActiveCfg = Release|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Release|Win32.ActiveCfg = Release|Any CPU
+		{025D5019-6966-4E00-97C8-9B844527A6C1}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9691DCE0-4CEA-46AD-99ED-1FE578163A9E} = {CBB7CECF-19C9-439E-8369-BB69BC38F4AB}
+		{025D5019-6966-4E00-97C8-9B844527A6C1} = {CBB7CECF-19C9-439E-8369-BB69BC38F4AB}
 	EndGlobalSection
 EndGlobal

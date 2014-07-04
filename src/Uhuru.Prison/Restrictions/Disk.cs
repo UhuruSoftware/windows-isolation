@@ -12,7 +12,8 @@ namespace Uhuru.Prison.Restrictions
     class Disk : Rule
     {
         private DIDiskQuotaUser userQuota;
-        private class DiskQuotaManager
+
+        public class DiskQuotaManager
         {
             /// <summary>
             /// DiskQuotaControlls mapped to the unique volume name.
@@ -145,6 +146,13 @@ namespace Uhuru.Prison.Restrictions
                 }
             }
 
+            public static void SetDiskQuotaLimit(string WindowsUsername, string Path, long DiskQuotaBytes)
+            {
+                var rootPath = DiskQuotaManager.GetVolumeRootFromPath(Path);
+                var userQuota = DiskQuotaManager.GetDiskQuotaUser(rootPath, WindowsUsername);
+                userQuota.QuotaLimit = DiskQuotaBytes;
+            }
+
             /// <summary>
             /// Get the volume root mount of the path. 
             /// </summary>
@@ -179,15 +187,14 @@ namespace Uhuru.Prison.Restrictions
         public override void Apply(Prison prison)
         {
             // Set the disk quota to 0 for all disks, except disk quota path
-            var volumesQuotas = DiskQuotaManager.GetDisksQuotaUser(prison.User.Username);
+            var volumesQuotas = GetUserQoutaDiskQuotaManager(prison);
 
             foreach (var volumeQuota in volumesQuotas)
             {
                 volumeQuota.QuotaLimit = 0;
             }
 
-            userQuota = DiskQuotaManager.GetDiskQuotaUser(DiskQuotaManager.GetVolumeRootFromPath(prison.Rules.PrisonHomePath), prison.User.Username);
-            userQuota.QuotaLimit = prison.Rules.DiskQuotaBytes;
+            DiskQuotaManager.SetDiskQuotaLimit(prison.User.Username, prison.Rules.PrisonHomePath, prison.Rules.DiskQuotaBytes);
         }
 
         public override void Destroy(Prison prison)
@@ -216,6 +223,11 @@ namespace Uhuru.Prison.Restrictions
 
         public override void Recover(Prison prison)
         {
+        }
+
+        private DIDiskQuotaUser[] GetUserQoutaDiskQuotaManager(Prison prison)
+        {
+            return DiskQuotaManager.GetDisksQuotaUser(prison.User.Username);
         }
     }
 }
