@@ -107,7 +107,7 @@ namespace Uhuru.Prison.ComWrapper
 
         public IProcessTracker Run(IContainerRunInfo runInfo)
         {
-            var process = this.prison.Execute(runInfo.Filename, runInfo.Arguments, false, runInfo.ExtraEnvironmentVariables, runInfo.StdinPipeName, runInfo.StdoutPipeName, runInfo.StderrPipeName);
+            var process = this.prison.Execute(runInfo.Filename, runInfo.Arguments, false, runInfo.ExtraEnvironmentVariables, runInfo.StdinPipe, runInfo.StdoutPipe, runInfo.StderrPipe);
             return new ProcessTracker(process);
         }
 

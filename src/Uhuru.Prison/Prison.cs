@@ -359,7 +359,7 @@ namespace Uhuru.Prison
             return this.Execute(filename, arguments, interactive, null, null, null, null);
         }
 
-        public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
+        public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             if (GetCurrentSessionId() == 0)
             {
@@ -374,7 +374,7 @@ namespace Uhuru.Prison
             }
         }
 
-        public Process InitializeProcessWithChagedSession(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
+        public Process InitializeProcessWithChagedSession(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             string tempSeriviceId = Guid.NewGuid().ToString();
             InitChangeSessionService(tempSeriviceId);
@@ -402,7 +402,7 @@ namespace Uhuru.Prison
             return workingProcess;
         }
 
-        public Process InitializeProcess(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
+        public Process InitializeProcess(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             // C with Win32 API example to start a process under a different user: http://msdn.microsoft.com/en-us/library/aa379608%28VS.85%29.aspx
 
@@ -1011,14 +1011,14 @@ namespace Uhuru.Prison
 
         }
 
-        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string envBlock, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
+        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             var startupInfo = new Native.STARTUPINFO();
             var processInfo = new Native.PROCESS_INFORMATION();
 
-            NamedPipeServerStream stdinPipe = null;
-            NamedPipeServerStream stdoutPipe = null;
-            NamedPipeServerStream stderrPipe = null;
+            PipeStream stdinPipe = null;
+            PipeStream stdoutPipe = null;
+            PipeStream stderrPipe = null;
 
             startupInfo = new Native.STARTUPINFO();
 
@@ -1068,15 +1068,17 @@ namespace Uhuru.Prison
                 {
                     //stdinPipe = new NamedPipeClientStream(".", stdinPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
                     //stdinPipe.Connect();
-                    stdinPipe = new NamedPipeServerStream(stdinPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    //stdinPipe = new NamedPipeServerStream(stdinPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    stdinPipe = stdinPipeName;
                     startupInfo.hStdInput = stdinPipe.SafePipeHandle.DangerousGetHandle();
-                }
+                } 
 
                 if (stdoutPipeName != null)
                 {
                     //stdoutPipe = new NamedPipeClientStream(".", stdoutPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
                     //stdoutPipe.Connect();
-                    stdoutPipe = new NamedPipeServerStream(stdoutPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    //stdoutPipe = new NamedPipeServerStream(stdoutPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    stdoutPipe = stdoutPipeName;
                     startupInfo.hStdOutput = stdoutPipe.SafePipeHandle.DangerousGetHandle();
                 }
 
@@ -1084,7 +1086,8 @@ namespace Uhuru.Prison
                 {
                     //stderrPipe = new NamedPipeClientStream(".", stderrPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
                     //stderrPipe.Connect();
-                    stderrPipe = new NamedPipeServerStream(stderrPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    //stderrPipe = new NamedPipeServerStream(stderrPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    stderrPipe = stderrPipeName;
                     startupInfo.hStdError = stderrPipe.SafePipeHandle.DangerousGetHandle();
                 }
 

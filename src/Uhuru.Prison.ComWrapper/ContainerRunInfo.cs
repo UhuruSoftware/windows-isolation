@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,13 +19,16 @@ namespace Uhuru.Prison.ComWrapper
         string Arguments { get; set; }
 
         [ComVisible(true)]
-        string StdinPipeName { get; set; }
+        string StdinPipeName { get; }
+        PipeStream StdinPipe { get; }
 
         [ComVisible(true)]
-        string StdoutPipeName { get; set; }
+        string StdoutPipeName { get;  }
+        PipeStream StdoutPipe { get; }
 
         [ComVisible(true)]
-        string StderrPipeName { get; set; }
+        string StderrPipeName { get;  }
+        PipeStream StderrPipe { get; }
 
         [ComVisible(true)]
         Dictionary<string, string> ExtraEnvironmentVariables { get; }
@@ -56,11 +61,14 @@ namespace Uhuru.Prison.ComWrapper
 
 
 
-        public string StdinPipeName { get; set; }
+        public string StdinPipeName { get; private set; }
+        public PipeStream StdinPipe { get; private set; }
 
-        public string StdoutPipeName { get; set; }
+        public string StdoutPipeName { get; private set; }
+        public PipeStream StdoutPipe { get; private set; }
 
-        public string StderrPipeName { get; set; }
+        public string StderrPipeName { get; private set; }
+        public PipeStream StderrPipe { get; private set; }
 
         public Dictionary<string, string> ExtraEnvironmentVariables { get; private set; }
 
@@ -85,10 +93,19 @@ namespace Uhuru.Prison.ComWrapper
             if (redirect)
             {
                 this.StdinPipeName = runId + "\\stdin";
+                if (this.StdinPipe == null)
+                {
+                    this.StdinPipe = new NamedPipeServerStream(this.StdinPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                }
             }
             else
             {
                 this.StdinPipeName = null;
+                if (this.StdinPipe != null)
+                {
+                    this.StdinPipe.Dispose();
+                    this.StdinPipe = null;
+                }
             }
             return this.StdinPipeName;
         }
@@ -98,6 +115,10 @@ namespace Uhuru.Prison.ComWrapper
             if (redirect)
             {
                 this.StdoutPipeName = runId + "\\stdout";
+                if (this.StdoutPipe == null)
+                {
+                    this.StdoutPipe = new NamedPipeServerStream(this.StdoutPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                }
             }
             else
             {
@@ -111,6 +132,10 @@ namespace Uhuru.Prison.ComWrapper
             if (redirect)
             {
                 this.StderrPipeName = runId + "\\stderr";
+                if (this.StderrPipe == null)
+                {
+                    this.StderrPipe = new NamedPipeServerStream(this.StderrPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                }
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -16,9 +17,9 @@ namespace Uhuru.Prison.ExecutorService
             string filename, 
             string arguments,
             Dictionary<string, string> extraEnvironmentVariables,
-            string stdinPipeName, 
-            string stdoutPipeName, 
-            string stderrPipeName
+            PipeStream stdinPipeName, 
+            PipeStream stdoutPipeName, 
+            PipeStream stderrPipeName
             );
     }
 }

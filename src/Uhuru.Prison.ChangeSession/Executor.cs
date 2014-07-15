@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.Pipes;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
@@ -14,7 +15,7 @@ namespace Uhuru.Prison.ChangeSession
     public class Executor : IExecutor
     {
         [PrincipalPermission(SecurityAction.Demand, Role = "BUILTIN\\Administrators")]
-        public int ExecuteProcess(Prison prison, string filename, string arguments, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
+        public int ExecuteProcess(Prison prison, string filename, string arguments, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             // To debug the service uncomment the following line:
             // Debugger.Launch();
