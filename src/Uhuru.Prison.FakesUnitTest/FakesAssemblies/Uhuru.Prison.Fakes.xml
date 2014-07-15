@@ -247,11 +247,11 @@
         <member name="M:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.#ctor">
             <summary>Initializes a new instance of type StubIExecutor</summary>
         </member>
-        <member name="F:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.ExecuteProcessPrisonStringStringDictionaryOfStringString">
-            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
+        <member name="F:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.ExecuteProcessPrisonStringStringDictionaryOfStringStringStringStringString">
+            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
-        <member name="M:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.up::Uhuru#Prison#ExecutorService#IExecutor#ExecuteProcess(Uhuru.Prison.Prison,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
+        <member name="M:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.up::Uhuru#Prison#ExecutorService#IExecutor#ExecuteProcess(Uhuru.Prison.Prison,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String,System.String)">
+            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
         <member name="T:Uhuru.Prison.Fakes.ShimFirewallTools">
             <summary>Shim type of Uhuru.Prison.FirewallTools</summary>
@@ -658,6 +658,9 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.ExecuteStringStringBooleanDictionaryOfStringString">
             <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
         </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.ExecuteStringStringBooleanDictionaryOfStringStringStringStringString">
+            <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
+        </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.GetChangeSessionServicePath">
             <summary>Sets the shim of Prison.GetChangeSessionServicePath()</summary>
         </member>
@@ -700,17 +703,20 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeLogonToken">
             <summary>Sets the shim of Prison.InitializeLogonToken()</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessStringStringBooleanDictionaryOfStringString">
-            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessStringStringBooleanDictionaryOfStringStringStringStringString">
+            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessWithChagedSessionStringStringBooleanDictionaryOfStringString">
-            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessWithChagedSessionStringStringBooleanDictionaryOfStringStringStringStringString">
+            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeSystemVirtualAddressSpaceQuotas">
             <summary>Sets the shim of Prison.InitializeSystemVirtualAddressSpaceQuotas()</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.InstallServiceStringDictionaryOfStringString">
             <summary>Sets the shim of Prison.InstallService(String servicePath, Dictionary`2&lt;String,String&gt; parameters)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.IsLocked">
+            <summary>Sets the shim of Prison.IsLocked()</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.IsProfileLoaded">
             <summary>Sets the shim of Prison.IsProfileLoaded()</summary>
@@ -739,8 +745,8 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.LockdownPrisonRules">
             <summary>Sets the shim of Prison.Lockdown(PrisonRules prisonRules)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserBooleanStringStringString">
-            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserBooleanStringStringStringStringStringString">
+            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.Reattach">
             <summary>Sets the shim of Prison.Reattach()</summary>
@@ -832,6 +838,9 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.ExecuteStringStringBooleanDictionaryOfStringString">
             <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
         </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.ExecuteStringStringBooleanDictionaryOfStringStringStringStringString">
+            <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
+        </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.GetDefaultEnvironmentVarialbes">
             <summary>Sets the shim of Prison.GetDefaultEnvironmentVarialbes()</summary>
         </member>
@@ -853,14 +862,17 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeLogonToken">
             <summary>Sets the shim of Prison.InitializeLogonToken()</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessStringStringBooleanDictionaryOfStringString">
-            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessStringStringBooleanDictionaryOfStringStringStringStringString">
+            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessWithChagedSessionStringStringBooleanDictionaryOfStringString">
-            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessWithChagedSessionStringStringBooleanDictionaryOfStringStringStringStringString">
+            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeSystemVirtualAddressSpaceQuotas">
             <summary>Sets the shim of Prison.InitializeSystemVirtualAddressSpaceQuotas()</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.IsLocked">
+            <summary>Sets the shim of Prison.IsLocked()</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.IsProfileLoaded">
             <summary>Sets the shim of Prison.IsProfileLoaded()</summary>
@@ -877,8 +889,8 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.LockdownPrisonRules">
             <summary>Sets the shim of Prison.Lockdown(PrisonRules prisonRules)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.NativeCreateProcessAsUserBooleanStringStringString">
-            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.NativeCreateProcessAsUserBooleanStringStringStringStringStringString">
+            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock, String stdinPipeName, String stdoutPipeName, String stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.Reattach">
             <summary>Sets the shim of Prison.Reattach()</summary>

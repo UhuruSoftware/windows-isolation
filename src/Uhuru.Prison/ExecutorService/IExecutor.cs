@@ -15,7 +15,10 @@ namespace Uhuru.Prison.ExecutorService
             Prison prison,
             string filename, 
             string arguments,
-            Dictionary<string, string> extraEnvironmentVariables
+            Dictionary<string, string> extraEnvironmentVariables,
+            string stdinPipeName, 
+            string stdoutPipeName, 
+            string stderrPipeName
             );
     }
 }

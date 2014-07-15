@@ -121,8 +121,8 @@ namespace Uhuru.Prison.FakesUnitTest.JobObjects
 
                 StubIExecutor exec = new StubIExecutor();
                 ShimChannelFactory<IExecutor>.AllInstances.CreateChannel = (executor) => { return exec; };
-                exec.ExecuteProcessPrisonStringStringDictionaryOfStringString =
-                    (fakePrison, filename, arguments, extraEnvironmentVariables) =>
+                exec.ExecuteProcessPrisonStringStringDictionaryOfStringStringStringStringString =
+                    (fakePrison, filename, arguments, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName) =>
                     {
                         return processInfo.dwProcessId;
                     };

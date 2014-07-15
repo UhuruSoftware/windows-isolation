@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
@@ -61,6 +62,11 @@ namespace Uhuru.Prison
         public JobObject JobObject
         {
             get { return jobObject; }
+        }
+
+        public bool IsLocked()
+        {
+            return this.isLocked;
         }
 
         [DataMember]
@@ -350,20 +356,25 @@ namespace Uhuru.Prison
 
         public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
         {
+            return this.Execute(filename, arguments, interactive, null, null, null, null);
+        }
+
+        public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
+        {
             if (GetCurrentSessionId() == 0)
             {
-                var workerProcess = InitializeProcess(filename, arguments, interactive, extraEnvironmentVariables);
+                var workerProcess = InitializeProcess(filename, arguments, interactive, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
                 ResumeProcess(workerProcess);
                 return workerProcess;
             }
             else
             {
-                var workerProcess = InitializeProcessWithChagedSession(filename, arguments, interactive, extraEnvironmentVariables);
+                var workerProcess = InitializeProcessWithChagedSession(filename, arguments, interactive, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
                 return workerProcess;
             }
         }
 
-        public Process InitializeProcessWithChagedSession(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
+        public Process InitializeProcessWithChagedSession(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
         {
             string tempSeriviceId = Guid.NewGuid().ToString();
             InitChangeSessionService(tempSeriviceId);
@@ -378,7 +389,7 @@ namespace Uhuru.Prison
             
             IExecutor remoteSessionExec = channelFactory.CreateChannel();
 
-            var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, extraEnvironmentVariables);
+            var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
             var workingProcess = Process.GetProcessById(workingProcessId);
             workingProcess.EnableRaisingEvents = true;
 
@@ -391,7 +402,7 @@ namespace Uhuru.Prison
             return workingProcess;
         }
 
-        public Process InitializeProcess(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
+        public Process InitializeProcess(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
         {
             // C with Win32 API example to start a process under a different user: http://msdn.microsoft.com/en-us/library/aa379608%28VS.85%29.aspx
 
@@ -426,7 +437,7 @@ namespace Uhuru.Prison
                 new WindowStation().Apply(this);
             }
 
-            Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, envBlock);
+            Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, envBlock, stdinPipeName, stdoutPipeName, stderrPipeName);
 
             var workerProcessPid = processInfo.dwProcessId;
             var workerProcess = Process.GetProcessById(workerProcessPid);
@@ -695,6 +706,7 @@ namespace Uhuru.Prison
 
         private static int GetCurrentSessionId()
         {
+            return 0; // Set for windows-warden
             return Process.GetCurrentProcess().SessionId;
         }
 
@@ -955,7 +967,8 @@ namespace Uhuru.Prison
             string userSid = this.user.UserSID;
 
             bool retry = true;
-            int retries = 5;
+            int retries = 30;
+            int errorCode = 0;
 
             while (retry && retries > 0)
             {
@@ -963,7 +976,7 @@ namespace Uhuru.Prison
 
                 if (!Native.DeleteProfile(userSid, null, null))
                 {
-                    int errorCode = Marshal.GetLastWin32Error();
+                    errorCode = Marshal.GetLastWin32Error();
 
                     // Error Code 2: The user profile was not created or was already deleted
                     if (errorCode == 2)
@@ -971,17 +984,15 @@ namespace Uhuru.Prison
                         return;
                     }
                     // Error Code 87: The user profile is still loaded.
-                    else if (errorCode == 87)
+                    else
                     {
                         retry = true;
                         retries--;
                     }
-                    else
-                    {
-                        throw new Win32Exception(errorCode);
-                    }
                 }
+                Thread.Sleep(100);
             }
+            throw new Win32Exception(errorCode);
         }
 
         private void GetNativeUserProfileDirectory(StringBuilder pathBuf)
@@ -1000,10 +1011,14 @@ namespace Uhuru.Prison
 
         }
 
-        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string envBlock)
+        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string envBlock, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
         {
             var startupInfo = new Native.STARTUPINFO();
             var processInfo = new Native.PROCESS_INFORMATION();
+
+            NamedPipeServerStream stdinPipe = null;
+            NamedPipeServerStream stdoutPipe = null;
+            NamedPipeServerStream stderrPipe = null;
 
             startupInfo = new Native.STARTUPINFO();
 
@@ -1024,13 +1039,13 @@ namespace Uhuru.Prison
                 Native.ProcessCreationFlags.CREATE_DEFAULT_ERROR_MODE |
                 Native.ProcessCreationFlags.CREATE_NEW_PROCESS_GROUP |
                 Native.ProcessCreationFlags.CREATE_SUSPENDED |
-                Native.ProcessCreationFlags.CREATE_UNICODE_ENVIRONMENT;
+                Native.ProcessCreationFlags.CREATE_UNICODE_ENVIRONMENT |
+                Native.ProcessCreationFlags.CREATE_NEW_CONSOLE;
 
             // TODO: extra steps for interactive to work:
             // http://blogs.msdn.com/b/winsdk/archive/2013/05/01/how-to-launch-a-process-interactively-from-a-windows-service.aspx
             if (interactive)
             {
-                creationFlags |= Native.ProcessCreationFlags.CREATE_NEW_CONSOLE;
                 startupInfo.lpDesktop = "";
             }
             else
@@ -1038,9 +1053,41 @@ namespace Uhuru.Prison
                 //     creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
 
                 // startupInfo.dwFlags |= 0x00000100; // STARTF_USESTDHANDLES
-                startupInfo.hStdInput = Native.GetStdHandle(Native.STD_INPUT_HANDLE);
-                startupInfo.hStdOutput = Native.GetStdHandle(Native.STD_OUTPUT_HANDLE);
-                startupInfo.hStdError = Native.GetStdHandle(Native.STD_ERROR_HANDLE);
+
+                // Dangerous and maybe insecure to give a handle like that an untrusted processes
+                //startupInfo.hStdInput = Native.GetStdHandle(Native.STD_INPUT_HANDLE);
+                //startupInfo.hStdOutput = Native.GetStdHandle(Native.STD_OUTPUT_HANDLE);
+                //startupInfo.hStdError = Native.GetStdHandle(Native.STD_ERROR_HANDLE);
+
+                if (stdinPipeName != null || stdoutPipeName != null || stderrPipeName!= null)
+                {
+                    startupInfo.dwFlags |= 0x00000100; // STARTF_USESTDHANDLES
+                }
+
+                if (stdinPipeName != null)
+                {
+                    //stdinPipe = new NamedPipeClientStream(".", stdinPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
+                    //stdinPipe.Connect();
+                    stdinPipe = new NamedPipeServerStream(stdinPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    startupInfo.hStdInput = stdinPipe.SafePipeHandle.DangerousGetHandle();
+                }
+
+                if (stdoutPipeName != null)
+                {
+                    //stdoutPipe = new NamedPipeClientStream(".", stdoutPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
+                    //stdoutPipe.Connect();
+                    stdoutPipe = new NamedPipeServerStream(stdoutPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    startupInfo.hStdOutput = stdoutPipe.SafePipeHandle.DangerousGetHandle();
+                }
+
+                if (stderrPipeName != null)
+                {
+                    //stderrPipe = new NamedPipeClientStream(".", stderrPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
+                    //stderrPipe.Connect();
+                    stderrPipe = new NamedPipeServerStream(stderrPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
+                    startupInfo.hStdError = stderrPipe.SafePipeHandle.DangerousGetHandle();
+                }
+
             }
 
             Native.SECURITY_ATTRIBUTES processAttributes = new Native.SECURITY_ATTRIBUTES();
@@ -1054,7 +1101,7 @@ namespace Uhuru.Prison
                 lpCommandLine: arguments,
                 lpProcessAttributes: ref processAttributes,
                 lpThreadAttributes: ref threadAttributes,
-                bInheritHandles: false,
+                bInheritHandles: true,
                 dwCreationFlags: creationFlags,
                 lpEnvironment: envBlock,
                 lpCurrentDirectory: this.prisonRules.PrisonHomePath,
@@ -1065,6 +1112,11 @@ namespace Uhuru.Prison
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
+
+            // TODO: use finnaly
+            if (stdinPipe != null) stdinPipe.Dispose(); stdinPipe = null;
+            if (stdoutPipe != null) stdoutPipe.Dispose(); stdoutPipe = null;
+            if (stderrPipe != null) stderrPipe.Dispose(); stderrPipe = null;
 
             return processInfo;
         }

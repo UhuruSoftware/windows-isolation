@@ -14,13 +14,13 @@ namespace Uhuru.Prison.ChangeSession
     public class Executor : IExecutor
     {
         [PrincipalPermission(SecurityAction.Demand, Role = "BUILTIN\\Administrators")]
-        public int ExecuteProcess(Prison prison, string filename, string arguments, Dictionary<string, string> extraEnvironmentVariables)
+        public int ExecuteProcess(Prison prison, string filename, string arguments, Dictionary<string, string> extraEnvironmentVariables, string stdinPipeName, string stdoutPipeName, string stderrPipeName)
         {
             // To debug the service uncomment the following line:
             // Debugger.Launch();
 
             prison.Reattach();
-            var p = prison.InitializeProcess(filename, arguments, false, extraEnvironmentVariables);
+            var p = prison.InitializeProcess(filename, arguments, false, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
 
             return p.Id;
         }
