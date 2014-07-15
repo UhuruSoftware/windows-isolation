@@ -288,7 +288,7 @@ int wmain(int argc, wchar_t **argv)
 
 	SetDefaultDacl();
 
-	wstring dischargeEventName = wstring(L"discharge-") + jobName;
+	wstring dischargeEventName = wstring(L"Global\\discharge-") + jobName;
 
 	hPrisonJob = GetPrisonJobObjectHandle(jobName);
 	hGuardJob = CreateGuardJobObject(jobName + L"-guard");
