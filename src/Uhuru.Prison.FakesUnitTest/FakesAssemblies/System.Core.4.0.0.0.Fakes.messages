@@ -1,0 +1,309 @@
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.EventDescriptor: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementEntityAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementHostingModel: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.WmiConfigurationAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementBindAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementCreateAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementRemoveAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementEnumeratorAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementProbeAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementTaskAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementKeyAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementReferenceAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementConfigurationType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementConfigurationAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementCommitAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Management.Instrumentation.ManagementNameAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogIsolation: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogMode: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogLink: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogStatus: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventProperty: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventKeyword: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLevel: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogRecord: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventRecordWrittenEventArgs: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.SessionAuthentication: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.PathType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventMetadata: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventOpcode: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventTask: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.EventLogInformation: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.StandardEventLevel: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.StandardEventTask: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.StandardEventOpcode: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.Eventing.Reader.StandardEventKeywords: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Queryable: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Enumerable: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Lookup`2: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.ParallelEnumerable: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.ExecutionScope: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.EnumerableQuery: method System.Linq.Expressions.Expression System.Linq.EnumerableQuery.get_Expression() unstubbable: method is abstract and could not be stubbed, method signature type is non-visible to exported or assembly(System.Core.4.0.0.0.Fakes) or subtype(EnumerableQuery in assembly System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.EnumerableQuery`1: method System.Linq.Expressions.Expression System.Linq.EnumerableQuery.get_Expression() unstubbable: method is abstract and could not be stubbed, method signature type is non-visible to exported or assembly(System.Core.4.0.0.0.Fakes) or subtype(EnumerableQuery`1 in assembly System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.DynamicAttribute: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.ParallelMergeOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.ParallelExecutionMode: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.ParallelQuery: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.ParallelQuery`1: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.ManifestKinds: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.AesCryptoServiceProvider: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.AesManaged: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngAlgorithm: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngAlgorithmGroup: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKeyHandleOpenOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKey: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKeyBlobFormat: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKeyCreationParameters: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngProperty: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngPropertyCollection: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngProvider: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngUIPolicy: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ECDiffieHellmanCng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ECDiffieHellmanCngPublicKey: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ECDsaCng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ECKeyXmlFormat: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ManifestSignatureInformation: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.ManifestSignatureInformationCollection: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.MD5Cng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngExportPolicies: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKeyCreationOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKeyOpenOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngKeyUsages: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngPropertyOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.CngUIProtectionLevels: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA1Cng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA256Cng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA256CryptoServiceProvider: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA384Cng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA384CryptoServiceProvider: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA512Cng: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SHA512CryptoServiceProvider: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.SignatureVerificationResult: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.StrongNameSignatureInformation: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.X509Certificates.AuthenticodeSignatureInformation: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.X509Certificates.TimestampInformation: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Security.Cryptography.X509Certificates.TrustStatus: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for Microsoft.Win32.SafeHandles.SafePipeHandle: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Dynamic.BindingRestrictions: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Dynamic.CallInfo: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.CallSite: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.CallSite`1: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.CallSiteHelpers: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.CallSiteOps: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Dynamic.ExpandoObject: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.RuntimeOps: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.RuleCache`1: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.BinaryExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.BlockExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.CatchBlock: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.ConditionalExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.ConstantExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.DebugInfoExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.DefaultExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.DynamicExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.ElementInit: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.ExpressionType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.DynamicExpressionVisitor: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.GotoExpressionKind: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.GotoExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.IndexExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.InvocationExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.LabelExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.LabelTarget: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.LambdaExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.Expression`1: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.ListInitExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.LoopExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MemberAssignment: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MemberBindingType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MemberExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MemberInitExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MemberListBinding: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MemberMemberBinding: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.MethodCallExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.NewArrayExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.NewExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.ParameterExpression: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.RuntimeVariablesExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.SwitchCase: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.SwitchExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.SymbolDocumentInfo: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.TryExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.TypeBinaryExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.Expressions.UnaryExpression: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.Closure: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`9: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`10: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`11: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`12: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`13: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`14: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`15: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Action`16: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`10: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`11: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`12: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`13: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`14: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`15: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`16: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Func`17: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Runtime.CompilerServices.ReadOnlyCollectionBuilder`1: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.TraceLogRetentionOption: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.PerformanceData.CounterData: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.PerformanceData.CounterSetInstance: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.PerformanceData.CounterSetInstanceType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Diagnostics.PerformanceData.CounterType: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Collections.Generic.HashSetDebugView`1: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.HandleInheritability: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeDirection: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeTransmissionMode: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.AnonymousPipeServerStream: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.AnonymousPipeClientStream: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeStreamImpersonationWorker: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.NamedPipeServerStream: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.NamedPipeClientStream: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeAccessRights: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeAccessRule: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.Pipes.PipeAuditRule: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Threading.LockRecursionPolicy: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Threading.Tasks.TaskExtensions: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for Microsoft.Win32.SafeHandles.SafeMemoryMappedFileHandle: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for Microsoft.Win32.SafeHandles.SafeMemoryMappedViewHandle: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.MemoryMappedFiles.MemoryMappedFileAccess: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.MemoryMappedFiles.MemoryMappedFileOptions: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.MemoryMappedFiles.MemoryMappedFile: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.MemoryMappedFiles.MemoryMappedViewAccessor: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.MemoryMappedFiles.MemoryMappedViewStream: type is sealed.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.IO.MemoryMappedFiles.MemoryMappedFileRights: type is a value type.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for System.Linq.OrderedParallelQuery`1: type has no family visible contructors.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate stub for <PrivateImplementationDetails>{73D76CB6-7F16-463B-A4DC-BC9D45BAF766}: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.EventProvider+WriteEventErrorCode: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Management.Instrumentation.ManagementHostingModel: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Management.Instrumentation.ManagementConfigurationType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.EventLogType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.EventLogIsolation: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.EventLogMode: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.SessionAuthentication: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.PathType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.StandardEventLevel: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.StandardEventTask: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.StandardEventOpcode: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.Eventing.Reader.StandardEventKeywords: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IQueryable: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IQueryable`1: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IQueryProvider: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IOrderedQueryable: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IOrderedQueryable`1: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IOrderedEnumerable`1: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.IGrouping`2: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.ILookup`2: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.ExecutionScope: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.DynamicAttribute: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.ParallelMergeOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.ParallelExecutionMode: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafeNCryptHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.ManifestKinds: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngKeyHandleOpenOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.ECKeyXmlFormat: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngExportPolicies: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngKeyCreationOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngKeyOpenOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngKeyUsages: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngPropertyOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.CngUIProtectionLevels: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.SignatureVerificationResult: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Security.Cryptography.X509Certificates.TrustStatus: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafePipeHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.CallSiteBinder: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Dynamic.BindingRestrictions+BindingRestrictionsProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.CallSite: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.CallSite`1: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.CallSiteHelpers: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.CallSiteOps: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Dynamic.IDynamicMetaObjectProvider: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.RuntimeOps: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.IRuntimeVariables: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Dynamic.IInvokeOnGetBinder: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.RuleCache`1: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+BinaryExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+BlockExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+CatchBlockProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+ConditionalExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+ConstantExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+DebugInfoExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+DefaultExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+DynamicExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+GotoExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+IndexExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+InvocationExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+LabelExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+LambdaExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+ListInitExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+LoopExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+MemberExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+MemberInitExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+MethodCallExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+NewArrayExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+NewExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+ParameterExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+RuntimeVariablesExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+SwitchCaseProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+SwitchExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+TryExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+TypeBinaryExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.Expression+UnaryExpressionProxy: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.ExpressionType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.DynamicExpressionVisitor: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.GotoExpressionKind: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Linq.Expressions.MemberBindingType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.Closure: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.DebugInfoGenerator: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`9: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`10: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`11: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`12: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`13: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`14: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`15: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Action`16: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`10: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`11: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`12: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`13: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`14: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`15: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`16: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Func`17: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.ReadOnlyCollectionBuilder`1: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.IStrongBox: type is an interface.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.CompilerServices.StrongBox`1: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.TraceLogRetentionOption: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.PerformanceData.CounterSetInstanceType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Diagnostics.PerformanceData.CounterType: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Collections.Generic.HashSetDebugView`1: type is not visible to exported or assembly(System.Core.4.0.0.0.Fakes).
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.HandleInheritability: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.Pipes.PipeDirection: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.Pipes.PipeTransmissionMode: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.Pipes.PipeOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.Pipes.PipeStreamImpersonationWorker: type is a delegate.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.Pipes.PipeAccessRights: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Threading.LockRecursionPolicy: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafeMemoryMappedFileHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for Microsoft.Win32.SafeHandles.SafeMemoryMappedViewHandle: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.MemoryMappedFiles.MemoryMappedFileAccess: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.MemoryMappedFiles.MemoryMappedFileOptions: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.IO.MemoryMappedFiles.MemoryMappedFileRights: type is an enum.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for System.Runtime.InteropServices.ComAwareEventInfo: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\System.Core.fakes : warning : Cannot generate shim for <PrivateImplementationDetails>{73D76CB6-7F16-463B-A4DC-BC9D45BAF766}: type is not supported because of internal limitations.

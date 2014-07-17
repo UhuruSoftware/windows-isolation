@@ -4,6 +4,9 @@
         <name>Uhuru.Prison.Fakes</name>
     </assembly>
     <members>
+        <member name="T:Microsoft.QualityTools.Testing.Fakes.Delegates.UhuruPrisonDelegates">
+            <summary>Contains custom delegates used for the stubs and shims of Uhuru.Prison</summary>
+        </member>
         <member name="T:Uhuru.Prison.Allowances.Fakes.ShimHttpsys">
             <summary>Shim type of Uhuru.Prison.Allowances.Httpsys</summary>
         </member>
@@ -679,6 +682,9 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.GetGuardPath">
             <summary>Sets the shim of Prison.GetGuardPath()</summary>
         </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.GetHandleFromPipePipeStream">
+            <summary>Sets the shim of Prison.GetHandleFromPipe(PipeStream ps)</summary>
+        </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.GetNativeUserProfileDirectoryStringBuilder">
             <summary>Sets the shim of Prison.GetNativeUserProfileDirectory(StringBuilder pathBuf)</summary>
         </member>
@@ -747,6 +753,9 @@
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserBooleanStringStringStringPipeStreamPipeStreamPipeStream">
             <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserSafeTokenHandleStringStringNativeSECURITY_ATTRIBUTESRefNativeSECURITY_ATTRIBUTESRefBooleanNativeProcessCreationFlagsStringStringNativeSTARTUPINFORefNativePROCESS_INFORMATIONOut">
+            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(SafeTokenHandle hToken, String lpApplicationName, String lpCommandLine, SECURITY_ATTRIBUTES&amp; lpProcessAttributes, SECURITY_ATTRIBUTES&amp; lpThreadAttributes, Boolean bInheritHandles, ProcessCreationFlags dwCreationFlags, String lpEnvironment, String lpCurrentDirectory, STARTUPINFO&amp; lpStartupInfo, PROCESS_INFORMATION&amp; lpProcessInformation)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.Reattach">
             <summary>Sets the shim of Prison.Reattach()</summary>

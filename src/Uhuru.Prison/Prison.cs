@@ -57,7 +57,7 @@ namespace Uhuru.Prison
         public const string changeSessionBaseEndpointAddress = @"net.pipe://localhost/Uhuru.Prison.ExecutorService/Executor";
 
         private const string databaseLocation = @".\uhuru-prison-db";
-        private static string installUtilPath = Path.Combine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(),  "InstallUtil.exe");
+        private static string installUtilPath = Path.Combine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(), "InstallUtil.exe");
 
         public JobObject JobObject
         {
@@ -288,12 +288,12 @@ namespace Uhuru.Prison
         }
 
 
-        
+
         private static void InstallService(string servicePath, Dictionary<string, string> parameters)
         {
             string installCmd = installUtilPath;
 
-            foreach(var p in parameters)
+            foreach (var p in parameters)
             {
                 installCmd += " /" + p.Key + "=" + p.Value;
             }
@@ -301,7 +301,7 @@ namespace Uhuru.Prison
             installCmd += " " + '"' + servicePath + '"';
 
             var res = Utilities.Command.ExecuteCommand(installCmd);
-            
+
             if (res != 0)
             {
                 throw new Exception(String.Format("Error installing service {0}, exit code: {1}", installCmd, res));
@@ -329,7 +329,7 @@ namespace Uhuru.Prison
 
         private static void InitChangeSessionService(string id)
         {
-            InstallService(GetChangeSessionServicePath(), new Dictionary<string, string>() { {"service-id", id} });
+            InstallService(GetChangeSessionServicePath(), new Dictionary<string, string>() { { "service-id", id } });
             Utilities.Command.ExecuteCommand("net start ChangeSession-" + id);
         }
 
@@ -384,9 +384,9 @@ namespace Uhuru.Prison
             bind.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
 
             var endpoint = new EndpointAddress(changeSessionBaseEndpointAddress + "/" + tempSeriviceId);
-            
+
             var channelFactory = new ChannelFactory<IExecutor>(bind, endpoint);
-            
+
             IExecutor remoteSessionExec = channelFactory.CreateChannel();
 
             var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
@@ -958,7 +958,7 @@ namespace Uhuru.Prison
             string currentProfileDir = pathBuf.ToString();
 
             ChangeRegistryUserProfile(destination);
-            
+
             Directory.Move(currentProfileDir, destination);
         }
 
@@ -966,14 +966,11 @@ namespace Uhuru.Prison
         {
             string userSid = this.user.UserSID;
 
-            bool retry = true;
             int retries = 30;
             int errorCode = 0;
 
-            while (retry && retries > 0)
+            while (retries > 0)
             {
-                retry = false;
-
                 if (!Native.DeleteProfile(userSid, null, null))
                 {
                     errorCode = Marshal.GetLastWin32Error();
@@ -986,11 +983,14 @@ namespace Uhuru.Prison
                     // Error Code 87: The user profile is still loaded.
                     else
                     {
-                        retry = true;
                         retries--;
+                        Thread.Sleep(200);
                     }
                 }
-                Thread.Sleep(100);
+                else
+                {
+                    return;
+                }
             }
             throw new Win32Exception(errorCode);
         }
@@ -1050,7 +1050,7 @@ namespace Uhuru.Prison
             }
             else
             {
-                //     creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
+                // creationFlags |= Native.ProcessCreationFlags.CREATE_NO_WINDOW;
 
                 // startupInfo.dwFlags |= 0x00000100; // STARTF_USESTDHANDLES
 
@@ -1059,38 +1059,25 @@ namespace Uhuru.Prison
                 //startupInfo.hStdOutput = Native.GetStdHandle(Native.STD_OUTPUT_HANDLE);
                 //startupInfo.hStdError = Native.GetStdHandle(Native.STD_ERROR_HANDLE);
 
-                if (stdinPipeName != null || stdoutPipeName != null || stderrPipeName!= null)
+                if (stdinPipeName != null || stdoutPipeName != null || stderrPipeName != null)
                 {
                     startupInfo.dwFlags |= 0x00000100; // STARTF_USESTDHANDLES
                 }
 
                 if (stdinPipeName != null)
                 {
-                    //stdinPipe = new NamedPipeClientStream(".", stdinPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
-                    //stdinPipe.Connect();
-                    //stdinPipe = new NamedPipeServerStream(stdinPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
-                    stdinPipe = stdinPipeName;
-                    startupInfo.hStdInput = stdinPipe.SafePipeHandle.DangerousGetHandle();
-                } 
+                    startupInfo.hStdInput = GetHandleFromPipe(stdinPipeName);
+                }
 
                 if (stdoutPipeName != null)
                 {
-                    //stdoutPipe = new NamedPipeClientStream(".", stdoutPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
-                    //stdoutPipe.Connect();
-                    //stdoutPipe = new NamedPipeServerStream(stdoutPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
-                    stdoutPipe = stdoutPipeName;
-                    startupInfo.hStdOutput = stdoutPipe.SafePipeHandle.DangerousGetHandle();
+                    startupInfo.hStdOutput = GetHandleFromPipe(stdoutPipeName);
                 }
 
                 if (stderrPipeName != null)
                 {
-                    //stderrPipe = new NamedPipeClientStream(".", stderrPipeName, PipeDirection.In, PipeOptions.WriteThrough, System.Security.Principal.TokenImpersonationLevel.None, HandleInheritability.Inheritable);
-                    //stderrPipe.Connect();
-                    //stderrPipe = new NamedPipeServerStream(stderrPipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 1024 * 128, 1024 * 128, null, HandleInheritability.Inheritable);
-                    stderrPipe = stderrPipeName;
-                    startupInfo.hStdError = stderrPipe.SafePipeHandle.DangerousGetHandle();
+                    startupInfo.hStdError = GetHandleFromPipe(stderrPipeName);
                 }
-
             }
 
             Native.SECURITY_ATTRIBUTES processAttributes = new Native.SECURITY_ATTRIBUTES();
@@ -1098,8 +1085,8 @@ namespace Uhuru.Prison
             processAttributes.nLength = Marshal.SizeOf(processAttributes);
             threadAttributes.nLength = Marshal.SizeOf(threadAttributes);
 
-            var createProcessSuc = Native.CreateProcessAsUser(
-                hToken: logonToken.DangerousGetHandle(),
+            var createProcessSuc = NativeCreateProcessAsUser(
+                hToken: logonToken,
                 lpApplicationName: filename,
                 lpCommandLine: arguments,
                 lpProcessAttributes: ref processAttributes,
@@ -1124,6 +1111,40 @@ namespace Uhuru.Prison
             return processInfo;
         }
 
+        private static IntPtr GetHandleFromPipe(PipeStream ps)
+        {
+            return ps.SafePipeHandle.DangerousGetHandle();
+        }
+
+
+        private static bool NativeCreateProcessAsUser(
+            SafeTokenHandle hToken,
+            string lpApplicationName,
+            string lpCommandLine,
+            ref Uhuru.Prison.Native.SECURITY_ATTRIBUTES lpProcessAttributes,
+            ref Uhuru.Prison.Native.SECURITY_ATTRIBUTES lpThreadAttributes,
+            bool bInheritHandles,
+            Uhuru.Prison.Native.ProcessCreationFlags dwCreationFlags,
+            string lpEnvironment,
+            string lpCurrentDirectory,
+            ref Uhuru.Prison.Native.STARTUPINFO lpStartupInfo,
+            out Uhuru.Prison.Native.PROCESS_INFORMATION lpProcessInformation
+            )
+        {
+            return Native.CreateProcessAsUser(
+                    hToken.DangerousGetHandle(),
+                    lpApplicationName,
+                    lpCommandLine,
+                    ref lpProcessAttributes,
+                    ref lpThreadAttributes,
+                    bInheritHandles,
+                    dwCreationFlags,
+                    lpEnvironment,
+                    lpCurrentDirectory,
+                    ref lpStartupInfo,
+                    out lpProcessInformation
+                );
+        }
         private void SystemRemoveQuota()
         {
             SystemVirtualAddressSpaceQuotas.RemoveQuotas(new SecurityIdentifier(this.user.UserSID));

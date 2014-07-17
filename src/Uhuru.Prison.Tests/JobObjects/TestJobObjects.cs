@@ -71,7 +71,7 @@ namespace Uhuru.Prison.Tests.JobObjects
 
             PrisonRules prisonRules = new PrisonRules();
             prisonRules.CellType = RuleType.None;
-            prisonRules.CellType |= RuleType.Filesystem;
+            prisonRules.CellType |= RuleType.WindowStation;
 
             prisonRules.PrisonHomePath = String.Format(@"c:\prison_tests\{0}", prison.ID);
 
@@ -88,6 +88,36 @@ namespace Uhuru.Prison.Tests.JobObjects
 
             // Assert
             Assert.AreEqual(667, process.ExitCode);
+        }
+
+        [TestMethod]
+        public void TestPowerShell()
+        {
+            // Arrange
+            Prison prison = new Prison();
+            prison.Tag = "uhtst";
+
+            PrisonRules prisonRules = new PrisonRules();
+            prisonRules.CellType = RuleType.None;
+            prisonRules.CellType |= RuleType.WindowStation;
+            prisonRules.CellType |= RuleType.IISGroup;
+
+            prisonRules.PrisonHomePath = String.Format(@"c:\prison_tests\{0}", prison.ID);
+
+            prison.Lockdown(prisonRules);
+
+            // Act
+
+            Process process = prison.Execute(
+    @"c:\windows\system32\cmd.exe",
+    @" /c powershell.exe -Command Get-NetIPAddress");
+
+            process.WaitForExit();
+
+            prison.Destroy();
+
+            // Assert
+            Assert.AreEqual(0, process.ExitCode);
         }
     }
 }

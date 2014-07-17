@@ -61,6 +61,10 @@
     <Reference Include="System.4.0.0.0.Fakes">
       <HintPath>FakesAssemblies\System.4.0.0.0.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Core.4.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\System.Core.4.0.0.0.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.4.0.0.0.Fakes">
@@ -163,6 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\System.ServiceModel.fakes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Fakes Include="Fakes\System.Core.fakes" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
