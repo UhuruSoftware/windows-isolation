@@ -144,7 +144,7 @@ namespace Uhuru.Prison.Restrictions
 
         private static IntPtr NativeGetProcessWindowStation()
         {
-            return NativeGetProcessWindowStation();
+            return Native.GetProcessWindowStation();
         }
 
         private static IntPtr NativeCreateDesktop()
