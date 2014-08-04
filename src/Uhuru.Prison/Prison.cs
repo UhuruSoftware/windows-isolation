@@ -492,6 +492,12 @@ namespace Uhuru.Prison
             this.DeletePersistedPrirson();
         }
 
+        public void ForceStop()
+        {
+            this.jobObject.TerminateProcesses(-1);
+            this.TryStopGuard();
+        }
+
         public static void Init()
         {
             if (!Prison.wasInitialized)
