@@ -12,13 +12,16 @@ namespace Uhuru.Prison.Restrictions
     class WindowStation : Rule
     {
         private static readonly object windowStationContextLock = new object();
+        IntPtr windowStation = IntPtr.Zero;
+        IntPtr desktop = IntPtr.Zero;
 
         public override void Apply(Prison prison)
         {
+            if (windowStation != IntPtr.Zero) return;
+
             Native.SECURITY_ATTRIBUTES secAttributes = new Native.SECURITY_ATTRIBUTES();
             secAttributes.nLength = Marshal.SizeOf(secAttributes);
 
-            IntPtr windowStation = IntPtr.Zero;
 
             windowStation = NativeOpenWindowStation(prison.User.Username);
 
@@ -56,7 +59,7 @@ namespace Uhuru.Prison.Restrictions
                     }
 
                     // TODO SECURITY: change security attributes. the default will give everyone access to the object including other prisons
-                    var desktop = NativeCreateDesktop();
+                    desktop = NativeCreateDesktop();
 
                     if (desktop == IntPtr.Zero)
                     {
@@ -154,3 +157,4 @@ namespace Uhuru.Prison.Restrictions
 
     }
 }
+

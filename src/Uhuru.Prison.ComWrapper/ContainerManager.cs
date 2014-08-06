@@ -47,5 +47,16 @@ namespace Uhuru.Prison.ComWrapper
             var c = new Container(p);
             return c;
         }
+
+        public void DestoryContainer(string Id)
+        {
+            var p = Prison.LoadPrisonAndAttach(new Guid(Id));
+            if (p == null)
+            {
+                throw new ArgumentException("Container ID not found");
+            }
+
+            p.Destroy();
+        }
     }
 }

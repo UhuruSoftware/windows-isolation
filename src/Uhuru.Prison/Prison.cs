@@ -434,10 +434,15 @@ namespace Uhuru.Prison
 
             if (CellEnabled(RuleType.WindowStation))
             {
-                new WindowStation().Apply(this);
+                var winStationCell = this.prisonCells.First((a) => { return a.GetFlag() == RuleType.WindowStation; });
+                winStationCell.Apply(this);
+                //new WindowStation().Apply(this);
             }
 
             Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, envBlock, stdinPipeName, stdoutPipeName, stderrPipeName);
+
+            Native.CloseHandle(processInfo.hProcess);
+            Native.CloseHandle(processInfo.hThread);
 
             var workerProcessPid = processInfo.dwProcessId;
             var workerProcess = Process.GetProcessById(workerProcessPid);
@@ -1103,7 +1108,7 @@ namespace Uhuru.Prison
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
-            // TODO: use finnaly
+            // TODO: use finally
             if (stdinPipe != null) stdinPipe.Dispose(); stdinPipe = null;
             if (stdoutPipe != null) stdoutPipe.Dispose(); stdoutPipe = null;
             if (stderrPipe != null) stderrPipe.Dispose(); stderrPipe = null;
