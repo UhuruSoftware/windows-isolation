@@ -40,6 +40,12 @@ namespace Uhuru.Prison.ComWrapper
         void RemoveEnvironemntVariable(string key);
 
         [ComVisible(true)]
+        string[] ListEnvironemntVariableKeys();
+
+        [ComVisible(true)]
+        string GetEnvironmentVariableFromKey(string key);
+
+        [ComVisible(true)]
         string RedirectStdin(bool redirect);
 
         [ComVisible(true)]
@@ -58,8 +64,6 @@ namespace Uhuru.Prison.ComWrapper
         public string Filename { get; set; }
 
         public string Arguments { get; set; }
-
-
 
         public string StdinPipeName { get; private set; }
         public PipeStream StdinPipe { get; private set; }
@@ -80,6 +84,16 @@ namespace Uhuru.Prison.ComWrapper
         public void RemoveEnvironemntVariable(string key)
         {
             ExtraEnvironmentVariables.Remove(key);
+        }
+
+        public string[] ListEnvironemntVariableKeys()
+        {
+            return ExtraEnvironmentVariables.Keys.ToArray();
+        }
+
+        public string GetEnvironmentVariableFromKey(string key)
+        {
+            return ExtraEnvironmentVariables[key];
         }
 
         public ContainerRunInfo()
