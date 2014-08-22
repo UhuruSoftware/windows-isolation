@@ -37,8 +37,8 @@ N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Pris
 N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Native+ProcessCreationFlags: type is an enum.
 N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Native+ThreadAccess: type is an enum.
 N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Native+WINDOWS_STATION_ACCESS_MASK: type is an enum.
-N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Prison+<>c__DisplayClass3: type is not supported because of internal limitations.
-N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Prison+<>c__DisplayClass6: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Prison+<>c__DisplayClass5: type is not supported because of internal limitations.
+N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Prison+<>c__DisplayClass8: type is not supported because of internal limitations.
 N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.PrisonUser+<>c__DisplayClass1: type is not supported because of internal limitations.
 N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Utilities.StreamWriterCallback: type is a delegate.
 N:\code\github\windows-isolation\src\Uhuru.Prison.FakesUnitTest\Fakes\Uhuru.Prison.fakes : warning : Cannot generate shim for Uhuru.Prison.Utilities.ProcessDoneCallback: type is a delegate.

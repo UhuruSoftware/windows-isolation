@@ -356,10 +356,10 @@ namespace Uhuru.Prison
 
         public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
         {
-            return this.Execute(filename, arguments, interactive, null, null, null, null, null);
+            return this.Execute(filename, arguments, null, interactive, null, null, null, null);
         }
 
-        public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string curDir, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
+        public Process Execute(string filename, string arguments, string curDir, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             if (GetCurrentSessionId() == 0)
             {
@@ -1083,6 +1083,11 @@ namespace Uhuru.Prison
                 {
                     startupInfo.hStdError = GetHandleFromPipe(stderrPipeName);
                 }
+            }
+
+            if (string.IsNullOrWhiteSpace(curDir))
+            {
+                curDir = prisonRules.PrisonHomePath;
             }
 
             Native.SECURITY_ATTRIBUTES processAttributes = new Native.SECURITY_ATTRIBUTES();

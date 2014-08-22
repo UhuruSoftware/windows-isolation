@@ -236,7 +236,7 @@ namespace Uhuru.Prison.FakesUnitTest
                 // Act
                 Process process = prison.Execute(
                     @"c:\windows\system32\cmd.exe",
-                    @"/c echo test", false, null, shimedStdin.Instance, shimedStdout.Instance, shimedStderr.Instance);
+                    @"/c echo test", "", false, null, shimedStdin.Instance, shimedStdout.Instance, shimedStderr.Instance);
 
 
                 // Assert

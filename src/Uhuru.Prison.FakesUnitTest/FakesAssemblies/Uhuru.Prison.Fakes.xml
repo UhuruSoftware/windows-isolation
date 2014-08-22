@@ -250,11 +250,11 @@
         <member name="M:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.#ctor">
             <summary>Initializes a new instance of type StubIExecutor</summary>
         </member>
-        <member name="F:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.ExecuteProcessPrisonStringStringDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="F:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.ExecuteProcessPrisonStringStringStringDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, String curDir, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
-        <member name="M:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.up::Uhuru#Prison#ExecutorService#IExecutor#ExecuteProcess(Uhuru.Prison.Prison,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.IO.Pipes.PipeStream,System.IO.Pipes.PipeStream,System.IO.Pipes.PipeStream)">
-            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="M:Uhuru.Prison.ExecutorService.Fakes.StubIExecutor.up::Uhuru#Prison#ExecutorService#IExecutor#ExecuteProcess(Uhuru.Prison.Prison,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.IO.Pipes.PipeStream,System.IO.Pipes.PipeStream,System.IO.Pipes.PipeStream)">
+            <summary>Sets the stub of IExecutor.ExecuteProcess(Prison prison, String filename, String arguments, String curDir, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="T:Uhuru.Prison.Fakes.ShimFirewallTools">
             <summary>Shim type of Uhuru.Prison.FirewallTools</summary>
@@ -661,8 +661,8 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.ExecuteStringStringBooleanDictionaryOfStringString">
             <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.ExecuteStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.ExecuteStringStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.Execute(String filename, String arguments, String curDir, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.GetChangeSessionServicePath">
             <summary>Sets the shim of Prison.GetChangeSessionServicePath()</summary>
@@ -709,11 +709,11 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeLogonToken">
             <summary>Sets the shim of Prison.InitializeLogonToken()</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessStringStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, String curDir, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessWithChagedSessionStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeProcessWithChagedSessionStringStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, String curDir, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.InitializeSystemVirtualAddressSpaceQuotas">
             <summary>Sets the shim of Prison.InitializeSystemVirtualAddressSpaceQuotas()</summary>
@@ -751,8 +751,8 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.LockdownPrisonRules">
             <summary>Sets the shim of Prison.Lockdown(PrisonRules prisonRules)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserBooleanStringStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserBooleanStringStringStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String curDir, String envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.NativeCreateProcessAsUserSafeTokenHandleStringStringNativeSECURITY_ATTRIBUTESRefNativeSECURITY_ATTRIBUTESRefBooleanNativeProcessCreationFlagsStringStringNativeSTARTUPINFORefNativePROCESS_INFORMATIONOut">
             <summary>Sets the shim of Prison.NativeCreateProcessAsUser(SafeTokenHandle hToken, String lpApplicationName, String lpCommandLine, SECURITY_ATTRIBUTES&amp; lpProcessAttributes, SECURITY_ATTRIBUTES&amp; lpThreadAttributes, Boolean bInheritHandles, ProcessCreationFlags dwCreationFlags, String lpEnvironment, String lpCurrentDirectory, STARTUPINFO&amp; lpStartupInfo, PROCESS_INFORMATION&amp; lpProcessInformation)</summary>
@@ -802,6 +802,9 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.UserGet">
             <summary>Sets the shim of Prison.get_User()</summary>
         </member>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison._InitializeProcessb__2Rule">
+            <summary>Sets the shim of Prison.&lt;InitializeProcess&gt;b__2(Rule a)</summary>
+        </member>
         <member name="T:Uhuru.Prison.Fakes.ShimPrison.AllInstances">
             <summary>Define shims for all instances members</summary>
         </member>
@@ -847,8 +850,8 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.ExecuteStringStringBooleanDictionaryOfStringString">
             <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.ExecuteStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.Execute(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.ExecuteStringStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.Execute(String filename, String arguments, String curDir, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.GetDefaultEnvironmentVarialbes">
             <summary>Sets the shim of Prison.GetDefaultEnvironmentVarialbes()</summary>
@@ -871,11 +874,11 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeLogonToken">
             <summary>Sets the shim of Prison.InitializeLogonToken()</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessStringStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.InitializeProcess(String filename, String arguments, String curDir, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessWithChagedSessionStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeProcessWithChagedSessionStringStringStringBooleanDictionaryOfStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.InitializeProcessWithChagedSession(String filename, String arguments, String curDir, Boolean interactive, Dictionary`2&lt;String,String&gt; extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.InitializeSystemVirtualAddressSpaceQuotas">
             <summary>Sets the shim of Prison.InitializeSystemVirtualAddressSpaceQuotas()</summary>
@@ -898,8 +901,8 @@
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.LockdownPrisonRules">
             <summary>Sets the shim of Prison.Lockdown(PrisonRules prisonRules)</summary>
         </member>
-        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.NativeCreateProcessAsUserBooleanStringStringStringPipeStreamPipeStreamPipeStream">
-            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
+        <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.NativeCreateProcessAsUserBooleanStringStringStringStringPipeStreamPipeStreamPipeStream">
+            <summary>Sets the shim of Prison.NativeCreateProcessAsUser(Boolean interactive, String filename, String arguments, String curDir, String envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)</summary>
         </member>
         <member name="P:Uhuru.Prison.Fakes.ShimPrison.AllInstances.Reattach">
             <summary>Sets the shim of Prison.Reattach()</summary>

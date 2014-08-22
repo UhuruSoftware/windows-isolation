@@ -172,7 +172,7 @@ namespace Uhuru.Prison.FakesUnitTest
             //shim Prison.GetDefaultEnvironmentVarialbes
             ShimPrison.AllInstances.GetDefaultEnvironmentVarialbes = (pris) => { return new Dictionary<string, string>(); };
 
-            ShimPrison.AllInstances.NativeCreateProcessAsUserBooleanStringStringStringPipeStreamPipeStreamPipeStream = (pris, interactive, filename, arguments, envBlock, x, y, z) =>
+            ShimPrison.AllInstances.NativeCreateProcessAsUserBooleanStringStringStringStringPipeStreamPipeStreamPipeStream = (pris, interactive, filename, arguments, cd, envBlock, x, y, z) =>
             {
                 return processInfo;
             };
