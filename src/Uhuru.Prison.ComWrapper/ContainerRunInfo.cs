@@ -19,6 +19,9 @@ namespace Uhuru.Prison.ComWrapper
         string Arguments { get; set; }
 
         [ComVisible(true)]
+        string CurrentDirectory { get; set; }
+
+        [ComVisible(true)]
         string StdinPipeName { get; }
         PipeStream StdinPipe { get; }
 
@@ -64,6 +67,8 @@ namespace Uhuru.Prison.ComWrapper
         public string Filename { get; set; }
 
         public string Arguments { get; set; }
+
+        public string CurrentDirectory { get; set; }
 
         public string StdinPipeName { get; private set; }
         public PipeStream StdinPipe { get; private set; }

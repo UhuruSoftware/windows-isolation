@@ -356,25 +356,25 @@ namespace Uhuru.Prison
 
         public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables)
         {
-            return this.Execute(filename, arguments, interactive, null, null, null, null);
+            return this.Execute(filename, arguments, interactive, null, null, null, null, null);
         }
 
-        public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
+        public Process Execute(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, string curDir, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             if (GetCurrentSessionId() == 0)
             {
-                var workerProcess = InitializeProcess(filename, arguments, interactive, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
+                var workerProcess = InitializeProcess(filename, arguments, curDir, interactive, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
                 ResumeProcess(workerProcess);
                 return workerProcess;
             }
             else
             {
-                var workerProcess = InitializeProcessWithChagedSession(filename, arguments, interactive, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
+                var workerProcess = InitializeProcessWithChagedSession(filename, arguments, curDir, interactive, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
                 return workerProcess;
             }
         }
 
-        public Process InitializeProcessWithChagedSession(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
+        public Process InitializeProcessWithChagedSession(string filename, string arguments, string curDir, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             string tempSeriviceId = Guid.NewGuid().ToString();
             InitChangeSessionService(tempSeriviceId);
@@ -389,7 +389,7 @@ namespace Uhuru.Prison
 
             IExecutor remoteSessionExec = channelFactory.CreateChannel();
 
-            var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
+            var workingProcessId = remoteSessionExec.ExecuteProcess(this, filename, arguments, curDir, extraEnvironmentVariables, stdinPipeName, stdoutPipeName, stderrPipeName);
             var workingProcess = Process.GetProcessById(workingProcessId);
             workingProcess.EnableRaisingEvents = true;
 
@@ -402,7 +402,7 @@ namespace Uhuru.Prison
             return workingProcess;
         }
 
-        public Process InitializeProcess(string filename, string arguments, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
+        public Process InitializeProcess(string filename, string arguments, string curDir, bool interactive, Dictionary<string, string> extraEnvironmentVariables, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             // C with Win32 API example to start a process under a different user: http://msdn.microsoft.com/en-us/library/aa379608%28VS.85%29.aspx
 
@@ -439,7 +439,7 @@ namespace Uhuru.Prison
                 //new WindowStation().Apply(this);
             }
 
-            Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, envBlock, stdinPipeName, stdoutPipeName, stderrPipeName);
+            Native.PROCESS_INFORMATION processInfo = NativeCreateProcessAsUser(interactive, filename, arguments, curDir, envBlock, stdinPipeName, stdoutPipeName, stderrPipeName);
 
             Native.CloseHandle(processInfo.hProcess);
             Native.CloseHandle(processInfo.hThread);
@@ -1016,7 +1016,7 @@ namespace Uhuru.Prison
 
         }
 
-        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
+        private Native.PROCESS_INFORMATION NativeCreateProcessAsUser(bool interactive, string filename, string arguments, string curDir, string envBlock, PipeStream stdinPipeName, PipeStream stdoutPipeName, PipeStream stderrPipeName)
         {
             var startupInfo = new Native.STARTUPINFO();
             var processInfo = new Native.PROCESS_INFORMATION();
@@ -1099,7 +1099,7 @@ namespace Uhuru.Prison
                 bInheritHandles: true,
                 dwCreationFlags: creationFlags,
                 lpEnvironment: envBlock,
-                lpCurrentDirectory: this.prisonRules.PrisonHomePath,
+                lpCurrentDirectory: curDir,
                 lpStartupInfo: ref startupInfo,
                 lpProcessInformation: out processInfo);
 
