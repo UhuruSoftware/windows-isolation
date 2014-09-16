@@ -35,5 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: InternalsVisibleTo("Uhuru.Prison.Fakes")]
-[assembly: InternalsVisibleTo("Uhuru.Prison.FakesUnitTest")]
+// Hack: commented this to avoid:
+// Error	119	Friend assembly reference 'Uhuru.Prison.FakesUnitTest' is invalid. Strong-name signed assemblies must specify a public key in their InternalsVisibleTo declarations.
+//[assembly: InternalsVisibleTo("Uhuru.Prison.Fakes")]
+//[assembly: InternalsVisibleTo("Uhuru.Prison.FakesUnitTest")]

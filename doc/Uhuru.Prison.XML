@@ -188,6 +188,13 @@
             <param name="environmentVariables"></param>
             <returns></returns>
         </member>
+        <member name="M:Uhuru.Prison.Prison.SetUsersEnvironmentVariables(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Sets an environment variable for the user.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
         <member name="T:Uhuru.Prison.Logger">
             <summary>
             This is a helper logger class that is used throughout the code.

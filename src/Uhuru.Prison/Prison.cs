@@ -426,7 +426,7 @@ namespace Uhuru.Prison
                 }
             }
 
-            string envBlock = extraEnvironmentVariables == null ? null : Prison.BuildEnvironmentVariable(envs);
+            string envBlock = Prison.BuildEnvironmentVariable(envs);
 
             Logger.Debug("Starting process '{0}' with arguments '{1}' as user '{2}' in working dir '{3}'", filename, arguments, this.user.Username, this.prisonRules.PrisonHomePath);
 
@@ -821,6 +821,45 @@ namespace Uhuru.Prison
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Sets an environment variable for the user.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public void SetUsersEnvironmentVariables(Dictionary<string, string> envVariables)
+        {
+            if (!this.isLocked)
+            {
+                throw new InvalidOperationException("This prison is not locked.");
+            }
+
+            if (envVariables.Keys.Any(x => x.Contains('=')))
+            {
+                throw new ArgumentException("A name of an environment variable contains the invalid '=' characther", "envVariables");
+            }
+
+            if (envVariables.Keys.Any(x => string.IsNullOrEmpty(x)))
+            {
+                throw new ArgumentException("A name of an environment variable is null or empty", "envVariables");
+            }
+
+            LoadUserProfileIfNotLoaded();
+
+            using (var allUsersKey = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Registry64))
+            {
+                using (var envRegKey = allUsersKey.OpenSubKey(user.UserSID + "\\Environment", true))
+                {
+                    foreach (var env in envVariables)
+                    {
+                        var value = env.Value == null ? string.Empty : env.Value;
+
+                        envRegKey.SetValue(env.Key, value, RegistryValueKind.String);
+                    }
+
+                }
+            }
         }
 
         private static Process[] GetChildPrecesses(int parentId)
