@@ -506,6 +506,8 @@ namespace Uhuru.Prison
             SystemRemoveQuota();
 
             this.DeletePersistedPrirson();
+
+            this.isLocked = false;
         }
 
         public static void Init()
