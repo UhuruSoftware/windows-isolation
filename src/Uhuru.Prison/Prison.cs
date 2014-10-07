@@ -39,6 +39,7 @@ namespace Uhuru.Prison
         };
 
         static private string guardSuffix = "-guard";
+        private const int checkGuardRetries = 200;
 
         List<Rule> prisonCells = null;
 
@@ -232,6 +233,8 @@ namespace Uhuru.Prison
         private Process RunGuard()
         {
             var psi = new ProcessStartInfo();
+            Exception checkGuardException = null;
+            int retryCount = 0;
             // this is set to true to prevent HANDLE inheritance 
             // http://stackoverflow.com/questions/10638901/create-a-process-and-redirect-its-input-output-and-dont-inherit-socket-handles
             psi.UseShellExecute = true;
@@ -250,10 +253,19 @@ namespace Uhuru.Prison
             {
                 try
                 {
+                    retryCount++;
                     CheckGuard();
                     break;
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    checkGuardException = ex;
+                }
+
+                if (retryCount == checkGuardRetries)
+                {
+                    throw new Exception("Maximum start prison guard retries exceeded", checkGuardException);
+                }
 
                 Thread.Sleep(100);
             }
