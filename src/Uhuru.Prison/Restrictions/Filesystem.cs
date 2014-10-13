@@ -45,64 +45,63 @@ namespace Uhuru.Prison.Restrictions
 
         public override void Init()
         {
-            Filesystem.InitOpenDirectoriesList();
+            //Filesystem.InitOpenDirectoriesList();
 
-            if (!WindowsUsersAndGroups.ExistsGroup(prisonRestrictionsGroup))
-            {
-                WindowsUsersAndGroups.CreateGroup(prisonRestrictionsGroup);
+            //if (!WindowsUsersAndGroups.ExistsGroup(prisonRestrictionsGroup))
+            //{
+            //    WindowsUsersAndGroups.CreateGroup(prisonRestrictionsGroup);
 
-                // Take ownership of c:\Windows\System32\spool\drivers\color folder
-                Filesystem.TakeOwnership(Environment.UserName, @"c:\Windows\System32\spool\drivers\color");
+            //    // Take ownership of c:\Windows\System32\spool\drivers\color folder
+            //    Filesystem.TakeOwnership(Environment.UserName, @"c:\Windows\System32\spool\drivers\color");
 
-                // Take ownership of c:\windows\tracing folder
-                Filesystem.TakeOwnership(Environment.UserName, @"c:\windows\tracing");
+            //    // Take ownership of c:\windows\tracing folder
+            //    Filesystem.TakeOwnership(Environment.UserName, @"c:\windows\tracing");
 
-                // Remove access to c:\Windows\tracing
-                Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\windows\tracing");
-                // Remove file write access to c:\Users\Public
-                Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\windows\tracing", true);
+            //    // Remove access to c:\Windows\tracing
+            //    Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\windows\tracing");
+            //    // Remove file write access to c:\Users\Public
+            //    Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\windows\tracing", true);
 
-                // Remove access to c:\ProgramData
-                Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\ProgramData");
-                // Remove file write access to c:\Users\Public
-                Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\ProgramData", true);
-
-
-                // Remove directory create access to c:\Users\All Users
-                Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\Users\All Users", true);
-                // Remove file write access to c:\Users\Public\All Users
-                Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\Users\All Users", true);
+            //    // Remove access to c:\ProgramData
+            //    Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\ProgramData");
+            //    // Remove file write access to c:\Users\Public
+            //    Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\ProgramData", true);
 
 
-                // Remove directory create access to c:\Users\Public
-                Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\Users\Public", true);
-                // Remove file write access to c:\Users\Public\Public
-                Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\Users\Public", true);
+            //    // Remove directory create access to c:\Users\All Users
+            //    Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\Users\All Users", true);
+            //    // Remove file write access to c:\Users\Public\All Users
+            //    Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\Users\All Users", true);
 
-                //// Remove directory create & file create access to profile dir
-                //FilesystemCell.AddCreateSubdirDenyRule(prisonRestrictionsGroup, Path.Combine(@"c:\Users", prisonRestrictionsGroup), true);
-                //FilesystemCell.AddCreateFileDenyRule(prisonRestrictionsGroup, Path.Combine(@"c:\Users", prisonRestrictionsGroup), true);
 
-                // Remove access to other open directories
-                foreach (string directory in Filesystem.OpenDirs)
-                {
-                    try
-                    {
-                        if (!directory.ToLower().StartsWith(prisonRestrictionsGroup))
-                        {
-                            // Remove directory create access
-                            Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, directory);
+            //    // Remove directory create access to c:\Users\Public
+            //    Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, @"c:\Users\Public", true);
+            //    // Remove file write access to c:\Users\Public\Public
+            //    Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, @"c:\Users\Public", true);
 
-                            // Remove file write access
-                            Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, directory);
-                        }
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
+            //    //// Remove directory create & file create access to profile dir
+            //    //FilesystemCell.AddCreateSubdirDenyRule(prisonRestrictionsGroup, Path.Combine(@"c:\Users", prisonRestrictionsGroup), true);
+            //    //FilesystemCell.AddCreateFileDenyRule(prisonRestrictionsGroup, Path.Combine(@"c:\Users", prisonRestrictionsGroup), true);
 
+            //    // Remove access to other open directories
+            //    foreach (string directory in Filesystem.OpenDirs)
+            //    {
+            //        try
+            //        {
+            //            if (!directory.ToLower().StartsWith(prisonRestrictionsGroup))
+            //            {
+            //                // Remove directory create access
+            //                Filesystem.AddCreateSubdirDenyRule(prisonRestrictionsGroup, directory);
+
+            //                // Remove file write access
+            //                Filesystem.AddCreateFileDenyRule(prisonRestrictionsGroup, directory);
+            //            }
+            //        }
+            //        catch
+            //        {
+            //        }
+            //    }
+            //}
         }
 
         private readonly static object openDirLock = new object();
